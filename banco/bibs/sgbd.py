@@ -75,20 +75,6 @@ def create_conta_poupanca(id, senha):
     cursor.close()
     return conta
     
-def get_contas_corrente():
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM conta_corrente")
-    result = cursor.fetchall()
-    cursor.close()
-    return result
- 
-def get_contas_poupanca():
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM conta_poupanca")
-    result = cursor.fetchall()
-    cursor.close()
-    return result
-   
 def get_conta_corrente(id):
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM conta_corrente WHERE cliente_idcliente = %s", (id,))
@@ -131,13 +117,6 @@ def valida_senha_conta_poupanca(id, senha):
     else:
         return False
 
-def get_clientes():
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM cliente")
-    result = cursor.fetchall()
-    cursor.close()
-    return result
-
 def add_transacao(id_da_conta, tipo_da_conta, valor, tipo):
     cursor = banco.cursor()
     if tipo_da_conta == "cc":
@@ -147,19 +126,6 @@ def add_transacao(id_da_conta, tipo_da_conta, valor, tipo):
         
     banco.commit()
     cursor.close()
-    
-def excluir_conta_corrente(id):
-    cursor = banco.cursor()
-    cursor.execute("DELETE FROM conta_corrente WHERE idconta_corrente = %s", (id,))
-    banco.commit()
-    cursor.close()
-
-def get_historico():
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM historico")
-    result = cursor.fetchall()
-    cursor.close()
-    return result
 
 def get_transacoes(id_da_conta, tipo_da_conta):
     if isinstance(id_da_conta, tuple):
@@ -247,38 +213,3 @@ def busca_conta_por_cpf(cpf, tipo_da_conta):
     else:
         return get_conta_poupanca(id_user)    
     
-def del_cliente(id):
-    cursor = banco.cursor()
-    cursor.execute("DELETE FROM cliente WHERE idcliente = %s", (id,))
-    banco.commit()
-    cursor.close()
-
-def del_conta_corrente(id):
-    cursor = banco.cursor()
-    cursor.execute("DELETE FROM conta_corrente WHERE idconta_corrente = %s", (id,))
-    banco.commit()
-    cursor.close()
-    
-if __name__ == "__main__":
-    # add_cliente(nome="Joao Vitor Moreira Passos", cpf="06906496301", nascimento="2001-08-04", email="moreirapassosj@gmail.com", senha="12345678")
-    # del_cliente(13)
-    # print(login("moreirapassosj@gmail.com", "12345678"))
-    # print(get_clientes())
-    print("---------------------")
-    # list(map(lambda x: print(x), get_clientes()))
-    # create_conta_corrente(1, "123456")
-    # print(create_conta_corrente(id=1, senha="123456"))
-    # excluir_conta_corrente(2)
-    print(get_contas_corrente())
-    # del_conta_corrente(1)
-    # print(get_contas_poupanca())
-    # print("---------------------")
-    # print("---------------------")
-    # print("here: ", get_transacoes(1, "cc"))
-    # print("---------------------")
-    # print(get_historico())
-    # print(get_conta_corrente(1))
-    # print(get_transacoes(100000, "cc"))
-    # print(get_conta_corrente(2))w
-    # print(str(datetime.now()).split('.')[0])
-    # print(busca_conta_por_cpf("06906496301", "cc").senha)
