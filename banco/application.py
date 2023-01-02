@@ -9,7 +9,8 @@ from screens.extrato          import Ui_MainWindow as TelaDeExtrato
 from screens.deposito_e_saque import Ui_MainWindow as TelaDeDepositoESaque
 from screens.transferencia    import Ui_MainWindow as TelaDeTransferencia
 from bibs.sgbd                import login, add_cliente, create_conta_corrente, create_conta_poupanca, deposito_conta_corrente, deposito_conta_poupanca, get_transacoes, saque_conta_corrente, saque_conta_poupanca, busca_conta_por_cpf, valida_senha_conta_corrente, valida_senha_conta_poupanca
-from PIL                      import Image   
+from PIL                      import Image  
+import os 
 
 
 class Main(QMainWindow, TelaDeLogin):
@@ -525,12 +526,8 @@ class Main(QMainWindow, TelaDeLogin):
         senha = janela.senha.text()
         nascimento = self.convertDate(janela.nascimento.text())
         return nome, cpf, nascimento, email, senha
+    
+
         
         
         
-if __name__ == "__main__":
-    import sys
-    qt = QtWidgets.QApplication(sys.argv)
-    app = Main()
-    app.show()
-    qt.exec_()
