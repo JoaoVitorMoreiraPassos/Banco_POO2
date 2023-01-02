@@ -9,6 +9,7 @@ from screens.extrato          import Ui_MainWindow as TelaDeExtrato
 from screens.deposito_e_saque import Ui_MainWindow as TelaDeDepositoESaque
 from screens.transferencia    import Ui_MainWindow as TelaDeTransferencia
 from bibs.sgbd                import login, add_cliente, create_conta_corrente, create_conta_poupanca, deposito_conta_corrente, deposito_conta_poupanca, get_transacoes, saque_conta_corrente, saque_conta_poupanca, busca_conta_por_cpf, valida_senha_conta_corrente, valida_senha_conta_poupanca
+from PIL                      import Image   
 
 
 class Main(QMainWindow, TelaDeLogin):
@@ -20,7 +21,9 @@ class Main(QMainWindow, TelaDeLogin):
         self.pushButton.clicked.connect(lambda: self.logIn(self,self))
         self.pushButton_2.clicked.connect(lambda: self.openCadastro(self))
         self.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.checkBox, self.senha))
-        img = QtGui.QPixmap("./icons/exit.png")
+        img = Image.open("./icons/exit.png")
+        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = QtGui.QPixmap(img.toqpixmap())
         self.img.setPixmap(img)
         self.voltar.clicked.connect(lambda: self.close())
         
@@ -34,7 +37,9 @@ class Main(QMainWindow, TelaDeLogin):
         self.login_screen.pushButton.clicked.connect(lambda: self.logIn(self.login_screen, self.window))
         self.login_screen.pushButton_2.clicked.connect(lambda: self.openCadastro(self.window))
         self.login_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.login_screen.checkBox, self.login_screen.senha))
-        img = QtGui.QPixmap("./icons/exit.png")
+        img = Image.open("./icons/exit.png")
+        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = QtGui.QPixmap(img.toqpixmap())
         self.login_screen.img.setPixmap(img)
         self.login_screen.voltar.clicked.connect(lambda: self.window.close())
         self.window.show()
@@ -48,8 +53,10 @@ class Main(QMainWindow, TelaDeLogin):
         self.cadastro_screen.btn_cadastro.clicked.connect(lambda: self.cadastrar(self.cadastro_screen))
         self.cadastro_screen.btn_login.clicked.connect(lambda: self.openLogin(self.window))
         self.cadastro_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.cadastro_screen.checkBox, self.cadastro_screen.senha))
-        img1 = QtGui.QPixmap("./icons/exit.png")
-        self.cadastro_screen.img.setPixmap(img1)
+        img = Image.open("./icons/exit.png")
+        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = QtGui.QPixmap(img.toqpixmap())
+        self.cadastro_screen.img.setPixmap(img)
         self.cadastro_screen.voltar.clicked.connect(lambda: self.window.close())
         self.window.show()
         MainWindow.close()
@@ -72,7 +79,9 @@ class Main(QMainWindow, TelaDeLogin):
         self.criador_screen = TelaDeCriarContas()
         self.criador_screen.setupUi(self.window)
         self.criador_screen.btn_criar.clicked.connect(lambda: self.criarContaCorrente(self.window, self.criador_screen, user) if tipo == "corrente" else self.criarContaPoupanca(self.window, self.criador_screen, user))
-        img = QtGui.QPixmap("./icons/back.png")
+        img = Image.open("./icons/back.png")
+        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = QtGui.QPixmap(img.toqpixmap())
         self.criador_screen.img.setPixmap(img)
         self.criador_screen.voltar.clicked.connect(lambda: self.openPainel(self.window, self.criador_screen, user))
         self.window.show()
@@ -111,7 +120,9 @@ class Main(QMainWindow, TelaDeLogin):
         self.deposito_screen.btn_confirma.clicked.connect(lambda: self.depositar(self.window, user, self.deposito_screen.valor.text(), conta, tipo, self.deposito_screen.senha.text()))
         self.deposito_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.deposito_screen.checkBox, self.deposito_screen.senha))
         self.deposito_screen.voltar.clicked.connect(lambda: self.openContas(self.window, user, conta, tipo))
-        img = QtGui.QPixmap("./icons/back.png")
+        img = Image.open("./icons/back.png")
+        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = QtGui.QPixmap(img.toqpixmap())
         self.deposito_screen.img.setPixmap(img)
         MainWindow.close()
         self.window.show()
@@ -125,7 +136,9 @@ class Main(QMainWindow, TelaDeLogin):
         self.saque_screen.btn_confirma.clicked.connect(lambda: self.sacar(self.window, user, self.saque_screen.valor.text(), conta, tipo, self.saque_screen.senha.text()))
         self.saque_screen.voltar.clicked.connect(lambda: self.openContas(self.window, user, conta, tipo))
         self.saque_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.saque_screen.checkBox, self.saque_screen.senha))
-        img = QtGui.QPixmap("./icons/back.png")
+        img = Image.open("./icons/back.png")
+        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = QtGui.QPixmap(img.toqpixmap())
         self.saque_screen.img.setPixmap(img)
         MainWindow.close()
         self.window.show()
@@ -135,11 +148,14 @@ class Main(QMainWindow, TelaDeLogin):
         self.window = QtWidgets.QMainWindow()
         self.transferencia_screen = TelaDeTransferencia()
         self.transferencia_screen.setupUi(self.window)
-        self.transferencia_screen.valor_3.textChanged.connect(lambda: self.atualizaContas(user,tipo,self.transferencia_screen.frame,self.transferencia_screen.valor_3,self.transferencia_screen.comboBox_2))
-        self.transferencia_screen.btn_confirma.clicked.connect(lambda: self.transferir(self.window,user, self.transferencia_screen.valor.text(),conta,self.transferencia_screen.valor_3.text(),self.transferencia_screen.comboBox_2.currentText(), self.transferencia_screen.senha.text()))
+        self.transferencia_screen.cpf.textChanged.connect(lambda: self.atualizaContas(user,tipo,self.transferencia_screen.frame,self.transferencia_screen.cpf,self.transferencia_screen.comboBox_2))
+        self.transferencia_screen.cpf.setFocus()
+        self.transferencia_screen.btn_confirma.clicked.connect(lambda: self.transferir(self.window,user, self.transferencia_screen.valor.text(),conta,self.transferencia_screen.cpf.text(),self.transferencia_screen.comboBox_2.currentText(), self.transferencia_screen.senha.text()))
         self.transferencia_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.transferencia_screen.checkBox, self.transferencia_screen.senha))
         self.transferencia_screen.voltar.clicked.connect(lambda: self.openContas(self.window, user, conta, tipo))
-        img = QtGui.QPixmap("./icons/back.png")
+        img = Image.open("./icons/back.png")
+        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = QtGui.QPixmap(img.toqpixmap())
         self.transferencia_screen.img.setPixmap(img)
         MainWindow.close()
         self.window.show()
@@ -155,7 +171,7 @@ class Main(QMainWindow, TelaDeLogin):
         vertical = []
         if len(historico) > 0:
             line = QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
-            line.setFrameShadow(QtWidgets.QFrame.Plain)
+            # line.setFrameShadow(QtWidgets.QFrame.Plain)
             line.setLineWidth(5)
             line.setMidLineWidth(2)
             line.setFrameShape(QtWidgets.QFrame.HLine)
@@ -242,7 +258,9 @@ class Main(QMainWindow, TelaDeLogin):
             label.setText("Essa conta não possui nenhuma transação!")
             self.extrato_screen.gridLayout.addWidget(label, 0, 0, 1, 8)
         self.extrato_screen.voltar.clicked.connect(lambda: self.openContas(self.window, user, conta, tipo))
-        img = QtGui.QPixmap("./icons/back.png")
+        img = Image.open("./icons/back.png")
+        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = QtGui.QPixmap(img.toqpixmap())
         self.extrato_screen.img.setPixmap(img)
         MainWindow.close()
         self.window.show()
@@ -487,15 +505,19 @@ class Main(QMainWindow, TelaDeLogin):
         cc = busca_conta_por_cpf(cpf.text(), "cc")
         cp = busca_conta_por_cpf(cpf.text(), "cp")
         select.clear()
-        if cc:
-            if user.cpf == cpf.text() and tipo == "cc":
-                pass
-            select.addItem("Conta Corrente")
-        if cp:
-            if user.cpf == cpf.text() and tipo == "cp":
-                pass
-            select.addItem("Conta Poupança")
-            
+        print(user.cpf, cpf)
+        if user.cpf == cpf.text():
+            if tipo == "cc":
+                if cp:
+                    select.addItem(f"Conta Poupança - {cp.numero}")
+            elif tipo == "cp":
+                if cc:
+                    select.addItem(f"Conta Corrente - {cc.numero}")
+        else:
+            if cc:
+                select.addItem(f"Conta Corrente - {cc.numero}")
+            if cp:
+                select.addItem(f"Conta Poupança - {cp.numero}")           
 
     
     def getInfos(self, janela):

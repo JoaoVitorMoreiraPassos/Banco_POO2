@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>806</width>
-    <height>600</height>
+    <width>1366</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="contextMenuPolicy">
@@ -25,210 +25,246 @@
    <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="deposito_back">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>230</y>
-      <width>150</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-
-	background-color: #7cbec6;
-	color: #fff;
-	border-radius: 75px;
-}
-
-QPushButton:hover{
-	background-color: rgb(140, 214, 223);
-	border: 10px groove rgb(140, 214, 223);
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset theme="icones/to_left.png">
-      <normaloff>../../../../../../.designer/backup</normaloff>../../../../../../.designer/backup</iconset>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="extrato_back">
-    <property name="geometry">
-     <rect>
-      <x>630</x>
-      <y>230</y>
-      <width>150</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-
-	background-color: #7cbec6;
-	color: #fff;
-	border-radius: 75px;
-}
-
-QPushButton:hover{
-	background-color: rgb(140, 214, 223);
-	border: 10px groove rgb(140, 214, 223);
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="transferencia_back">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>230</y>
-      <width>150</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-
-	background-color: #7cbec6;
-	color: #fff;
-	border-radius: 75px;
-}
-
-QPushButton:hover{
-	background-color: rgb(140, 214, 223);
-	border: 10px groove rgb(140, 214, 223);
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="saque_back">
-    <property name="geometry">
-     <rect>
-      <x>245</x>
-      <y>230</y>
-      <width>150</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-
-	background-color: #7cbec6;
-	color: #fff;
-	border-radius: 75px;
-}
-
-QPushButton:hover{
-	background-color: rgb(140, 214, 223);
-	border: 10px groove rgb(140, 214, 223);
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>0</y>
-      <width>72</width>
-      <height>19</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="saldo">
-    <property name="geometry">
-     <rect>
-      <x>458</x>
-      <y>65</y>
-      <width>291</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: #fff;
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>131</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-bottom: 1px;
+border-top: 0px;
+border-left: 0px;
+border-right: 0px</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QWidget" name="widget" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>111</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="tipo">
+            <property name="minimumSize">
+             <size>
+              <width>181</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>181</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>17</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: #fff;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="numero">
+            <property name="minimumSize">
+             <size>
+              <width>181</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>181</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: #fff;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QWidget" name="widget_2" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>356</width>
+           <height>111</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>356</width>
+           <height>111</height>
+          </size>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QLineEdit" name="saldo">
+            <property name="minimumSize">
+             <size>
+              <width>291</width>
+              <height>61</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>291</width>
+              <height>61</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #fff;
 border-radius: 5px;
 padding-left: 10px;
 padding-right: 10px;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-    <property name="dragEnabled">
-     <bool>false</bool>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_sair">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>460</y>
-      <width>180</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="dragEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox">
+            <property name="minimumSize">
+             <size>
+              <width>121</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>121</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #498f97;
+color: white;</string>
+            </property>
+            <property name="text">
+             <string>mostrar saldo</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QFrame" name="frame_4">
+         <property name="styleSheet">
+          <string notr="true">border: 0px
+</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QFrame" name="frame_2">
+      <property name="styleSheet">
+       <string notr="true">border: 0px</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="btn_sair">
+         <property name="minimumSize">
+          <size>
+           <width>171</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>90</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
 
 QPushButton {
 	color: #fff;
@@ -241,163 +277,78 @@ QPushButton:hover{
 	background-color: rgb(86, 132, 137);
 	border: 1px solid #7cbec6 ;
 }</string>
-    </property>
-    <property name="text">
-     <string>Sair</string>
-    </property>
-   </widget>
-   <widget class="Line" name="line">
-    <property name="geometry">
-     <rect>
-      <x>8</x>
-      <y>150</y>
-      <width>790</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>630</x>
-      <y>130</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: #498f97;
-color: white;</string>
-    </property>
-    <property name="text">
-     <string>mostrar saldo</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-    <property name="tristate">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="tipo">
-    <property name="geometry">
-     <rect>
-      <x>58</x>
-      <y>55</y>
-      <width>181</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>17</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: #fff;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="numero">
-    <property name="geometry">
-     <rect>
-      <x>58</x>
-      <y>95</y>
-      <width>181</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: #fff;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>333</x>
-      <y>15</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Sawasdee</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: #7cbec6;</string>
-    </property>
-    <property name="text">
-     <string>Beast Bank</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="img_transf">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>320</y>
-      <width>50</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius:20px;
+         </property>
+         <property name="text">
+          <string>Sair</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QFrame" name="frame_option">
+      <property name="styleSheet">
+       <string notr="true">border: 0px</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="2">
+        <widget class="QWidget" name="widget_transf" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>171</width>
+           <height>171</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>171</width>
+           <height>171</height>
+          </size>
+         </property>
+         <widget class="QLabel" name="img_transf">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>100</y>
+            <width>50</width>
+            <height>50</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius:20px;
 background-color: rgba(191, 64, 64, 0)</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="deposito">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>230</y>
-      <width>150</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="transferencia">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>150</width>
+            <height>150</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
 	color: #fff;
 	background-color: rgba(200, 200, 200, 0);
 
@@ -407,82 +358,387 @@ background-color: rgba(191, 64, 64, 0)</string>
 QPushButton:hover{
 border: 10px groove rgb(140, 214, 223);
 }</string>
-    </property>
-    <property name="text">
-     <string>Depósito</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="img_extrato">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>320</y>
-      <width>50</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(191, 64, 64, 0);
+          </property>
+          <property name="text">
+           <string>Transferência</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="transferencia_back">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>150</width>
+            <height>150</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+
+	background-color: #7cbec6;
+	color: #fff;
+	border-radius: 75px;
+}
+
+QPushButton:hover{
+	background-color: rgb(140, 214, 223);
+	border: 10px groove rgb(140, 214, 223);
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <zorder>transferencia_back</zorder>
+         <zorder>img_transf</zorder>
+         <zorder>transferencia</zorder>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QWidget" name="widget_dep" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>171</width>
+           <height>171</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>171</width>
+           <height>171</height>
+          </size>
+         </property>
+         <widget class="QLabel" name="img_dep">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>100</y>
+            <width>50</width>
+            <height>50</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius:20px;
+background-color: rgba(191, 64, 64, 0)</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="deposito_back">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>150</width>
+            <height>150</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+
+	background-color: #7cbec6;
+	color: #fff;
+	border-radius: 75px;
+}
+
+QPushButton:hover{
+	background-color: rgb(140, 214, 223);
+	border: 10px groove rgb(140, 214, 223);
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="icones/to_left.png">
+            <normaloff>../../../../../../.designer/backup</normaloff>../../../../../../.designer/backup</iconset>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="deposito">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>150</width>
+            <height>150</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: #fff;
+	background-color: rgba(200, 200, 200, 0);
+
+	border-radius: 75px;
+}
+
+QPushButton:hover{
+border: 10px groove rgb(140, 214, 223);
+}</string>
+          </property>
+          <property name="text">
+           <string>Depósito</string>
+          </property>
+         </widget>
+         <zorder>deposito_back</zorder>
+         <zorder>img_dep</zorder>
+         <zorder>deposito</zorder>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QWidget" name="widget_saque" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>171</width>
+           <height>171</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>171</width>
+           <height>171</height>
+          </size>
+         </property>
+         <widget class="QLabel" name="img_saque">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>100</y>
+            <width>50</width>
+            <height>50</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius:20px;
+background-color: rgba(191, 64, 64, 0)</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="saque_back">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>150</width>
+            <height>150</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>150</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>150</width>
+            <height>150</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+
+	background-color: #7cbec6;
+	color: #fff;
+	border-radius: 75px;
+}
+
+QPushButton:hover{
+	background-color: rgb(140, 214, 223);
+	border: 10px groove rgb(140, 214, 223);
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="saque">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>150</width>
+            <height>150</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>150</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>150</width>
+            <height>150</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	color: #fff;
+	background-color: rgba(200, 200, 200, 0);
+
+	border-radius: 75px;
+}
+
+QPushButton:hover{
+border: 10px groove rgb(140, 214, 223);
+}</string>
+          </property>
+          <property name="text">
+           <string>Saque</string>
+          </property>
+         </widget>
+         <zorder>saque_back</zorder>
+         <zorder>img_saque</zorder>
+         <zorder>saque</zorder>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QWidget" name="widget_extrato" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>181</width>
+           <height>171</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>181</width>
+           <height>171</height>
+          </size>
+         </property>
+         <widget class="QLabel" name="img_extrato">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>100</y>
+            <width>50</width>
+            <height>50</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(191, 64, 64, 0);
 border-radius:20px</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="img_saque">
-    <property name="geometry">
-     <rect>
-      <x>295</x>
-      <y>320</y>
-      <width>50</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius:20px;
-background-color: rgba(191, 64, 64, 0)</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="img_dep">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>320</y>
-      <width>50</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius:20px;
-background-color: rgba(191, 64, 64, 0)</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="saque">
-    <property name="geometry">
-     <rect>
-      <x>245</x>
-      <y>230</y>
-      <width>150</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="extrato_back">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>10</y>
+            <width>150</width>
+            <height>150</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+
+	background-color: #7cbec6;
+	color: #fff;
+	border-radius: 75px;
+}
+
+QPushButton:hover{
+	background-color: rgb(140, 214, 223);
+	border: 10px groove rgb(140, 214, 223);
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="extrato">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>10</y>
+            <width>150</width>
+            <height>150</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Ubuntu</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
 	color: #fff;
 	background-color: rgba(200, 200, 200, 0);
 
@@ -492,99 +748,68 @@ background-color: rgba(191, 64, 64, 0)</string>
 QPushButton:hover{
 border: 10px groove rgb(140, 214, 223);
 }</string>
-    </property>
-    <property name="text">
-     <string>Saque</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="transferencia">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>230</y>
-      <width>150</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-	color: #fff;
-	background-color: rgba(200, 200, 200, 0);
-
-	border-radius: 75px;
-}
-
-QPushButton:hover{
-border: 10px groove rgb(140, 214, 223);
-}</string>
-    </property>
-    <property name="text">
-     <string>Transferência</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="extrato">
-    <property name="geometry">
-     <rect>
-      <x>630</x>
-      <y>230</y>
-      <width>150</width>
-      <height>150</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-	color: #fff;
-	background-color: rgba(200, 200, 200, 0);
-
-	border-radius: 75px;
-}
-
-QPushButton:hover{
-border: 10px groove rgb(140, 214, 223);
-}</string>
-    </property>
-    <property name="text">
-     <string>Extrato</string>
-    </property>
-   </widget>
-   <zorder>deposito_back</zorder>
-   <zorder>extrato_back</zorder>
-   <zorder>transferencia_back</zorder>
-   <zorder>saque_back</zorder>
-   <zorder>label</zorder>
-   <zorder>saldo</zorder>
-   <zorder>btn_sair</zorder>
-   <zorder>line</zorder>
-   <zorder>checkBox</zorder>
-   <zorder>tipo</zorder>
-   <zorder>numero</zorder>
-   <zorder>label_2</zorder>
-   <zorder>img_transf</zorder>
-   <zorder>img_extrato</zorder>
-   <zorder>img_saque</zorder>
-   <zorder>img_dep</zorder>
-   <zorder>transferencia</zorder>
-   <zorder>deposito</zorder>
-   <zorder>saque</zorder>
-   <zorder>extrato</zorder>
+          </property>
+          <property name="text">
+           <string>Extrato</string>
+          </property>
+         </widget>
+         <zorder>extrato_back</zorder>
+         <zorder>img_extrato</zorder>
+         <zorder>extrato</zorder>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="frame_3">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 0px
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <family>Sawasdee</family>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #7cbec6;</string>
+         </property>
+         <property name="text">
+          <string>Beast Bank</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
