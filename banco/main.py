@@ -348,7 +348,6 @@ class Main(QMainWindow, TelaDeLogin):
                             deposito_conta_poupanca(cp.id, cp.numero, valor, True)
                             QMessageBox.information(None, "Sucesso", "Transferência concluida!")
                             new_cp = busca_conta_por_cpf(user.cpf, "cp")
-                            print(new_cp)
                             user.add_cp(new_cp)
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except:
@@ -505,7 +504,6 @@ class Main(QMainWindow, TelaDeLogin):
         cc = busca_conta_por_cpf(cpf.text(), "cc")
         cp = busca_conta_por_cpf(cpf.text(), "cp")
         select.clear()
-        print(user.cpf, cpf)
         if user.cpf == cpf.text():
             if tipo == "cc":
                 if cp:
