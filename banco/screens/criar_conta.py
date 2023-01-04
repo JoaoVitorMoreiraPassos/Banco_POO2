@@ -22,7 +22,38 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
-        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame_2 = QtWidgets.QFrame(self.centralwidget)
+        self.frame_2.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.frame_2.setStyleSheet("border: 0px")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.voltar = QtWidgets.QPushButton(self.frame_2)
+        self.voltar.setGeometry(QtCore.QRect(40, 0, 40, 40))
+        self.voltar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.voltar.setStyleSheet("background-color: rgba(200, 200, 200, 51);\n"
+"border-radius: 20px;\n"
+"")
+        self.voltar.setText("")
+        self.voltar.setObjectName("voltar")
+        self.img = QtWidgets.QLabel(self.frame_2)
+        self.img.setGeometry(QtCore.QRect(40, 0, 40, 40))
+        self.img.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.img.setStyleSheet("background-color: rgb(243, 243, 243);\n"
+"border-radius: 20px;")
+        self.img.setText("")
+        self.img.setObjectName("img")
+        self.img.raise_()
+        self.voltar.raise_()
+        self.gridLayout.addWidget(self.frame_2, 1, 0, 1, 1)
+        self.frame_3 = QtWidgets.QFrame(self.centralwidget)
+        self.frame_3.setStyleSheet("border: 0px")
+        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_3.setObjectName("frame_3")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.frame_3)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.frame = QtWidgets.QFrame(self.frame_3)
         self.frame.setMinimumSize(QtCore.QSize(361, 411))
         self.frame.setMaximumSize(QtCore.QSize(361, 411))
         self.frame.setStyleSheet("background-color: #156068;\n"
@@ -46,12 +77,12 @@ class Ui_MainWindow(object):
         self.Titulo.setWordWrap(True)
         self.Titulo.setObjectName("Titulo")
         self.btn_criar = QtWidgets.QPushButton(self.frame)
-        self.btn_criar.setGeometry(QtCore.QRect(101, 300, 158, 27))
+        self.btn_criar.setGeometry(QtCore.QRect(50, 295, 261, 35))
         self.btn_criar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_criar.setStyleSheet("QPushButton {\n"
 "\n"
 "    background-color: #498f97;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 17px;\n"
 "    color: #fff\n"
 "}\n"
 "\n"
@@ -70,40 +101,35 @@ class Ui_MainWindow(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.senha = QtWidgets.QLineEdit(self.frame)
-        self.senha.setGeometry(QtCore.QRect(50, 220, 261, 27))
-        self.senha.setStyleSheet("background-color: #fff;\n"
-"color: #111;\n"
-"padding-left: 5px;\n"
-"border-radius: 5px;\n"
-"")
+        self.senha.setGeometry(QtCore.QRect(50, 220, 261, 35))
+        self.senha.setStyleSheet("QLineEdit{\n"
+"    background-color: #fff;\n"
+"    color: #111;\n"
+"    padding-left: 5px;\n"
+"    border-radius: 17px;\n"
+"    border: 2px solid #498f97;\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"    border: 2px ridge rgb(3, 151, 136)\n"
+"}")
+        self.senha.setEchoMode(QtWidgets.QLineEdit.Password)
         self.senha.setObjectName("senha")
         self.label_3 = QtWidgets.QLabel(self.frame)
-        self.label_3.setGeometry(QtCore.QRect(50, 200, 72, 19))
+        self.label_3.setGeometry(QtCore.QRect(55, 200, 72, 19))
         self.label_3.setStyleSheet("color: #fff;")
         self.label_3.setObjectName("label_3")
-        self.voltar = QtWidgets.QPushButton(self.frame)
-        self.voltar.setGeometry(QtCore.QRect(10, 350, 40, 40))
-        self.voltar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.voltar.setStyleSheet("background-color: rgba(200, 200, 200, 51);\n"
-"border-radius: 20px;\n"
-"")
-        self.voltar.setText("")
-        self.voltar.setObjectName("voltar")
-        self.img = QtWidgets.QLabel(self.frame)
-        self.img.setGeometry(QtCore.QRect(10, 350, 40, 40))
-        self.img.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.img.setStyleSheet("background-color: rgb(243, 243, 243);\n"
-"border-radius: 20px;")
-        self.img.setText("")
-        self.img.setObjectName("img")
-        self.img.raise_()
-        self.Titulo.raise_()
-        self.btn_criar.raise_()
-        self.label_2.raise_()
-        self.senha.raise_()
-        self.label_3.raise_()
-        self.voltar.raise_()
-        self.gridLayout.addWidget(self.frame, 0, 0, 1, 1)
+        self.checkBox = QtWidgets.QCheckBox(self.frame)
+        self.checkBox.setGeometry(QtCore.QRect(175, 260, 131, 16))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox.setFont(font)
+        self.checkBox.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.checkBox.setAutoFillBackground(False)
+        self.checkBox.setStyleSheet("color: #fff;")
+        self.checkBox.setObjectName("checkBox")
+        self.gridLayout_2.addWidget(self.frame, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.frame_3, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -116,4 +142,5 @@ class Ui_MainWindow(object):
         self.btn_criar.setText(_translate("MainWindow", "Criar"))
         self.label_2.setText(_translate("MainWindow", "Beast Bank"))
         self.senha.setPlaceholderText(_translate("MainWindow", "senha de 6 digitos..."))
-        self.label_3.setText(_translate("MainWindow", "senha:"))
+        self.label_3.setText(_translate("MainWindow", "Senha:"))
+        self.checkBox.setText(_translate("MainWindow", "mostrar senha"))

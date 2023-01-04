@@ -1,12 +1,12 @@
 import sys
-from application import Main
-from UiToPy import convert
+import UiToPy
 from PyQt5 import QtWidgets
 
 
 
 if __name__ == "__main__":
-    convert()
+    UiToPy.convert_ui_to_py()
+    from application import Main
     qt = QtWidgets.QApplication(sys.argv)
     app = Main()
     app.show()

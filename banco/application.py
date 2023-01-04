@@ -9,8 +9,7 @@ from screens.extrato          import Ui_MainWindow as TelaDeExtrato
 from screens.deposito_e_saque import Ui_MainWindow as TelaDeDepositoESaque
 from screens.transferencia    import Ui_MainWindow as TelaDeTransferencia
 from bibs.sgbd                import login, add_cliente, create_conta_corrente, create_conta_poupanca, deposito_conta_corrente, deposito_conta_poupanca, get_transacoes, saque_conta_corrente, saque_conta_poupanca, busca_conta_por_cpf, valida_senha_conta_corrente, valida_senha_conta_poupanca
-from PIL                      import Image  
-import os 
+from PIL                      import Image 
 
 
 class Main(QMainWindow, TelaDeLogin):
@@ -51,6 +50,7 @@ class Main(QMainWindow, TelaDeLogin):
         self.window = QtWidgets.QMainWindow()
         self.cadastro_screen = TelaDeCadastro()
         self.cadastro_screen.setupUi(self.window)
+        self.cadastro_screen.nome.setFocus()
         self.cadastro_screen.btn_cadastro.clicked.connect(lambda: self.cadastrar(self.cadastro_screen))
         self.cadastro_screen.btn_login.clicked.connect(lambda: self.openLogin(self.window))
         self.cadastro_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.cadastro_screen.checkBox, self.cadastro_screen.senha))
@@ -79,7 +79,9 @@ class Main(QMainWindow, TelaDeLogin):
         self.window = QtWidgets.QMainWindow()
         self.criador_screen = TelaDeCriarContas()
         self.criador_screen.setupUi(self.window)
+        self.criador_screen.senha.setFocus()
         self.criador_screen.btn_criar.clicked.connect(lambda: self.criarContaCorrente(self.window, self.criador_screen, user) if tipo == "corrente" else self.criarContaPoupanca(self.window, self.criador_screen, user))
+        self.criador_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.criador_screen.checkBox, self.criador_screen.senha))
         img = Image.open("./icons/back.png")
         img = img.resize((30,30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
@@ -117,6 +119,7 @@ class Main(QMainWindow, TelaDeLogin):
         self.window.setWindowTitle("Depósito")
         self.deposito_screen = TelaDeDepositoESaque()
         self.deposito_screen.setupUi(self.window)
+        self.deposito_screen.valor.setFocus()
         self.deposito_screen.operacao.setText("Depósito")
         self.deposito_screen.btn_confirma.clicked.connect(lambda: self.depositar(self.window, user, self.deposito_screen.valor.text(), conta, tipo, self.deposito_screen.senha.text()))
         self.deposito_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.deposito_screen.checkBox, self.deposito_screen.senha))
@@ -133,6 +136,7 @@ class Main(QMainWindow, TelaDeLogin):
         self.window.setWindowTitle("Saque")
         self.saque_screen = TelaDeDepositoESaque()
         self.saque_screen.setupUi(self.window)
+        self.saque_screen.valor.setFocus()
         self.saque_screen.operacao.setText("Saque")
         self.saque_screen.btn_confirma.clicked.connect(lambda: self.sacar(self.window, user, self.saque_screen.valor.text(), conta, tipo, self.saque_screen.senha.text()))
         self.saque_screen.voltar.clicked.connect(lambda: self.openContas(self.window, user, conta, tipo))
@@ -172,7 +176,6 @@ class Main(QMainWindow, TelaDeLogin):
         vertical = []
         if len(historico) > 0:
             line = QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
-            # line.setFrameShadow(QtWidgets.QFrame.Plain)
             line.setLineWidth(5)
             line.setMidLineWidth(2)
             line.setFrameShape(QtWidgets.QFrame.HLine)
@@ -526,8 +529,4 @@ class Main(QMainWindow, TelaDeLogin):
         senha = janela.senha.text()
         nascimento = self.convertDate(janela.nascimento.text())
         return nome, cpf, nascimento, email, senha
-    
-
-        
-        
         

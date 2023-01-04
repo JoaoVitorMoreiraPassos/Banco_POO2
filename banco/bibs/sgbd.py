@@ -143,7 +143,7 @@ def deposito_conta_corrente(id, numero, valor, eh_transacao=False):
     cursor = banco.cursor()
     cursor.execute("SELECT saldo FROM conta_corrente WHERE numero = %s", (numero,))
     result = cursor.fetchone()
-    if valor < 0:
+    if valor <= 0:
         raise Exception("Valor inválido!")
     cursor.execute("UPDATE conta_corrente SET saldo = %s WHERE numero = %s", (result[0] + valor, numero))
     banco.commit()
@@ -155,7 +155,7 @@ def deposito_conta_poupanca(id, numero, valor, eh_transferencia=False):
     cursor = banco.cursor()
     cursor.execute("SELECT saldo FROM conta_poupanca WHERE numero = %s", (numero,))
     result = cursor.fetchone()
-    if valor < 0:
+    if valor <= 0:
         raise Exception("Valor inválido!")
     cursor.execute("UPDATE conta_poupanca SET saldo = %s WHERE numero = %s", (result[0] + valor, numero))
     banco.commit()

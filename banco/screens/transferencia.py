@@ -20,7 +20,14 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
-        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame_2 = QtWidgets.QFrame(self.centralwidget)
+        self.frame_2.setStyleSheet("border: 0px")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.frame_2)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.frame = QtWidgets.QFrame(self.frame_2)
         self.frame.setMinimumSize(QtCore.QSize(361, 471))
         self.frame.setMaximumSize(QtCore.QSize(361, 471))
         self.frame.setStyleSheet("background-color: #156068;\n"
@@ -30,12 +37,12 @@ class Ui_MainWindow(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.btn_confirma = QtWidgets.QPushButton(self.frame)
-        self.btn_confirma.setGeometry(QtCore.QRect(101, 410, 158, 27))
+        self.btn_confirma.setGeometry(QtCore.QRect(50, 400, 261, 35))
         self.btn_confirma.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_confirma.setStyleSheet("QPushButton {\n"
 "\n"
 "    background-color: #498f97;\n"
-"    border-radius: 13px;\n"
+"    border-radius: 17px;\n"
 "    color: #fff\n"
 "}\n"
 "\n"
@@ -76,7 +83,7 @@ class Ui_MainWindow(object):
 "    background-color: #fff;\n"
 "    color: #000;\n"
 "    padding-left: 5px;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 17px;\n"
 "    border: 2px solid #498f97;\n"
 "}\n"
 "\n"
@@ -101,28 +108,13 @@ class Ui_MainWindow(object):
         self.checkBox.setAutoFillBackground(False)
         self.checkBox.setStyleSheet("color: #fff;")
         self.checkBox.setObjectName("checkBox")
-        self.img = QtWidgets.QLabel(self.frame)
-        self.img.setGeometry(QtCore.QRect(10, 420, 40, 40))
-        self.img.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.img.setStyleSheet("background-color: rgb(243, 243, 243);\n"
-"border-radius: 20px;")
-        self.img.setText("")
-        self.img.setAlignment(QtCore.Qt.AlignCenter)
-        self.img.setObjectName("img")
-        self.voltar = QtWidgets.QPushButton(self.frame)
-        self.voltar.setGeometry(QtCore.QRect(10, 420, 40, 40))
-        self.voltar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.voltar.setStyleSheet("background-color: rgba(200, 200, 200, 51);\n"
-"border-radius: 20px;")
-        self.voltar.setText("")
-        self.voltar.setObjectName("voltar")
         self.cpf = QtWidgets.QLineEdit(self.frame)
         self.cpf.setGeometry(QtCore.QRect(50, 140, 261, 35))
         self.cpf.setStyleSheet("QLineEdit{\n"
 "    background-color: #fff;\n"
 "    color: #111;\n"
 "    padding-left: 5px;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 17px;\n"
 "    border: 2px solid #498f97;\n"
 "}\n"
 "\n"
@@ -136,7 +128,7 @@ class Ui_MainWindow(object):
 "    background-color: #fff;\n"
 "    color: #111;\n"
 "    padding-left: 5px;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 17px;\n"
 "    border: 2px solid #498f97;\n"
 "}\n"
 "\n"
@@ -150,19 +142,42 @@ class Ui_MainWindow(object):
 "    background-color: #fff;\n"
 "    color: #111;\n"
 "    padding-left: 5px;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 17px;\n"
 "    border: 2px solid #498f97;\n"
 "}\n"
 "\n"
 "QLineEdit:focus{\n"
 "    border: 2px ridge rgb(3, 151, 136)\n"
 "}")
+        self.senha.setEchoMode(QtWidgets.QLineEdit.Password)
         self.senha.setObjectName("senha")
-        self.gridLayout.addWidget(self.frame, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.frame, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.frame_2, 0, 0, 1, 1)
+        self.frame_3 = QtWidgets.QFrame(self.centralwidget)
+        self.frame_3.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.frame_3.setStyleSheet("border: 0px")
+        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_3.setObjectName("frame_3")
+        self.voltar = QtWidgets.QPushButton(self.frame_3)
+        self.voltar.setGeometry(QtCore.QRect(40, 0, 40, 40))
+        self.voltar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.voltar.setStyleSheet("background-color: rgba(200, 200, 200, 51);\n"
+"border-radius: 20px;")
+        self.voltar.setText("")
+        self.voltar.setObjectName("voltar")
+        self.img = QtWidgets.QLabel(self.frame_3)
+        self.img.setGeometry(QtCore.QRect(40, 0, 40, 40))
+        self.img.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.img.setStyleSheet("background-color: rgb(243, 243, 243);\n"
+"border-radius: 20px;")
+        self.img.setText("")
+        self.img.setAlignment(QtCore.Qt.AlignCenter)
+        self.img.setObjectName("img")
+        self.img.raise_()
+        self.voltar.raise_()
+        self.gridLayout.addWidget(self.frame_3, 1, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
