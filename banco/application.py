@@ -28,7 +28,9 @@ class Main(QMainWindow, TelaDeLogin):
         self.voltar.clicked.connect(lambda: self.close())
         
     """
+    ------------------------------------------------------------
         Métodos de criação de e abertura de janelas
+    ------------------------------------------------------------
     """
     def openLogin(self, MainWindow=None):
         self.window = QtWidgets.QMainWindow()
@@ -270,7 +272,9 @@ class Main(QMainWindow, TelaDeLogin):
         self.window.show()
         
     """
+    ---------------------------------------------------
         Métodos de execução dos butões das telas
+    ---------------------------------------------------
     """
     def logIn(self, janela, MainWindow=None):
         email = janela.email.text()
@@ -482,7 +486,11 @@ class Main(QMainWindow, TelaDeLogin):
             QMessageBox.warning(None, "Erro", str(E))
             return
         
-    """Métodos auxiliares"""
+    """
+    -----------------------------------------------------
+    Métodos auxiliares  
+    -----------------------------------------------------
+    """
     
     @staticmethod
     def mostraSaldo(state, label, saldo):
@@ -497,8 +505,8 @@ class Main(QMainWindow, TelaDeLogin):
             senha.setEchoMode(QtWidgets.QLineEdit.Normal)
         else:
             senha.setEchoMode(QtWidgets.QLineEdit.Password)
+            
     @staticmethod
-
     def convertDate(date):
         date = date.split("/")
         return f"{date[2]}-{date[1]}-{date[0]}"
@@ -520,13 +528,12 @@ class Main(QMainWindow, TelaDeLogin):
                 select.addItem(f"Conta Corrente - {cc.numero}")
             if cp:
                 select.addItem(f"Conta Poupança - {cp.numero}")           
-
     
     def getInfos(self, janela):
-        nome = janela.nome.text()
-        cpf = janela.cpf.text()
-        email = janela.email.text()
-        senha = janela.senha.text()
+        nome       = janela.nome.text()
+        cpf        = janela.cpf.text()
+        email      = janela.email.text()
+        senha      = janela.senha.text()
         nascimento = self.convertDate(janela.nascimento.text())
         return nome, cpf, nascimento, email, senha
         
