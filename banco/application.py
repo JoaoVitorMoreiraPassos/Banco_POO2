@@ -16,8 +16,6 @@ class Main(QMainWindow, TelaDeLogin):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.email.setText("moreirapassosj@gmail.com")
-        self.senha.setText("12345678")
         self.pushButton.clicked.connect(lambda: self.logIn(self,self))
         self.pushButton_2.clicked.connect(lambda: self.openCadastro(self))
         self.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.checkBox, self.senha))
