@@ -331,6 +331,7 @@ class Main(QMainWindow, TelaDeLogin):
             valor = float(valor)
         except:
             QMessageBox.warning(None, "Erro", "Valor inválido!")
+            return
         
         if tipo_origem == "cc":
             if not valida_senha_conta_corrente(conta.id, senha):
@@ -409,8 +410,10 @@ class Main(QMainWindow, TelaDeLogin):
             valor = float(valor)
         except:
             QMessageBox.warning(None, "Erro", "Valor inválido!")
+            return
         if valor == "":
             QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            return
         else:
             if tipo == "cc":
                 if not valida_senha_conta_corrente(conta.id, senha):
@@ -423,6 +426,7 @@ class Main(QMainWindow, TelaDeLogin):
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
                     QMessageBox.warning(None, "Erro", str(E))
+                    return
             if tipo == "cp":
                 if not valida_senha_conta_poupanca(conta.id, senha):
                     QMessageBox.warning(None, "Erro", "Senha incorreta!")
@@ -434,14 +438,17 @@ class Main(QMainWindow, TelaDeLogin):
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
                     QMessageBox.warning(None, "Erro", str(E))
+                    return
     
     def sacar(self, MainWindow, user, valor, conta, tipo, senha):
         try:
             valor = float(valor)
         except:
             QMessageBox.warning(None, "Erro", "Valor inválido!")
+            return
         if valor == "":
             QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            return
         else:
             if tipo == "cc":
                 if not valida_senha_conta_corrente(conta.id, senha):
@@ -454,6 +461,7 @@ class Main(QMainWindow, TelaDeLogin):
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
                     QMessageBox.warning(None, "Erro", str(E))
+                    return
             if tipo == "cp":
                 if not valida_senha_conta_poupanca(conta.id, senha):
                     QMessageBox.warning(None, "Erro", "Senha incorreta!")
@@ -465,6 +473,7 @@ class Main(QMainWindow, TelaDeLogin):
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
                     QMessageBox.warning(None, "Erro", str(E))
+                    return
     
     def cadastrar(self, MainWindow):
         infos = self.getInfos(MainWindow)
@@ -474,7 +483,7 @@ class Main(QMainWindow, TelaDeLogin):
         if len(infos[4]) < 8:
             QMessageBox.warning(None, "Erro", "Senha muito curta!")
             return
-        if len(infos[4] > 45):
+        if len(infos[4]) > 45:
             QMessageBox.warning(None, "Erro", "Senha muito comprida!")
             return
         try:

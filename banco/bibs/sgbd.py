@@ -6,7 +6,7 @@ from datetime import datetime
 banco = conex.connect(
     host="localhost",
     user="root",
-    passwd="",
+    passwd="root",
     database="mydb"
 )
 
@@ -173,7 +173,7 @@ def saque_conta_corrente(id, numero, valor, eh_transacao=False):
     if result[0] < valor:
         cursor.close()
         raise Exception("Saldo insuficiente!")
-    if valor < 0:
+    if valor <= 0:
         cursor.close()
         raise Exception("Valor inválido!")
     cursor.execute("UPDATE conta_corrente SET saldo = %s WHERE numero = %s", (result[0] - valor, numero))
@@ -190,7 +190,7 @@ def saque_conta_poupanca(id, numero, valor, eh_transacao=False):
     if result[0] < valor:
         cursor.close()
         raise Exception("Saldo insuficiente!")
-    if valor < 0:
+    if valor <= 0:
         cursor.close()
         raise Exception("Valor inválido!")
     cursor.execute("UPDATE conta_poupanca SET saldo = %s WHERE numero = %s", (result[0] - valor, numero))

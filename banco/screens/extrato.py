@@ -78,10 +78,11 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.widget_3)
         self.label_2.setMaximumSize(QtCore.QSize(16777215, 90))
         font = QtGui.QFont()
-        font.setFamily("Sawasdee")
-        font.setPointSize(20)
+        font.setFamily("Suruma")
+        font.setPointSize(41)
         self.label_2.setFont(font)
-        self.label_2.setStyleSheet("color: #7cbec6;")
+        self.label_2.setStyleSheet("\n"
+"")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.gridLayout_3.addWidget(self.label_2, 0, 0, 1, 1)
@@ -89,7 +90,8 @@ class Ui_MainWindow(object):
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setMinimumSize(QtCore.QSize(700, 400))
         self.frame.setMaximumSize(QtCore.QSize(16777215, 400))
-        self.frame.setStyleSheet("border: 0px")
+        self.frame.setStyleSheet("border: 0px;\n"
+"")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -97,7 +99,7 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setObjectName("gridLayout_5")
         self.scrollArea = QtWidgets.QScrollArea(self.frame)
         self.scrollArea.setMaximumSize(QtCore.QSize(700, 401))
-        self.scrollArea.setStyleSheet("background-color: #156068;")
+        self.scrollArea.setStyleSheet("")
         self.scrollArea.setFrameShape(QtWidgets.QFrame.Box)
         self.scrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
         self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
@@ -105,6 +107,9 @@ class Ui_MainWindow(object):
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 686, 382))
+        self.scrollAreaWidgetContents.setStyleSheet("QWidget{\n"
+"    background: #156060;\n"
+"}")
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout.setObjectName("gridLayout")

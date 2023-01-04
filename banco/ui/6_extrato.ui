@@ -172,12 +172,13 @@ border-radius: 20px;</string>
          </property>
          <property name="font">
           <font>
-           <family>Sawasdee</family>
-           <pointsize>20</pointsize>
+           <family>Suruma</family>
+           <pointsize>41</pointsize>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: #7cbec6;</string>
+          <string notr="true">
+</string>
          </property>
          <property name="text">
           <string>Beast Bank</string>
@@ -205,7 +206,8 @@ border-radius: 20px;</string>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">border: 0px</string>
+       <string notr="true">border: 0px;
+</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -223,7 +225,7 @@ border-radius: 20px;</string>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: #156068;</string>
+          <string notr="true"/>
          </property>
          <property name="frameShape">
           <enum>QFrame::Box</enum>
@@ -245,6 +247,11 @@ border-radius: 20px;</string>
             <width>686</width>
             <height>382</height>
            </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget{
+	background: #156060;
+}</string>
           </property>
           <layout class="QGridLayout" name="gridLayout"/>
          </widget>

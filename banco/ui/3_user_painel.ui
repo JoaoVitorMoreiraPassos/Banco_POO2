@@ -52,17 +52,17 @@
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>28</height>
+           <height>55</height>
           </size>
          </property>
          <property name="font">
           <font>
-           <family>Sawasdee</family>
-           <pointsize>20</pointsize>
+           <family>Suruma</family>
+           <pointsize>41</pointsize>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: #7cbec6;</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Beast Bank</string>
@@ -103,6 +103,12 @@
     </item>
     <item row="1" column="0">
      <widget class="QFrame" name="frame_2">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>400</height>
+       </size>
+      </property>
       <property name="styleSheet">
        <string notr="true">border: 0px</string>
       </property>

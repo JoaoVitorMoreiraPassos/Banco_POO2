@@ -782,14 +782,20 @@ border: 10px groove rgb(140, 214, 223);
       <layout class="QGridLayout" name="gridLayout_7">
        <item row="0" column="0">
         <widget class="QLabel" name="label_2">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>55</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <family>Sawasdee</family>
-           <pointsize>20</pointsize>
+           <family>Suruma</family>
+           <pointsize>41</pointsize>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: #7cbec6;</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Beast Bank</string>
