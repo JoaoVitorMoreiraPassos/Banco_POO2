@@ -1,5 +1,5 @@
+from PIL                      import Image 
 from PyQt5                    import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets          import QMessageBox, QMainWindow
 from screens.login_screen     import Ui_MainWindow as TelaDeLogin
 from screens.cadastro_screen  import Ui_MainWindow as TelaDeCadastro
 from screens.user_painel      import Ui_MainWindow as TelaDoUsuario
@@ -8,11 +8,10 @@ from screens.criar_conta      import Ui_MainWindow as TelaDeCriarContas
 from screens.extrato          import Ui_MainWindow as TelaDeExtrato
 from screens.deposito_e_saque import Ui_MainWindow as TelaDeDepositoESaque
 from screens.transferencia    import Ui_MainWindow as TelaDeTransferencia
-from bibs.sgbd                import login, add_cliente, create_conta_corrente, create_conta_poupanca, deposito_conta_corrente, deposito_conta_poupanca, get_transacoes, saque_conta_corrente, saque_conta_poupanca, busca_conta_por_cpf, valida_senha_conta_corrente, valida_senha_conta_poupanca
-from PIL                      import Image 
+from bibs.consultor_sql       import login, add_cliente, create_conta_corrente, create_conta_poupanca, deposito_conta_corrente, deposito_conta_poupanca, get_transacoes, saque_conta_corrente, saque_conta_poupanca, busca_conta_por_cpf, valida_senha_conta_corrente, valida_senha_conta_poupanca
 
 
-class Main(QMainWindow, TelaDeLogin):
+class Main(QtWidgets.QMainWindow, TelaDeLogin):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
@@ -278,7 +277,7 @@ class Main(QMainWindow, TelaDeLogin):
         email = janela.email.text()
         senha = janela.senha.text()
         if email == "" or senha == "":
-            QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
         else:
             operacao, user = login(email, senha)
             if operacao:
@@ -286,16 +285,16 @@ class Main(QMainWindow, TelaDeLogin):
                     MainWindow.close()
                 self.openPainel(MainWindow, janela, user)
             else:
-                QMessageBox.warning(None, "Erro", "Usuário ou senha incorretos!")
+                QtWidgets.QMessageBox.warning(None, "Erro", "Usuário ou senha incorretos!")
 
                
     def criarContaCorrente(self, MainWindow, janela, user):
         senha = janela.senha.text()
         if len(senha) != 6:
-            QMessageBox.warning(None, "Erro", "A senha deve ter 6 dígitos!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "A senha deve ter 6 dígitos!")
             return
         if senha == "":
-            QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
             return
         else:
             cc = create_conta_corrente(user.id, senha)
@@ -305,10 +304,10 @@ class Main(QMainWindow, TelaDeLogin):
     def criarContaPoupanca(self, MainWindow, janela, user):
         senha = janela.senha.text()
         if len(senha) != 6:
-            QMessageBox.warning(None, "Erro", "A senha deve ter 6 dígitos!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "A senha deve ter 6 dígitos!")
             return
         if senha == "":
-            QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
             return
         else:
             cp = create_conta_poupanca(user.id, senha)
@@ -325,17 +324,17 @@ class Main(QMainWindow, TelaDeLogin):
         cc = busca_conta_por_cpf(cpf_destino, "cc")
         cp = busca_conta_por_cpf(cpf_destino, "cp")
         if cpf_destino == "" or valor == "":
-            QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
             return
         try:
             valor = float(valor)
         except:
-            QMessageBox.warning(None, "Erro", "Valor inválido!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Valor inválido!")
             return
         
         if tipo_origem == "cc":
             if not valida_senha_conta_corrente(conta.id, senha):
-                QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
                 return
             try:
                 saque_conta_corrente(conta.id, conta.numero, valor, True)
@@ -344,33 +343,33 @@ class Main(QMainWindow, TelaDeLogin):
                     if tipo == "Conta Corrente":
                         try:
                             deposito_conta_corrente(cc.id, cc.numero, valor, True)
-                            QMessageBox.information(None, "Sucesso", "Transferência concluida!")
+                            QtWidgets.QMessageBox.information(None, "Sucesso", "Transferência concluida!")
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except Exception as E:
                             deposito_conta_corrente(conta.id, conta.numero, valor, True)
-                            QMessageBox.warning(None, "Erro", str(E))
+                            QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                             return
                     else:
                         try:
                             deposito_conta_poupanca(cp.id, cp.numero, valor, True)
-                            QMessageBox.information(None, "Sucesso", "Transferência concluida!")
+                            QtWidgets.QMessageBox.information(None, "Sucesso", "Transferência concluida!")
                             new_cp = busca_conta_por_cpf(user.cpf, "cp")
                             user.add_cp(new_cp)
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except:
                             deposito_conta_corrente(conta.id, conta.numero, valor, True)
-                            QMessageBox.warning(None, "Erro", "Transação não concluida, valor estornado!")
+                            QtWidgets.QMessageBox.warning(None, "Erro", "Transação não concluida, valor estornado!")
                             return
                 except:
-                    QMessageBox.warning(None, "Erro", "CPF não encontrado!")
+                    QtWidgets.QMessageBox.warning(None, "Erro", "CPF não encontrado!")
                     return
             except Exception as E:
-                QMessageBox.warning(None, "Erro", str(E))
+                QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                 return
             
         if tipo_origem == "cp":
             if not valida_senha_conta_poupanca(conta.id, senha):
-                QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
                 return
             try:
                 saque_conta_poupanca(conta.id, conta.numero, valor, True)
@@ -379,118 +378,118 @@ class Main(QMainWindow, TelaDeLogin):
                     if tipo == "Conta Corrente":
                         try:
                             deposito_conta_corrente(cc.id, cc.numero, valor, True)
-                            QMessageBox.information(None, "Sucesso", "Transferência concluida!")
+                            QtWidgets.QMessageBox.information(None, "Sucesso", "Transferência concluida!")
                             new_cc = busca_conta_por_cpf(user.cpf, "cc")
                             user.add_cc(new_cc)
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except:
                             deposito_conta_poupanca(conta.id, conta.numero, valor, True)
                             conta.deposita(valor)
-                            QMessageBox.warning(None, "Erro", "Transação não concluida, valor estornado!")
+                            QtWidgets.QMessageBox.warning(None, "Erro", "Transação não concluida, valor estornado!")
                             return
                     else:
                         try:
                             deposito_conta_poupanca(cp.id, cp.numero, valor, True)
-                            QMessageBox.information(None, "Sucesso", "Transferência concluida!")
+                            QtWidgets.QMessageBox.information(None, "Sucesso", "Transferência concluida!")
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except:
                             deposito_conta_poupanca(conta.id, conta.numero, valor, True)
                             conta.deposita(valor)
-                            QMessageBox.warning(None, "Erro", "Transação não concluida, valor estornado!")
+                            QtWidgets.QMessageBox.warning(None, "Erro", "Transação não concluida, valor estornado!")
                             return
                 except:
-                    QMessageBox.warning(None, "Erro", "CPF não encontrado!")
+                    QtWidgets.QMessageBox.warning(None, "Erro", "CPF não encontrado!")
                     return
             except Exception as E:
-                QMessageBox.warning(None, "Erro", str(E))
+                QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                 return
         
     def depositar(self, MainWindow,user, valor, conta, tipo, senha):
         try:
             valor = float(valor)
         except:
-            QMessageBox.warning(None, "Erro", "Valor inválido!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Valor inválido!")
             return
         if valor == "":
-            QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
             return
         else:
             if tipo == "cc":
                 if not valida_senha_conta_corrente(conta.id, senha):
-                    QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                    QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
                     return
                 try:
                     deposito_conta_corrente(conta.id, conta.numero, valor)
                     conta.deposita(valor)
-                    QMessageBox.information(None, "Sucesso", "Depósito realizado com sucesso!")
+                    QtWidgets.QMessageBox.information(None, "Sucesso", "Depósito realizado com sucesso!")
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
-                    QMessageBox.warning(None, "Erro", str(E))
+                    QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                     return
             if tipo == "cp":
                 if not valida_senha_conta_poupanca(conta.id, senha):
-                    QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                    QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
                     return
                 try:
                     deposito_conta_poupanca(conta.id, conta.numero, valor)
                     conta.deposita(valor)
-                    QMessageBox.information(None, "Sucesso", "Depósito realizado com sucesso!")
+                    QtWidgets.QMessageBox.information(None, "Sucesso", "Depósito realizado com sucesso!")
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
-                    QMessageBox.warning(None, "Erro", str(E))
+                    QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                     return
     
     def sacar(self, MainWindow, user, valor, conta, tipo, senha):
         try:
             valor = float(valor)
         except:
-            QMessageBox.warning(None, "Erro", "Valor inválido!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Valor inválido!")
             return
         if valor == "":
-            QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
             return
         else:
             if tipo == "cc":
                 if not valida_senha_conta_corrente(conta.id, senha):
-                    QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                    QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
                     return
                 try:
                     saque_conta_corrente(conta.id, conta.numero, valor)
                     conta.saca(valor)
-                    QMessageBox.information(None, "Sucesso", "Saque realizado com sucesso!")
+                    QtWidgets.QMessageBox.information(None, "Sucesso", "Saque realizado com sucesso!")
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
-                    QMessageBox.warning(None, "Erro", str(E))
+                    QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                     return
             if tipo == "cp":
                 if not valida_senha_conta_poupanca(conta.id, senha):
-                    QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                    QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
                     return
                 try:
                     saque_conta_poupanca(conta.id, conta.numero, valor)
                     conta.saca(valor)
-                    QMessageBox.information(None, "Sucesso", "Saque realizado com sucesso!")
+                    QtWidgets.QMessageBox.information(None, "Sucesso", "Saque realizado com sucesso!")
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
-                    QMessageBox.warning(None, "Erro", str(E))
+                    QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                     return
     
     def cadastrar(self, MainWindow):
         infos = self.getInfos(MainWindow)
         if infos[0] == "" or infos[1] == "" or infos[2] == "" or infos[3] == "" or infos[4] == "":
-            QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
             return
         if len(infos[4]) < 8:
-            QMessageBox.warning(None, "Erro", "Senha muito curta!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Senha muito curta!")
             return
         if len(infos[4]) > 45:
-            QMessageBox.warning(None, "Erro", "Senha muito comprida!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Senha muito comprida!")
             return
         try:
             add_cliente(infos[0], infos[1], infos[2], infos[3], infos[4])
-            QMessageBox.about(None, "Sucesso", "Cadastro realizado com sucesso!")
+            QtWidgets.QMessageBox.about(None, "Sucesso", "Cadastro realizado com sucesso!")
         except Exception as E:
-            QMessageBox.warning(None, "Erro", str(E))
+            QtWidgets.QMessageBox.warning(None, "Erro", str(E))
             return
         
     """
