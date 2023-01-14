@@ -98,10 +98,10 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.contas_screen.saldo.setText(f"Saldo : R$ {conta.saldo:.2f}".replace(".",","))
         self.contas_screen.checkBox.stateChanged.connect(lambda: self.mostraSaldo(self.contas_screen.checkBox,self.contas_screen.saldo, conta.saldo))
         self.contas_screen.deposito.clicked.connect(lambda: self.openDeposito(self.window, user, conta, tipo))
-        img_dep = QtGui.QPixmap("./icons/saque.png", "0", QtCore.Qt.AvoidDither|QtCore.Qt.ThresholdDither|QtCore.Qt.ThresholdAlphaDither)
+        img_dep = QtGui.QPixmap("./icons/saque_e_deposito.png", "0", QtCore.Qt.AvoidDither|QtCore.Qt.ThresholdDither|QtCore.Qt.ThresholdAlphaDither)
         self.contas_screen.img_dep.setPixmap(img_dep)
         self.contas_screen.saque.clicked.connect(lambda: self.openSaque(self.window, user, conta, tipo))
-        img_saque = QtGui.QPixmap("./icons/saque.png", "0", QtCore.Qt.AvoidDither|QtCore.Qt.ThresholdDither|QtCore.Qt.ThresholdAlphaDither)
+        img_saque = QtGui.QPixmap("./icons/saque_e_deposito.png", "0", QtCore.Qt.AvoidDither|QtCore.Qt.ThresholdDither|QtCore.Qt.ThresholdAlphaDither)
         self.contas_screen.img_saque.setPixmap(img_saque)
         self.contas_screen.transferencia.clicked.connect(lambda: self.openTransferencia(self.window, user, conta, tipo))
         img_transf = QtGui.QPixmap("./icons/transferencia.png", "0", QtCore.Qt.AvoidDither|QtCore.Qt.ThresholdDither|QtCore.Qt.ThresholdAlphaDither)
@@ -146,7 +146,6 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.saque_screen.img.setPixmap(img)
         MainWindow.close()
         self.window.show()
-
         
     def openTransferencia(self, MainWindow, user, conta, tipo):
         self.window = QtWidgets.QMainWindow()

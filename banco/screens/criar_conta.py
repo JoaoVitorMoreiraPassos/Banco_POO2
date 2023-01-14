@@ -42,6 +42,7 @@ class Ui_MainWindow(object):
         self.img.setStyleSheet("background-color: rgb(243, 243, 243);\n"
 "border-radius: 20px;")
         self.img.setText("")
+        self.img.setAlignment(QtCore.Qt.AlignCenter)
         self.img.setObjectName("img")
         self.img.raise_()
         self.voltar.raise_()
