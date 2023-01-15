@@ -16,6 +16,7 @@ from bibs.consultor_sql import (
     deposito_conta_corrente,
     deposito_conta_poupanca,
     get_transacoes,
+    get_cliente_id_by_cpf,
     saque_conta_corrente,
     saque_conta_poupanca,
     busca_conta_por_cpf,
@@ -33,6 +34,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.checkBox.stateChanged.connect(
             lambda: self.mostraSenha(self.checkBox, self.senha)
         )
+        self.email.setText("moreirapassosj@gmail.com")
+        self.senha.setText("12345678")
         img = Image.open("./icons/exit.png")
         img = img.resize((30, 30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
@@ -323,7 +326,12 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.window = QtWidgets.QMainWindow()
         self.extrato_screen = TelaDeExtrato()
         self.extrato_screen.setupUi(self.window)
+        criacao = str(conta.criacao).split(" ")
+        criacao = "/".join(criacao[0].split("-")[::-1]) + " " + criacao[1]
+        self.extrato_screen.criacao.setText("Conta criada em " + criacao)
         historico = get_transacoes(conta.id, tipo)
+        historico.sort(key=lambda x: x[1], reverse=True)
+        historico = historico[:10]
         height = 2
         labels = []
         horizontal = []
@@ -334,6 +342,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             line.setMidLineWidth(2)
             line.setFrameShape(QtWidgets.QFrame.HLine)
             line.setObjectName("line")
+
             self.extrato_screen.gridLayout.addWidget(line, 1, 0, 1, 8)
             label_6 = QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
             label_6.setStyleSheet("color: #fff")
@@ -373,7 +382,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 self.extrato_screen.scrollAreaWidgetContents
             )
             for transacao in historico:
-                momento = str(transacao[1]).replace("-", "/")
+                momento = str(transacao[1]).split(" ")
+                momento = "/".join(momento[0].split("-")[::-1]) + " " + momento[1]
                 operacao = transacao[2]
                 valor = transacao[3]
 
@@ -498,6 +508,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             tipo_origem = "cp"
         cc = busca_conta_por_cpf(cpf_destino, "cc")
         cp = busca_conta_por_cpf(cpf_destino, "cp")
+        id_destino = get_cliente_id_by_cpf(cpf_destino)
         if cpf_destino == "" or valor == "":
             QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
             return
@@ -512,31 +523,42 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
                 return
             try:
-                saque_conta_corrente(conta.id, conta.numero, valor, True)
+                saque_conta_corrente(
+                    conta.id,
+                    conta.numero,
+                    valor,
+                    True,
+                    id_destino,
+                    "cc" if tipo == "Conta Corrente" else "cp",
+                )
                 conta.saca(valor)
                 try:
                     if tipo == "Conta Corrente":
                         try:
-                            deposito_conta_corrente(cc.id, cc.numero, valor, True)
+                            deposito_conta_corrente(
+                                cc.id, cc.numero, valor, True, user.id, tipo_origem
+                            )
                             QtWidgets.QMessageBox.information(
                                 None, "Sucesso", "Transferência concluida!"
                             )
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except Exception as E:
-                            deposito_conta_corrente(conta.id, conta.numero, valor, True)
+                            deposito_conta_corrente(conta.id, conta.numero, valor)
                             QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                             return
                     else:
                         try:
-                            deposito_conta_poupanca(cp.id, cp.numero, valor, True)
+                            deposito_conta_poupanca(
+                                cp.id, cp.numero, valor, True, user.id, tipo_origem
+                            )
                             QtWidgets.QMessageBox.information(
                                 None, "Sucesso", "Transferência concluida!"
                             )
                             new_cp = busca_conta_por_cpf(user.cpf, "cp")
                             user.add_cp(new_cp)
                             self.openContas(MainWindow, user, conta, tipo_origem)
-                        except:
-                            deposito_conta_corrente(conta.id, conta.numero, valor, True)
+                        except Exception as E:
+                            deposito_conta_corrente(conta.id, conta.numero, valor)
                             QtWidgets.QMessageBox.warning(
                                 None,
                                 "Erro",
@@ -555,12 +577,21 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
                 return
             try:
-                saque_conta_poupanca(conta.id, conta.numero, valor, True)
+                saque_conta_poupanca(
+                    conta.id,
+                    conta.numero,
+                    valor,
+                    True,
+                    id_destino,
+                    "cc" if tipo == "Conta Corrente" else "cp",
+                )
                 conta.saca(valor)
                 try:
                     if tipo == "Conta Corrente":
                         try:
-                            deposito_conta_corrente(cc.id, cc.numero, valor, True)
+                            deposito_conta_corrente(
+                                cc.id, cc.numero, valor, True, user.id, tipo_origem
+                            )
                             QtWidgets.QMessageBox.information(
                                 None, "Sucesso", "Transferência concluida!"
                             )
@@ -568,7 +599,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                             user.add_cc(new_cc)
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except:
-                            deposito_conta_poupanca(conta.id, conta.numero, valor, True)
+                            deposito_conta_poupanca(conta.id, conta.numero, valor)
                             conta.deposita(valor)
                             QtWidgets.QMessageBox.warning(
                                 None,
@@ -578,13 +609,15 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                             return
                     else:
                         try:
-                            deposito_conta_poupanca(cp.id, cp.numero, valor, True)
+                            deposito_conta_poupanca(
+                                cp.id, cp.numero, valor, True, user.id, tipo_origem
+                            )
                             QtWidgets.QMessageBox.information(
                                 None, "Sucesso", "Transferência concluida!"
                             )
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except:
-                            deposito_conta_poupanca(conta.id, conta.numero, valor, True)
+                            deposito_conta_poupanca(conta.id, conta.numero, valor)
                             conta.deposita(valor)
                             QtWidgets.QMessageBox.warning(
                                 None,

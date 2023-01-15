@@ -3,6 +3,14 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
+-- drop database mydb;
+-- drop table cliente;
+-- drop table conta_corrente;
+-- drop table conta_poupanca;
+-- DROP TABLE historico;
+-- INSERT INTO historico (momento, tipo, valor, conta_corrente_idconta_corrente) VALUES ('2022-12-27 16:53:02', 'deposito', 150, 1);
+
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -16,11 +24,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 USE `mydb` ;
-drop database mydb;
-drop table cliente;
-drop table conta_corrente;
-drop table conta_poupanca;
-DROP TABLE historico;
+
 -- -----------------------------------------------------
 -- Table `mydb`.`cliente`
 -- -----------------------------------------------------
@@ -30,7 +34,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`cliente` (
   `nascimento` DATE NOT NULL,
   `email` VARCHAR(100) NOT NULL UNIQUE,
   `nome` VARCHAR(100) NOT NULL,
-  `senha_acesso` VARCHAR(45) NULL,
+  `senha_acesso` VARCHAR(45) NOT NULL,
+  `criacao` DATETIME,
   PRIMARY KEY (`idcliente`))
 ENGINE = InnoDB;
 
@@ -44,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`conta_corrente` (
   `senha` VARCHAR(6) NOT NULL,
   `saldo` FLOAT NULL,
   `limite` FLOAT NOT NULL,
+  `criacao` DATETIME,
   `cliente_idcliente` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`idconta_corrente`),
     FOREIGN KEY (`cliente_idcliente`)
@@ -62,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`conta_poupanca` (
   `numero` VARCHAR(6) NOT NULL UNIQUE,
   `senha` VARCHAR(6) NOT NULL,
   `saldo` FLOAT NULL,
+  `criacao` DATETIME,
   `cliente_idcliente` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`idconta_poupanca`),
     FOREIGN KEY (`cliente_idcliente`)
@@ -70,7 +77,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`conta_poupanca` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO historico (momento, tipo, valor, conta_corrente_idconta_corrente) VALUES ('2022-12-27 16:53:02', 'deposito', 150, 1);
 -- -----------------------------------------------------
 -- Table `mydb`.`historico`
 -- -----------------------------------------------------

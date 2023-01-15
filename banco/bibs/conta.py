@@ -22,14 +22,23 @@ class Historico:
 
 class Conta:
 
-    __slots__ = ["_id", "_numero", "_senha", "_saldo", "_limite", "_historico"]
+    __slots__ = [
+        "_id",
+        "_numero",
+        "_senha",
+        "_criacao",
+        "_saldo",
+        "_limite",
+        "_historico",
+    ]
     _total_contas = 0
 
-    def __init__(self, id, numero, senha, saldo=0):
+    def __init__(self, id, numero, senha, criacao, saldo=0):
         self._id = id
         self._numero = numero
         self._senha = senha
         self._saldo = saldo
+        self._criacao = criacao
         self._historico = Historico()
         Conta._total_contas += 1
 
@@ -80,6 +89,10 @@ class Conta:
     @property
     def historico(self):
         return self._historico
+
+    @property
+    def criacao(self):
+        return self._criacao
 
     def deposita(self, valor, transferencia=False):
         try:
@@ -140,10 +153,10 @@ class Conta:
 
 class ContaCorrente(Conta):
 
-    __slots__ = ["_numero", "_senha", "_saldo", "_limite", "_historico"]
+    __slots__ = ["_numero", "_senha", "_criacao", "_saldo", "_limite", "_historico"]
 
-    def __init__(self, id, numero, senha, saldo=0, limite=800):
-        super().__init__(id, numero, senha, saldo)
+    def __init__(self, id, numero, senha, criacao, saldo=0, limite=800):
+        super().__init__(id, numero, senha, criacao, saldo)
         self._limite = limite
 
     @property
@@ -166,10 +179,10 @@ class ContaCorrente(Conta):
 
 class ContaPoupanca(Conta):
 
-    __slots__ = ["_numero", "_senha", "_saldo", "_limite", "_historico"]
+    __slots__ = ["_numero", "_senha", "_criacao", "_saldo", "_limite", "_historico"]
 
-    def __init__(self, id, numero, senha, saldo=0):
-        super().__init__(id, numero, senha, saldo)
+    def __init__(self, id, numero, senha, criacao, saldo=0):
+        super().__init__(id, numero, senha, criacao, saldo)
 
     def deposita(self, valor):
         return super().deposita(valor)
