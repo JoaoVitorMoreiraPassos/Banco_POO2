@@ -70,6 +70,7 @@ def create_conta_corrente(id, senha):
     if numero_de_contas[0] == None:
         numero_de_contas = (0,)
     cursor = banco.cursor()
+    criacao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cursor.execute(
         "INSERT INTO conta_corrente (numero, senha, cliente_idcliente, saldo, criacao, limite) VALUES (%s, %s, %s, %s, %s, %s)",
         (
@@ -77,7 +78,7 @@ def create_conta_corrente(id, senha):
             senha,
             id,
             0,
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            criacao,
             800,
         ),
     )
@@ -86,7 +87,7 @@ def create_conta_corrente(id, senha):
     num = int(numero_de_contas[0]) + 100000
     cursor.execute(f"SELECT idconta_corrente FROM conta_corrente WHERE numero = {num}")
     id_conta = cursor.fetchone()[0]
-    conta = ContaCorrente(id_conta, int(numero_de_contas[0]) + 100000, senha, 0, 800)
+    conta = ContaCorrente(id_conta, int(numero_de_contas[0]) + 100000, senha, criacao, 0, 800)
     cursor.close()
     return conta
 
@@ -98,6 +99,7 @@ def create_conta_poupanca(id, senha):
     if numero_de_contas[0] == None:
         numero_de_contas = (0,)
     cursor = banco.cursor()
+    criacao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cursor.execute(
         "INSERT INTO conta_poupanca (numero, senha, cliente_idcliente, saldo, criacao) VALUES (%s, %s, %s, %s, %s)",
         (
@@ -105,7 +107,7 @@ def create_conta_poupanca(id, senha):
             senha,
             id,
             0,
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            criacao,
         ),
     )
     banco.commit()
@@ -114,7 +116,7 @@ def create_conta_poupanca(id, senha):
         f"SELECT idconta_poupanca FROM conta_poupanca WHERE numero = {int(numero_de_contas[0])+100000}"
     )
     id_conta = cursor.fetchone()[0]
-    conta = ContaPoupanca(id_conta, int(numero_de_contas[0]) + 100000, senha, 0)
+    conta = ContaPoupanca(id_conta, int(numero_de_contas[0]) + 100000, senha, criacao, 0)
     cursor.close()
     return conta
 

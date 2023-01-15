@@ -9,6 +9,7 @@
 -- drop table conta_poupanca;
 -- DROP TABLE historico;
 -- INSERT INTO historico (momento, tipo, valor, conta_corrente_idconta_corrente) VALUES ('2022-12-27 16:53:02', 'deposito', 150, 1);
+-- SELECT idconta_corrente FROM conta_corrente WHERE numero = 100000;
 
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -57,7 +58,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`conta_corrente` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-SELECT idconta_corrente FROM conta_corrente WHERE numero = 100000;
 
 
 -- -----------------------------------------------------
