@@ -1,60 +1,92 @@
-from PIL                      import Image 
-from PyQt5                    import QtCore, QtGui, QtWidgets
-from screens.login_screen     import Ui_MainWindow as TelaDeLogin
-from screens.cadastro_screen  import Ui_MainWindow as TelaDeCadastro
-from screens.user_painel      import Ui_MainWindow as TelaDoUsuario
-from screens.account_painel   import Ui_MainWindow as TelaDasContas
-from screens.criar_conta      import Ui_MainWindow as TelaDeCriarContas
-from screens.extrato          import Ui_MainWindow as TelaDeExtrato
+from PIL import Image
+from PyQt5 import QtCore, QtGui, QtWidgets
+from screens.login_screen import Ui_MainWindow as TelaDeLogin
+from screens.cadastro_screen import Ui_MainWindow as TelaDeCadastro
+from screens.user_painel import Ui_MainWindow as TelaDoUsuario
+from screens.account_painel import Ui_MainWindow as TelaDasContas
+from screens.criar_conta import Ui_MainWindow as TelaDeCriarContas
+from screens.extrato import Ui_MainWindow as TelaDeExtrato
 from screens.deposito_e_saque import Ui_MainWindow as TelaDeDepositoESaque
-from screens.transferencia    import Ui_MainWindow as TelaDeTransferencia
-from bibs.consultor_sql       import login, add_cliente, create_conta_corrente, create_conta_poupanca, deposito_conta_corrente, deposito_conta_poupanca, get_transacoes, saque_conta_corrente, saque_conta_poupanca, busca_conta_por_cpf, valida_senha_conta_corrente, valida_senha_conta_poupanca
+from screens.transferencia import Ui_MainWindow as TelaDeTransferencia
+from bibs.consultor_sql import (
+    login,
+    add_cliente,
+    create_conta_corrente,
+    create_conta_poupanca,
+    deposito_conta_corrente,
+    deposito_conta_poupanca,
+    get_transacoes,
+    saque_conta_corrente,
+    saque_conta_poupanca,
+    busca_conta_por_cpf,
+    valida_senha_conta_corrente,
+    valida_senha_conta_poupanca,
+)
 
 
 class Main(QtWidgets.QMainWindow, TelaDeLogin):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.pushButton.clicked.connect(lambda: self.logIn(self,self))
+        self.pushButton.clicked.connect(lambda: self.logIn(self, self))
         self.pushButton_2.clicked.connect(lambda: self.openCadastro(self))
-        self.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.checkBox, self.senha))
+        self.checkBox.stateChanged.connect(
+            lambda: self.mostraSenha(self.checkBox, self.senha)
+        )
         img = Image.open("./icons/exit.png")
-        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = img.resize((30, 30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
         self.img.setPixmap(img)
         self.voltar.clicked.connect(lambda: self.close())
-        
+
     """
     ------------------------------------------------------------
         Métodos de criação de e abertura de janelas
     ------------------------------------------------------------
     """
+
     def openLogin(self, MainWindow=None):
         self.window = QtWidgets.QMainWindow()
         self.login_screen = TelaDeLogin()
         self.login_screen.setupUi(self.window)
-        self.login_screen.pushButton.clicked.connect(lambda: self.logIn(self.login_screen, self.window))
-        self.login_screen.pushButton_2.clicked.connect(lambda: self.openCadastro(self.window))
-        self.login_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.login_screen.checkBox, self.login_screen.senha))
+        self.login_screen.pushButton.clicked.connect(
+            lambda: self.logIn(self.login_screen, self.window)
+        )
+        self.login_screen.pushButton_2.clicked.connect(
+            lambda: self.openCadastro(self.window)
+        )
+        self.login_screen.checkBox.stateChanged.connect(
+            lambda: self.mostraSenha(
+                self.login_screen.checkBox, self.login_screen.senha
+            )
+        )
         img = Image.open("./icons/exit.png")
-        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = img.resize((30, 30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
         self.login_screen.img.setPixmap(img)
         self.login_screen.voltar.clicked.connect(lambda: self.window.close())
         self.window.show()
         if MainWindow:
             MainWindow.close()
-                    
+
     def openCadastro(self, MainWindow):
         self.window = QtWidgets.QMainWindow()
         self.cadastro_screen = TelaDeCadastro()
         self.cadastro_screen.setupUi(self.window)
         self.cadastro_screen.nome.setFocus()
-        self.cadastro_screen.btn_cadastro.clicked.connect(lambda: self.cadastrar(self.cadastro_screen))
-        self.cadastro_screen.btn_login.clicked.connect(lambda: self.openLogin(self.window))
-        self.cadastro_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.cadastro_screen.checkBox, self.cadastro_screen.senha))
+        self.cadastro_screen.btn_cadastro.clicked.connect(
+            lambda: self.cadastrar(self.cadastro_screen)
+        )
+        self.cadastro_screen.btn_login.clicked.connect(
+            lambda: self.openLogin(self.window)
+        )
+        self.cadastro_screen.checkBox.stateChanged.connect(
+            lambda: self.mostraSenha(
+                self.cadastro_screen.checkBox, self.cadastro_screen.senha
+            )
+        )
         img = Image.open("./icons/exit.png")
-        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = img.resize((30, 30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
         self.cadastro_screen.img.setPixmap(img)
         self.cadastro_screen.voltar.clicked.connect(lambda: self.window.close())
@@ -66,26 +98,54 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.user_screen = TelaDoUsuario()
         self.user_screen.setupUi(self.window)
         self.user_screen.label.setText(f"Bem-vindo(a), {user.nome.split()[0]}!")
-        self.user_screen.pushButton_2.clicked.connect(lambda: self.openCriadorDeConta(self.window, user, "corrente") if "cc" not in user.contas.keys() else self.openContas(self.window,user, user.contas['cc'], "cc"))
-        self.user_screen.pushButton_3.clicked.connect(lambda: self.openCriadorDeConta(self.window, user, "poupanca") if "cp" not in user.contas.keys() else self.openContas(self.window, user, user.contas['cp'], "cp"))
-        self.user_screen.pushButton_5.clicked.connect(lambda: self.openLogin(self.window))
-        self.user_screen.pushButton_2.setText("Criar conta corrente" if "cc" not in user.contas.keys() else "Conta corrente")
-        self.user_screen.pushButton_3.setText("Criar conta poupança" if "cp" not in user.contas.keys() else "Conta poupança")
+        self.user_screen.pushButton_2.clicked.connect(
+            lambda: self.openCriadorDeConta(self.window, user, "corrente")
+            if "cc" not in user.contas.keys()
+            else self.openContas(self.window, user, user.contas["cc"], "cc")
+        )
+        self.user_screen.pushButton_3.clicked.connect(
+            lambda: self.openCriadorDeConta(self.window, user, "poupanca")
+            if "cp" not in user.contas.keys()
+            else self.openContas(self.window, user, user.contas["cp"], "cp")
+        )
+        self.user_screen.pushButton_5.clicked.connect(
+            lambda: self.openLogin(self.window)
+        )
+        self.user_screen.pushButton_2.setText(
+            "Criar conta corrente"
+            if "cc" not in user.contas.keys()
+            else "Conta corrente"
+        )
+        self.user_screen.pushButton_3.setText(
+            "Criar conta poupança"
+            if "cp" not in user.contas.keys()
+            else "Conta poupança"
+        )
         self.window.show()
         MainWindow.close()
 
-    def openCriadorDeConta(self,MainWindow, user, tipo):
+    def openCriadorDeConta(self, MainWindow, user, tipo):
         self.window = QtWidgets.QMainWindow()
         self.criador_screen = TelaDeCriarContas()
         self.criador_screen.setupUi(self.window)
         self.criador_screen.senha.setFocus()
-        self.criador_screen.btn_criar.clicked.connect(lambda: self.criarContaCorrente(self.window, self.criador_screen, user) if tipo == "corrente" else self.criarContaPoupanca(self.window, self.criador_screen, user))
-        self.criador_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.criador_screen.checkBox, self.criador_screen.senha))
+        self.criador_screen.btn_criar.clicked.connect(
+            lambda: self.criarContaCorrente(self.window, self.criador_screen, user)
+            if tipo == "corrente"
+            else self.criarContaPoupanca(self.window, self.criador_screen, user)
+        )
+        self.criador_screen.checkBox.stateChanged.connect(
+            lambda: self.mostraSenha(
+                self.criador_screen.checkBox, self.criador_screen.senha
+            )
+        )
         img = Image.open("./icons/back.png")
-        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = img.resize((30, 30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
         self.criador_screen.img.setPixmap(img)
-        self.criador_screen.voltar.clicked.connect(lambda: self.openPainel(self.window, self.criador_screen, user))
+        self.criador_screen.voltar.clicked.connect(
+            lambda: self.openPainel(self.window, self.criador_screen, user)
+        )
         self.window.show()
         MainWindow.close()
 
@@ -93,23 +153,65 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.window = QtWidgets.QMainWindow()
         self.contas_screen = TelaDasContas()
         self.contas_screen.setupUi(self.window)
-        self.contas_screen.tipo.setText("Conta "+ "Corrente" if tipo == "cc" else "Poupança")
-        self.contas_screen.numero.setText("nº "+str(conta.numero))
-        self.contas_screen.saldo.setText(f"Saldo : R$ {conta.saldo:.2f}".replace(".",","))
-        self.contas_screen.checkBox.stateChanged.connect(lambda: self.mostraSaldo(self.contas_screen.checkBox,self.contas_screen.saldo, conta.saldo))
-        self.contas_screen.deposito.clicked.connect(lambda: self.openDeposito(self.window, user, conta, tipo))
-        img_dep = QtGui.QPixmap("./icons/saque_e_deposito.png", "0", QtCore.Qt.AvoidDither|QtCore.Qt.ThresholdDither|QtCore.Qt.ThresholdAlphaDither)
+        self.contas_screen.tipo.setText(
+            "Conta " + "Corrente" if tipo == "cc" else "Poupança"
+        )
+        self.contas_screen.numero.setText("nº " + str(conta.numero))
+        self.contas_screen.saldo.setText(
+            f"Saldo : R$ {conta.saldo:.2f}".replace(".", ",")
+        )
+        self.contas_screen.checkBox.stateChanged.connect(
+            lambda: self.mostraSaldo(
+                self.contas_screen.checkBox, self.contas_screen.saldo, conta.saldo
+            )
+        )
+        self.contas_screen.deposito.clicked.connect(
+            lambda: self.openDeposito(self.window, user, conta, tipo)
+        )
+        img_dep = QtGui.QPixmap(
+            "./icons/saque_e_deposito.png",
+            "0",
+            QtCore.Qt.AvoidDither
+            | QtCore.Qt.ThresholdDither
+            | QtCore.Qt.ThresholdAlphaDither,
+        )
         self.contas_screen.img_dep.setPixmap(img_dep)
-        self.contas_screen.saque.clicked.connect(lambda: self.openSaque(self.window, user, conta, tipo))
-        img_saque = QtGui.QPixmap("./icons/saque_e_deposito.png", "0", QtCore.Qt.AvoidDither|QtCore.Qt.ThresholdDither|QtCore.Qt.ThresholdAlphaDither)
+        self.contas_screen.saque.clicked.connect(
+            lambda: self.openSaque(self.window, user, conta, tipo)
+        )
+        img_saque = QtGui.QPixmap(
+            "./icons/saque_e_deposito.png",
+            "0",
+            QtCore.Qt.AvoidDither
+            | QtCore.Qt.ThresholdDither
+            | QtCore.Qt.ThresholdAlphaDither,
+        )
         self.contas_screen.img_saque.setPixmap(img_saque)
-        self.contas_screen.transferencia.clicked.connect(lambda: self.openTransferencia(self.window, user, conta, tipo))
-        img_transf = QtGui.QPixmap("./icons/transferencia.png", "0", QtCore.Qt.AvoidDither|QtCore.Qt.ThresholdDither|QtCore.Qt.ThresholdAlphaDither)
+        self.contas_screen.transferencia.clicked.connect(
+            lambda: self.openTransferencia(self.window, user, conta, tipo)
+        )
+        img_transf = QtGui.QPixmap(
+            "./icons/transferencia.png",
+            "0",
+            QtCore.Qt.AvoidDither
+            | QtCore.Qt.ThresholdDither
+            | QtCore.Qt.ThresholdAlphaDither,
+        )
         self.contas_screen.img_transf.setPixmap(img_transf)
-        self.contas_screen.extrato.clicked.connect(lambda: self.openExtrato(self.window, user, conta, tipo))
-        img_extrato = QtGui.QPixmap("./icons/historico.png", "0", QtCore.Qt.AvoidDither|QtCore.Qt.ThresholdDither|QtCore.Qt.ThresholdAlphaDither)
+        self.contas_screen.extrato.clicked.connect(
+            lambda: self.openExtrato(self.window, user, conta, tipo)
+        )
+        img_extrato = QtGui.QPixmap(
+            "./icons/historico.png",
+            "0",
+            QtCore.Qt.AvoidDither
+            | QtCore.Qt.ThresholdDither
+            | QtCore.Qt.ThresholdAlphaDither,
+        )
         self.contas_screen.img_extrato.setPixmap(img_extrato)
-        self.contas_screen.btn_sair.clicked.connect(lambda: self.openPainel(self.window, None, user))
+        self.contas_screen.btn_sair.clicked.connect(
+            lambda: self.openPainel(self.window, None, user)
+        )
         MainWindow.close()
         self.window.show()
 
@@ -120,16 +222,31 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.deposito_screen.setupUi(self.window)
         self.deposito_screen.valor.setFocus()
         self.deposito_screen.operacao.setText("Depósito")
-        self.deposito_screen.btn_confirma.clicked.connect(lambda: self.depositar(self.window, user, self.deposito_screen.valor.text(), conta, tipo, self.deposito_screen.senha.text()))
-        self.deposito_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.deposito_screen.checkBox, self.deposito_screen.senha))
-        self.deposito_screen.voltar.clicked.connect(lambda: self.openContas(self.window, user, conta, tipo))
+        self.deposito_screen.btn_confirma.clicked.connect(
+            lambda: self.depositar(
+                self.window,
+                user,
+                self.deposito_screen.valor.text(),
+                conta,
+                tipo,
+                self.deposito_screen.senha.text(),
+            )
+        )
+        self.deposito_screen.checkBox.stateChanged.connect(
+            lambda: self.mostraSenha(
+                self.deposito_screen.checkBox, self.deposito_screen.senha
+            )
+        )
+        self.deposito_screen.voltar.clicked.connect(
+            lambda: self.openContas(self.window, user, conta, tipo)
+        )
         img = Image.open("./icons/back.png")
-        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = img.resize((30, 30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
         self.deposito_screen.img.setPixmap(img)
         MainWindow.close()
         self.window.show()
-    
+
     def openSaque(self, MainWindow, user, conta, tipo):
         self.window = QtWidgets.QMainWindow()
         self.window.setWindowTitle("Saque")
@@ -137,32 +254,71 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.saque_screen.setupUi(self.window)
         self.saque_screen.valor.setFocus()
         self.saque_screen.operacao.setText("Saque")
-        self.saque_screen.btn_confirma.clicked.connect(lambda: self.sacar(self.window, user, self.saque_screen.valor.text(), conta, tipo, self.saque_screen.senha.text()))
-        self.saque_screen.voltar.clicked.connect(lambda: self.openContas(self.window, user, conta, tipo))
-        self.saque_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.saque_screen.checkBox, self.saque_screen.senha))
+        self.saque_screen.btn_confirma.clicked.connect(
+            lambda: self.sacar(
+                self.window,
+                user,
+                self.saque_screen.valor.text(),
+                conta,
+                tipo,
+                self.saque_screen.senha.text(),
+            )
+        )
+        self.saque_screen.voltar.clicked.connect(
+            lambda: self.openContas(self.window, user, conta, tipo)
+        )
+        self.saque_screen.checkBox.stateChanged.connect(
+            lambda: self.mostraSenha(
+                self.saque_screen.checkBox, self.saque_screen.senha
+            )
+        )
         img = Image.open("./icons/back.png")
-        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = img.resize((30, 30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
         self.saque_screen.img.setPixmap(img)
         MainWindow.close()
         self.window.show()
-        
+
     def openTransferencia(self, MainWindow, user, conta, tipo):
         self.window = QtWidgets.QMainWindow()
         self.transferencia_screen = TelaDeTransferencia()
         self.transferencia_screen.setupUi(self.window)
-        self.transferencia_screen.cpf.textChanged.connect(lambda: self.atualizaContas(user,tipo,self.transferencia_screen.frame,self.transferencia_screen.cpf,self.transferencia_screen.comboBox_2))
+        self.transferencia_screen.cpf.textChanged.connect(
+            lambda: self.atualizaContas(
+                user,
+                tipo,
+                self.transferencia_screen.frame,
+                self.transferencia_screen.cpf,
+                self.transferencia_screen.comboBox_2,
+            )
+        )
         self.transferencia_screen.cpf.setFocus()
-        self.transferencia_screen.btn_confirma.clicked.connect(lambda: self.transferir(self.window,user, self.transferencia_screen.valor.text(),conta,self.transferencia_screen.cpf.text(),self.transferencia_screen.comboBox_2.currentText(), self.transferencia_screen.senha.text()))
-        self.transferencia_screen.checkBox.stateChanged.connect(lambda: self.mostraSenha(self.transferencia_screen.checkBox, self.transferencia_screen.senha))
-        self.transferencia_screen.voltar.clicked.connect(lambda: self.openContas(self.window, user, conta, tipo))
+        self.transferencia_screen.btn_confirma.clicked.connect(
+            lambda: self.transferir(
+                self.window,
+                user,
+                self.transferencia_screen.valor.text(),
+                conta,
+                self.transferencia_screen.cpf.text(),
+                self.transferencia_screen.comboBox_2.currentText(),
+                self.transferencia_screen.senha.text(),
+            )
+        )
+        self.transferencia_screen.checkBox.stateChanged.connect(
+            lambda: self.mostraSenha(
+                self.transferencia_screen.checkBox, self.transferencia_screen.senha
+            )
+        )
+        self.transferencia_screen.voltar.clicked.connect(
+            lambda: self.openContas(self.window, user, conta, tipo)
+        )
         img = Image.open("./icons/back.png")
-        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = img.resize((30, 30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
         self.transferencia_screen.img.setPixmap(img)
         MainWindow.close()
         self.window.show()
-    
+
     def openExtrato(self, MainWindow, user, conta, tipo):
         self.window = QtWidgets.QMainWindow()
         self.extrato_screen = TelaDeExtrato()
@@ -213,65 +369,84 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
             line_3.setObjectName("line_3")
             self.extrato_screen.gridLayout.addWidget(line_3, 0, 5, 1, 1)
-            self.extrato_screen.scrollArea.setWidget(self.extrato_screen.scrollAreaWidgetContents)
+            self.extrato_screen.scrollArea.setWidget(
+                self.extrato_screen.scrollAreaWidgetContents
+            )
             for transacao in historico:
                 momento = str(transacao[1]).replace("-", "/")
                 operacao = transacao[2]
                 valor = transacao[3]
-                
-                labels.append(QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents))
+
+                labels.append(
+                    QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
+                )
                 self.extrato_screen.gridLayout.addWidget(labels[-1], height, 0, 1, 2)
                 labels[-1].setText(momento)
                 labels[-1].setStyleSheet("color: #fff;\n")
-                
-                vertical.append(QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents))
+
+                vertical.append(
+                    QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
+                )
                 vertical[-1].setFrameShape(QtWidgets.QFrame.VLine)
                 vertical[-1].setFrameShadow(QtWidgets.QFrame.Sunken)
                 self.extrato_screen.gridLayout.addWidget(vertical[-1], height, 2, 1, 1)
-                
-                labels.append(QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents))
+
+                labels.append(
+                    QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
+                )
                 self.extrato_screen.gridLayout.addWidget(labels[-1], height, 3, 1, 2)
                 labels[-1].setText(operacao)
                 labels[-1].setStyleSheet("color: #fff;\n")
-                
-                vertical.append(QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents))
+
+                vertical.append(
+                    QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
+                )
                 vertical[-1].setFrameShape(QtWidgets.QFrame.VLine)
                 vertical[-1].setFrameShadow(QtWidgets.QFrame.Sunken)
                 self.extrato_screen.gridLayout.addWidget(vertical[-1], height, 5, 1, 1)
-                
-                labels.append(QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents))
+
+                labels.append(
+                    QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
+                )
                 labels[-1].setAlignment(QtCore.Qt.AlignCenter)
                 self.extrato_screen.gridLayout.addWidget(labels[-1], height, 6, 1, 2)
                 labels[-1].setText(f"R$ {valor:.2f}".replace(".", ","))
                 labels[-1].setStyleSheet("color: #fff;\n")
-                
-                horizontal.append(QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents))
+
+                horizontal.append(
+                    QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
+                )
                 horizontal[-1].setFrameShape(QtWidgets.QFrame.HLine)
                 horizontal[-1].setFrameShadow(QtWidgets.QFrame.Sunken)
-                self.extrato_screen.gridLayout.addWidget(horizontal[-1], height+1, 0, 1, 8)
-                
+                self.extrato_screen.gridLayout.addWidget(
+                    horizontal[-1], height + 1, 0, 1, 8
+                )
+
                 height += 2
         else:
             label = QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
-            label.setStyleSheet("color: #fff;\n""font: 75 14pt \"MS Shell Dlg 2\";")
+            label.setStyleSheet("color: #fff;\n" 'font: 75 14pt "MS Shell Dlg 2";')
             label.setLineWidth(2)
             label.setAlignment(QtCore.Qt.AlignCenter)
             label.setObjectName("label")
             label.setText("Essa conta não possui nenhuma transação!")
             self.extrato_screen.gridLayout.addWidget(label, 0, 0, 1, 8)
-        self.extrato_screen.voltar.clicked.connect(lambda: self.openContas(self.window, user, conta, tipo))
+        self.extrato_screen.voltar.clicked.connect(
+            lambda: self.openContas(self.window, user, conta, tipo)
+        )
         img = Image.open("./icons/back.png")
-        img = img.resize((30,30), Image.Resampling.LANCZOS)
+        img = img.resize((30, 30), Image.Resampling.LANCZOS)
         img = QtGui.QPixmap(img.toqpixmap())
         self.extrato_screen.img.setPixmap(img)
         MainWindow.close()
         self.window.show()
-        
+
     """
     ---------------------------------------------------
         Métodos de execução dos butões das telas
     ---------------------------------------------------
     """
+
     def logIn(self, janela, MainWindow=None):
         email = janela.email.text()
         senha = janela.senha.text()
@@ -284,9 +459,10 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                     MainWindow.close()
                 self.openPainel(MainWindow, janela, user)
             else:
-                QtWidgets.QMessageBox.warning(None, "Erro", "Usuário ou senha incorretos!")
+                QtWidgets.QMessageBox.warning(
+                    None, "Erro", "Usuário ou senha incorretos!"
+                )
 
-               
     def criarContaCorrente(self, MainWindow, janela, user):
         senha = janela.senha.text()
         if len(senha) != 6:
@@ -299,7 +475,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             cc = create_conta_corrente(user.id, senha)
             user.add_cc(cc)
             self.openPainel(MainWindow, janela, user)
-    
+
     def criarContaPoupanca(self, MainWindow, janela, user):
         senha = janela.senha.text()
         if len(senha) != 6:
@@ -311,8 +487,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         else:
             cp = create_conta_poupanca(user.id, senha)
             user.add_cp(cp)
-            self.openPainel(MainWindow,janela, user)
-            
+            self.openPainel(MainWindow, janela, user)
+
     def transferir(self, MainWindow, user, valor, conta, cpf_destino, tipo, senha):
         tipo_origem = None
         try:
@@ -330,7 +506,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         except:
             QtWidgets.QMessageBox.warning(None, "Erro", "Valor inválido!")
             return
-        
+
         if tipo_origem == "cc":
             if not valida_senha_conta_corrente(conta.id, senha):
                 QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
@@ -342,7 +518,9 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                     if tipo == "Conta Corrente":
                         try:
                             deposito_conta_corrente(cc.id, cc.numero, valor, True)
-                            QtWidgets.QMessageBox.information(None, "Sucesso", "Transferência concluida!")
+                            QtWidgets.QMessageBox.information(
+                                None, "Sucesso", "Transferência concluida!"
+                            )
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except Exception as E:
                             deposito_conta_corrente(conta.id, conta.numero, valor, True)
@@ -351,13 +529,19 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                     else:
                         try:
                             deposito_conta_poupanca(cp.id, cp.numero, valor, True)
-                            QtWidgets.QMessageBox.information(None, "Sucesso", "Transferência concluida!")
+                            QtWidgets.QMessageBox.information(
+                                None, "Sucesso", "Transferência concluida!"
+                            )
                             new_cp = busca_conta_por_cpf(user.cpf, "cp")
                             user.add_cp(new_cp)
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except:
                             deposito_conta_corrente(conta.id, conta.numero, valor, True)
-                            QtWidgets.QMessageBox.warning(None, "Erro", "Transação não concluida, valor estornado!")
+                            QtWidgets.QMessageBox.warning(
+                                None,
+                                "Erro",
+                                "Transação não concluida, valor estornado!",
+                            )
                             return
                 except:
                     QtWidgets.QMessageBox.warning(None, "Erro", "CPF não encontrado!")
@@ -365,7 +549,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             except Exception as E:
                 QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                 return
-            
+
         if tipo_origem == "cp":
             if not valida_senha_conta_poupanca(conta.id, senha):
                 QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
@@ -377,24 +561,36 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                     if tipo == "Conta Corrente":
                         try:
                             deposito_conta_corrente(cc.id, cc.numero, valor, True)
-                            QtWidgets.QMessageBox.information(None, "Sucesso", "Transferência concluida!")
+                            QtWidgets.QMessageBox.information(
+                                None, "Sucesso", "Transferência concluida!"
+                            )
                             new_cc = busca_conta_por_cpf(user.cpf, "cc")
                             user.add_cc(new_cc)
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except:
                             deposito_conta_poupanca(conta.id, conta.numero, valor, True)
                             conta.deposita(valor)
-                            QtWidgets.QMessageBox.warning(None, "Erro", "Transação não concluida, valor estornado!")
+                            QtWidgets.QMessageBox.warning(
+                                None,
+                                "Erro",
+                                "Transação não concluida, valor estornado!",
+                            )
                             return
                     else:
                         try:
                             deposito_conta_poupanca(cp.id, cp.numero, valor, True)
-                            QtWidgets.QMessageBox.information(None, "Sucesso", "Transferência concluida!")
+                            QtWidgets.QMessageBox.information(
+                                None, "Sucesso", "Transferência concluida!"
+                            )
                             self.openContas(MainWindow, user, conta, tipo_origem)
                         except:
                             deposito_conta_poupanca(conta.id, conta.numero, valor, True)
                             conta.deposita(valor)
-                            QtWidgets.QMessageBox.warning(None, "Erro", "Transação não concluida, valor estornado!")
+                            QtWidgets.QMessageBox.warning(
+                                None,
+                                "Erro",
+                                "Transação não concluida, valor estornado!",
+                            )
                             return
                 except:
                     QtWidgets.QMessageBox.warning(None, "Erro", "CPF não encontrado!")
@@ -402,8 +598,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             except Exception as E:
                 QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                 return
-        
-    def depositar(self, MainWindow,user, valor, conta, tipo, senha):
+
+    def depositar(self, MainWindow, user, valor, conta, tipo, senha):
         try:
             valor = float(valor)
         except:
@@ -420,7 +616,9 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 try:
                     deposito_conta_corrente(conta.id, conta.numero, valor)
                     conta.deposita(valor)
-                    QtWidgets.QMessageBox.information(None, "Sucesso", "Depósito realizado com sucesso!")
+                    QtWidgets.QMessageBox.information(
+                        None, "Sucesso", "Depósito realizado com sucesso!"
+                    )
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
                     QtWidgets.QMessageBox.warning(None, "Erro", str(E))
@@ -432,12 +630,14 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 try:
                     deposito_conta_poupanca(conta.id, conta.numero, valor)
                     conta.deposita(valor)
-                    QtWidgets.QMessageBox.information(None, "Sucesso", "Depósito realizado com sucesso!")
+                    QtWidgets.QMessageBox.information(
+                        None, "Sucesso", "Depósito realizado com sucesso!"
+                    )
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
                     QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                     return
-    
+
     def sacar(self, MainWindow, user, valor, conta, tipo, senha):
         try:
             valor = float(valor)
@@ -455,7 +655,9 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 try:
                     saque_conta_corrente(conta.id, conta.numero, valor)
                     conta.saca(valor)
-                    QtWidgets.QMessageBox.information(None, "Sucesso", "Saque realizado com sucesso!")
+                    QtWidgets.QMessageBox.information(
+                        None, "Sucesso", "Saque realizado com sucesso!"
+                    )
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
                     QtWidgets.QMessageBox.warning(None, "Erro", str(E))
@@ -467,15 +669,23 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 try:
                     saque_conta_poupanca(conta.id, conta.numero, valor)
                     conta.saca(valor)
-                    QtWidgets.QMessageBox.information(None, "Sucesso", "Saque realizado com sucesso!")
+                    QtWidgets.QMessageBox.information(
+                        None, "Sucesso", "Saque realizado com sucesso!"
+                    )
                     self.openContas(MainWindow, user, conta, tipo)
                 except Exception as E:
                     QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                     return
-    
+
     def cadastrar(self, MainWindow):
         infos = self.getInfos(MainWindow)
-        if infos[0] == "" or infos[1] == "" or infos[2] == "" or infos[3] == "" or infos[4] == "":
+        if (
+            infos[0] == ""
+            or infos[1] == ""
+            or infos[2] == ""
+            or infos[3] == ""
+            or infos[4] == ""
+        ):
             QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
             return
         if len(infos[4]) < 8:
@@ -486,36 +696,38 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             return
         try:
             add_cliente(infos[0], infos[1], infos[2], infos[3], infos[4])
-            QtWidgets.QMessageBox.about(None, "Sucesso", "Cadastro realizado com sucesso!")
+            QtWidgets.QMessageBox.about(
+                None, "Sucesso", "Cadastro realizado com sucesso!"
+            )
         except Exception as E:
             QtWidgets.QMessageBox.warning(None, "Erro", str(E))
             return
-        
+
     """
     -----------------------------------------------------
     Métodos auxiliares  
     -----------------------------------------------------
     """
-    
+
     @staticmethod
     def mostraSaldo(state, label, saldo):
         if state.isChecked():
             label.setText(f"Saldo : R$ {saldo:.2f}".replace(".", ","))
         else:
-            label.setText(f"Saldo : R$ {'*' * len(str(saldo))}".replace(".", ","))     
-    
+            label.setText(f"Saldo : R$ {'*' * len(str(saldo))}".replace(".", ","))
+
     @staticmethod
     def mostraSenha(check, senha):
         if check.isChecked():
             senha.setEchoMode(QtWidgets.QLineEdit.Normal)
         else:
             senha.setEchoMode(QtWidgets.QLineEdit.Password)
-            
+
     @staticmethod
     def convertDate(date):
         date = date.split("/")
         return f"{date[2]}-{date[1]}-{date[0]}"
-    
+
     @staticmethod
     def atualizaContas(user, tipo, janela, cpf, select):
         cc = busca_conta_por_cpf(cpf.text(), "cc")
@@ -532,13 +744,12 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             if cc:
                 select.addItem(f"Conta Corrente - {cc.numero}")
             if cp:
-                select.addItem(f"Conta Poupança - {cp.numero}")           
-    
+                select.addItem(f"Conta Poupança - {cp.numero}")
+
     def getInfos(self, janela):
-        nome       = janela.nome.text()
-        cpf        = janela.cpf.text()
-        email      = janela.email.text()
-        senha      = janela.senha.text()
+        nome = janela.nome.text()
+        cpf = janela.cpf.text()
+        email = janela.email.text()
+        senha = janela.senha.text()
         nascimento = self.convertDate(janela.nascimento.text())
         return nome, cpf, nascimento, email, senha
-        
