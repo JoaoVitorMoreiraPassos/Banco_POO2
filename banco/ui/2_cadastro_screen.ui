@@ -426,49 +426,6 @@ QLineEdit:focus{
            <string>ex: 12345678</string>
           </property>
          </widget>
-         <widget class="QDateEdit" name="nascimento">
-          <property name="geometry">
-           <rect>
-            <x>50</x>
-            <y>240</y>
-            <width>261</width>
-            <height>35</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QDateEdit{
-	background-color: #fff;
-	border-radius: 5px;
-	padding-left: 5px;
-	border-radius: 17px;
-	border: 2px solid #498f97;
-}
-
-QDateEdit:focus{
-	border: 2px ridge rgb(3, 151, 136)
-}</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="minimumDate">
-           <date>
-            <year>1752</year>
-            <month>9</month>
-            <day>14</day>
-           </date>
-          </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
-          </property>
-          <property name="date">
-           <date>
-            <year>2000</year>
-            <month>1</month>
-            <day>1</day>
-           </date>
-          </property>
-         </widget>
          <widget class="QLabel" name="label_3">
           <property name="geometry">
            <rect>
@@ -580,6 +537,70 @@ QDateEdit:focus{
           <property name="text">
            <string>Nome completo:</string>
           </property>
+         </widget>
+         <widget class="QFrame" name="frame_5">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>240</y>
+            <width>261</width>
+            <height>35</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 17px;
+background-color: #0aabba;</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QDateEdit" name="nascimento">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>261</width>
+             <height>35</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QDateEdit{
+	background-color: #fff;
+	border-radius: 5px;
+	padding-left: 5px;
+	border-radius: 17px;
+	border: 2px solid #498f97;
+}
+
+QDateEdit:focus{
+	background-color: #fff;
+	border: 2px ridge rgb(3, 151, 136)	
+}</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="minimumDate">
+            <date>
+             <year>1752</year>
+             <month>9</month>
+             <day>14</day>
+            </date>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+           <property name="date">
+            <date>
+             <year>2000</year>
+             <month>1</month>
+             <day>1</day>
+            </date>
+           </property>
+          </widget>
          </widget>
         </widget>
        </item>

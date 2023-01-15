@@ -199,24 +199,6 @@ class Ui_MainWindow(object):
         self.senha.setText("")
         self.senha.setEchoMode(QtWidgets.QLineEdit.Password)
         self.senha.setObjectName("senha")
-        self.nascimento = QtWidgets.QDateEdit(self.frame)
-        self.nascimento.setGeometry(QtCore.QRect(50, 240, 261, 35))
-        self.nascimento.setStyleSheet("QDateEdit{\n"
-"    background-color: #fff;\n"
-"    border-radius: 5px;\n"
-"    padding-left: 5px;\n"
-"    border-radius: 17px;\n"
-"    border: 2px solid #498f97;\n"
-"}\n"
-"\n"
-"QDateEdit:focus{\n"
-"    border: 2px ridge rgb(3, 151, 136)\n"
-"}")
-        self.nascimento.setAlignment(QtCore.Qt.AlignCenter)
-        self.nascimento.setMinimumDate(QtCore.QDate(1752, 9, 14))
-        self.nascimento.setCalendarPopup(True)
-        self.nascimento.setDate(QtCore.QDate(2000, 1, 1))
-        self.nascimento.setObjectName("nascimento")
         self.label_3 = QtWidgets.QLabel(self.frame)
         self.label_3.setGeometry(QtCore.QRect(55, 220, 151, 20))
         font = QtGui.QFont()
@@ -249,6 +231,32 @@ class Ui_MainWindow(object):
         self.label_7.setGeometry(QtCore.QRect(55, 100, 131, 19))
         self.label_7.setStyleSheet("color: #fff;")
         self.label_7.setObjectName("label_7")
+        self.frame_5 = QtWidgets.QFrame(self.frame)
+        self.frame_5.setGeometry(QtCore.QRect(50, 240, 261, 35))
+        self.frame_5.setStyleSheet("border-radius: 17px;\n"
+"background-color: #0aabba;")
+        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.nascimento = QtWidgets.QDateEdit(self.frame_5)
+        self.nascimento.setGeometry(QtCore.QRect(0, 0, 261, 35))
+        self.nascimento.setStyleSheet("QDateEdit{\n"
+"    background-color: #fff;\n"
+"    border-radius: 5px;\n"
+"    padding-left: 5px;\n"
+"    border-radius: 17px;\n"
+"    border: 2px solid #498f97;\n"
+"}\n"
+"\n"
+"QDateEdit:focus{\n"
+"    background-color: #fff;\n"
+"    border: 2px ridge rgb(3, 151, 136)    \n"
+"}")
+        self.nascimento.setAlignment(QtCore.Qt.AlignCenter)
+        self.nascimento.setMinimumDate(QtCore.QDate(1752, 9, 14))
+        self.nascimento.setCalendarPopup(True)
+        self.nascimento.setDate(QtCore.QDate(2000, 1, 1))
+        self.nascimento.setObjectName("nascimento")
         self.gridLayout_2.addWidget(self.frame, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.frame_2, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
