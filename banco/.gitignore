@@ -1,0 +1,10 @@
+venv
+POO_2
+build
+dist
+index.spec
+__pycache__
+screens/__pycache__/*
+bibs/__pycache__
+bibs/__pycache__/*
+.vscode

@@ -3,7 +3,9 @@ from bibs.cliente import Cliente
 from bibs.conta import ContaCorrente, ContaPoupanca
 from datetime import datetime
 
-banco = conex.connect(host="localhost", user="root", password="", database="mydb")
+banco = conex.connect(
+    host="localhost", user="myuser", password="mypassword", database="mydb"
+)
 
 
 def get_columns(table):
@@ -18,7 +20,7 @@ def add_cliente(nome, cpf, nascimento, email, senha):
     cursor = banco.cursor()
     try:
         cursor.execute(
-            "INSERT INTO cliente (nome, cpf, nascimento, email, senha_acesso, criacao) VALUES (%s, %s, %s, %s, %s, %s)",
+            "INSERT INTO cliente (nome, cpf, nascimento, email, senha_acesso, criacao) VALUES (%s, %s, %s, %s, MD5(%s), %s)",
             (
                 nome,
                 cpf,
@@ -47,7 +49,8 @@ def get_cliente_id_by_cpf(cpf):
 def login(email, senha):
     cursor = banco.cursor()
     cursor.execute(
-        "SELECT * FROM cliente WHERE email = %s AND senha_acesso = %s", (email, senha)
+        "SELECT * FROM cliente WHERE email = %s AND senha_acesso = MD5(%s)",
+        (email, senha),
     )
     result = cursor.fetchone()
     if result:
@@ -72,7 +75,7 @@ def create_conta_corrente(id, senha):
     cursor = banco.cursor()
     criacao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cursor.execute(
-        "INSERT INTO conta_corrente (numero, senha, cliente_idcliente, saldo, criacao, limite) VALUES (%s, %s, %s, %s, %s, %s)",
+        "INSERT INTO conta_corrente (numero, senha, cliente_idcliente, saldo, criacao, limite) VALUES (%s,MD5(%s), %s, %s, %s, %s)",
         (
             int(numero_de_contas[0]) + 100000,
             senha,
@@ -87,7 +90,9 @@ def create_conta_corrente(id, senha):
     num = int(numero_de_contas[0]) + 100000
     cursor.execute(f"SELECT idconta_corrente FROM conta_corrente WHERE numero = {num}")
     id_conta = cursor.fetchone()[0]
-    conta = ContaCorrente(id_conta, int(numero_de_contas[0]) + 100000, senha, criacao, 0, 800)
+    conta = ContaCorrente(
+        id_conta, int(numero_de_contas[0]) + 100000, senha, criacao, 0, 800
+    )
     cursor.close()
     return conta
 
@@ -101,7 +106,7 @@ def create_conta_poupanca(id, senha):
     cursor = banco.cursor()
     criacao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cursor.execute(
-        "INSERT INTO conta_poupanca (numero, senha, cliente_idcliente, saldo, criacao) VALUES (%s, %s, %s, %s, %s)",
+        "INSERT INTO conta_poupanca (numero, senha, cliente_idcliente, saldo, criacao) VALUES (%s, MD5(%s), %s, %s, %s)",
         (
             int(numero_de_contas[0]) + 100000,
             senha,
@@ -116,7 +121,9 @@ def create_conta_poupanca(id, senha):
         f"SELECT idconta_poupanca FROM conta_poupanca WHERE numero = {int(numero_de_contas[0])+100000}"
     )
     id_conta = cursor.fetchone()[0]
-    conta = ContaPoupanca(id_conta, int(numero_de_contas[0]) + 100000, senha, criacao, 0)
+    conta = ContaPoupanca(
+        id_conta, int(numero_de_contas[0]) + 100000, senha, criacao, 0
+    )
     cursor.close()
     return conta
 
@@ -161,7 +168,7 @@ def get_conta_poupanca(id):
 def valida_senha_conta_corrente(id, senha):
     cursor = banco.cursor()
     cursor.execute(
-        "SELECT * FROM conta_corrente WHERE idconta_corrente = %s AND senha = %s",
+        "SELECT * FROM conta_corrente WHERE idconta_corrente = %s AND senha = MD5(%s)",
         (id, senha),
     )
     result = cursor.fetchone()
@@ -175,7 +182,7 @@ def valida_senha_conta_corrente(id, senha):
 def valida_senha_conta_poupanca(id, senha):
     cursor = banco.cursor()
     cursor.execute(
-        "SELECT * FROM conta_poupanca WHERE idconta_poupanca = %s AND senha = %s",
+        "SELECT * FROM conta_poupanca WHERE idconta_poupanca = %s AND senha = MD5(%s)",
         (id, senha),
     )
     result = cursor.fetchone()
