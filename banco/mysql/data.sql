@@ -46,7 +46,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`conta_corrente` (
   `idconta_corrente` INT NOT NULL AUTO_INCREMENT,
-  `numero` VARCHAR(32) NOT NULL UNIQUE,
+  `numero` VARCHAR(6) NOT NULL UNIQUE,
   `senha` VARCHAR(32) NOT NULL,
   `saldo` FLOAT NULL,
   `limite` FLOAT NOT NULL,
@@ -66,7 +66,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`conta_poupanca` (
   `idconta_poupanca` INT NOT NULL AUTO_INCREMENT,
   `numero` VARCHAR(6) NOT NULL UNIQUE,
-  `senha` VARCHAR(6) NOT NULL,
+  `senha` VARCHAR(32) NOT NULL,
   `saldo` FLOAT NULL,
   `criacao` DATETIME,
   `cliente_idcliente` INT UNSIGNED NOT NULL,

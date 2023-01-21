@@ -8,14 +8,6 @@ banco = conex.connect(
 )
 
 
-def get_columns(table):
-    global banco
-    cursor = banco.cursor()
-    cursor.execute("SELECT * FROM cliente")
-    columns = [column[0] for column in cursor.description]
-    return columns
-
-
 def add_cliente(nome, cpf, nascimento, email, senha):
     cursor = banco.cursor()
     try:
@@ -54,6 +46,7 @@ def login(email, senha):
     )
     result = cursor.fetchone()
     if result:
+        # 0 = id, 4 = nome, 1 = cpf, 2 = nascimento, 3 = email
         cliente = Cliente(result[0], result[4], result[1], result[2], result[3])
         cc = get_conta_corrente(cliente.id)
         cp = get_conta_poupanca(cliente.id)
@@ -72,12 +65,14 @@ def create_conta_corrente(id, senha):
     numero_de_contas = numero_de_contas.fetchone()
     if numero_de_contas[0] == None:
         numero_de_contas = (0,)
+    numero_da_conta = numero_de_contas[0] + 100000
+
     cursor = banco.cursor()
     criacao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cursor.execute(
         "INSERT INTO conta_corrente (numero, senha, cliente_idcliente, saldo, criacao, limite) VALUES (%s,MD5(%s), %s, %s, %s, %s)",
         (
-            int(numero_de_contas[0]) + 100000,
+            numero_da_conta,
             senha,
             id,
             0,
@@ -87,12 +82,12 @@ def create_conta_corrente(id, senha):
     )
     banco.commit()
     cursor = banco.cursor()
-    num = int(numero_de_contas[0]) + 100000
-    cursor.execute(f"SELECT idconta_corrente FROM conta_corrente WHERE numero = {num}")
-    id_conta = cursor.fetchone()[0]
-    conta = ContaCorrente(
-        id_conta, int(numero_de_contas[0]) + 100000, senha, criacao, 0, 800
+    cursor.execute(
+        f"SELECT idconta_corrente FROM conta_corrente WHERE numero = {numero_da_conta}"
     )
+    id_conta = cursor.fetchone()[0]
+
+    conta = ContaCorrente(id_conta, numero_da_conta, senha, criacao, 0, 800)
     cursor.close()
     return conta
 
@@ -136,7 +131,6 @@ def get_conta_corrente(id):
         result = result[0]
     except:
         return None
-    print(result)
     try:
         # 0 = id, 1 = numero, 2 = senha, 3 = saldo, 4 = limite, 5 = criacao
         conta = ContaCorrente(
@@ -156,7 +150,6 @@ def get_conta_poupanca(id):
         result = result[0]
     except:
         return None
-    print(result)
     try:
         conta = ContaPoupanca(result[0], result[1], result[2], result[4], result[3])
     except:
