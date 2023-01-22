@@ -5,8 +5,9 @@ from conta import ContaCorrente, ContaPoupanca
 
 banco = conex.connect(
     host="localhost", user="myuser", password="mypassword", database="mydb"
-)   
-    
+)
+
+
 def add_cliente(nome, cpf, nascimento, email, senha):
     cursor = banco.cursor()
     try:

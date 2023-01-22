@@ -158,7 +158,15 @@ def busca_conta_por_cpf(cpf, tipo_da_conta):
         # print(conta.id, conta.numero, conta.senha, conta.criacao, conta.saldo)
         return conta
 
-def saque_conta_corrente(id, numero, valor, transferencia=False, id_user_destino=None, tipo_conta_destino=None):
+
+def saque_conta_corrente(
+    id,
+    numero,
+    valor,
+    transferencia=False,
+    id_user_destino=None,
+    tipo_conta_destino=None,
+):
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -173,16 +181,24 @@ def saque_conta_corrente(id, numero, valor, transferencia=False, id_user_destino
     }
     data = str(data)
     client.send(data.encode())
-    
+
     result_saque = client.recv(1024).decode()
-    #fecha a conexão
+    # fecha a conexão
     client.close()
     if result_saque != "Saque realizado com sucesso!":
         raise Exception(result_saque)
     else:
         return True, result_saque
-    
-def saque_conta_poupanca(id, numero, valor, transferencia=False, id_user_destino=None, tipo_conta_destino=None):
+
+
+def saque_conta_poupanca(
+    id,
+    numero,
+    valor,
+    transferencia=False,
+    id_user_destino=None,
+    tipo_conta_destino=None,
+):
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -197,24 +213,25 @@ def saque_conta_poupanca(id, numero, valor, transferencia=False, id_user_destino
     }
     data = str(data)
     client.send(data.encode())
-    
+
     result_saque = client.recv(1024).decode()
-    #fecha a conexão
+    # fecha a conexão
     client.close()
     if result_saque != "Saque realizado com sucesso!":
         raise Exception(result_saque)
     else:
         return True, result_saque
-    
+
+
 def create_conta_corrente(id, senha):
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
     data = {"operacao": "07", "id": id, "senha": senha}
     data = str(data)
-    
+
     client.send(data.encode())
-    
+
     conta_corrente = client.recv(1024).decode()
     conta_corrente = eval(conta_corrente)
     conta_corrente = ContaCorrente(
@@ -226,16 +243,17 @@ def create_conta_corrente(id, senha):
         conta_corrente["limite"],
     )
     return conta_corrente
-    
+
+
 def create_conta_poupanca(id, senha):
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
     data = {"operacao": "08", "id": id, "senha": senha}
     data = str(data)
-    
+
     client.send(data.encode())
-    
+
     conta_poupanca = client.recv(1024).decode()
     conta_poupanca = eval(conta_poupanca)
     conta_poupanca = ContaPoupanca(
@@ -246,7 +264,8 @@ def create_conta_poupanca(id, senha):
         conta_poupanca["saldo"],
     )
     return conta_poupanca
-    
+
+
 def get_cliente_id_by_cpf(cpf):
     # Faz a conexão com o servidor
     client = connect()
@@ -259,8 +278,11 @@ def get_cliente_id_by_cpf(cpf):
         return None
     else:
         return id
-        
-def deposito_conta_corrente(id, numero, valor, transferencia=False, id_user_origem=None, tipo_conta_origem=None):
+
+
+def deposito_conta_corrente(
+    id, numero, valor, transferencia=False, id_user_origem=None, tipo_conta_origem=None
+):
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -275,16 +297,19 @@ def deposito_conta_corrente(id, numero, valor, transferencia=False, id_user_orig
     }
     data = str(data)
     client.send(data.encode())
-    
+
     result_deposito = client.recv(1024).decode()
-    #fecha a conexão
+    # fecha a conexão
     client.close()
     if result_deposito != "Depósito realizado com sucesso!":
         raise Exception(result_deposito)
     else:
         return True, result_deposito
-    
-def deposito_conta_poupanca(id, numero, valor, transferencia=False, id_user_origem=None, tipo_conta_origem=None):
+
+
+def deposito_conta_poupanca(
+    id, numero, valor, transferencia=False, id_user_origem=None, tipo_conta_origem=None
+):
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -299,15 +324,16 @@ def deposito_conta_poupanca(id, numero, valor, transferencia=False, id_user_orig
     }
     data = str(data)
     client.send(data.encode())
-    
+
     result_deposito = client.recv(1024).decode()
-    #fecha a conexão
+    # fecha a conexão
     client.close()
     if result_deposito != "Depósito realizado com sucesso!":
         raise Exception(result_deposito)
     else:
         return True, result_deposito
-    
+
+
 def valida_senha_conta_corrente(id, senha):
     # Faz a conexão com o servidor
     client = connect()
@@ -320,7 +346,8 @@ def valida_senha_conta_corrente(id, senha):
         return True
     else:
         return False
-    
+
+
 def valida_senha_conta_poupanca(id, senha):
     # Faz a conexão com o servidor
     client = connect()
@@ -333,15 +360,3 @@ def valida_senha_conta_poupanca(id, senha):
         return True
     else:
         return False
-    
-if __name__ == "__main__":
-    resuu = login("moreirapassosj@gmail.com", "12345678")
-    print(str(resuu[1]))
-    # print(login("moreirapassosj@gmail.com" , "12345678"))
-    # while True:
-    #     try:
-    #         msg = input("Digite uma mensagem: ")
-    #         client.send(msg.encode())
-    #         print(client.recv(1024).decode())
-    #     except:
-    #         client.close()
