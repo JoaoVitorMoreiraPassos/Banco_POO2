@@ -389,39 +389,23 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         # Busca no banco de dados as últimas 10 transações da conta
         historico = get_transacoes(conta.id, tipo)
         historico.sort(key=lambda x: x[1], reverse=True)
-        historico = historico[:10]
+        historico = historico[0:10]
         height = 2
         labels = []
-        horizontal = []
-        vertical = []
         # Verifica se há transações no histórico. Se houver, cria os labels e adiciona no grid layout
         if len(historico) > 0:
-            line = QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
-            line.setLineWidth(5)
-            line.setMidLineWidth(2)
-            line.setFrameShape(QtWidgets.QFrame.HLine)
-            line.setObjectName("line")
-
-            self.extrato_screen.gridLayout.addWidget(line, 1, 0, 1, 8)
             label_6 = QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
             label_6.setStyleSheet("color: #fff")
             label_6.setLineWidth(2)
             label_6.setObjectName("label_6")
             label_6.setText("Data")
-            self.extrato_screen.gridLayout.addWidget(label_6, 0, 0, 1, 2)
-            line_2 = QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
-            line_2.setLineWidth(5)
-            line_2.setMidLineWidth(5)
-            line_2.setFrameShape(QtWidgets.QFrame.VLine)
-            line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
-            line_2.setObjectName("line_2")
-            self.extrato_screen.gridLayout.addWidget(line_2, 0, 2, 1, 1)
+            self.extrato_screen.gridLayout.addWidget(label_6, 0, 0, 2, 2)
             label_2 = QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
             label_2.setStyleSheet("color: #fff;")
             label_2.setLineWidth(2)
             label_2.setObjectName("label_2")
             label_2.setText("Tipo")
-            self.extrato_screen.gridLayout.addWidget(label_2, 0, 3, 1, 2)
+            self.extrato_screen.gridLayout.addWidget(label_2, 0, 2, 2, 2)
             label_3 = QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
             label_3.setEnabled(True)
             label_3.setStyleSheet("color: #fff;")
@@ -429,14 +413,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             label_3.setAlignment(QtCore.Qt.AlignCenter)
             label_3.setObjectName("label_3")
             label_3.setText("Valor")
-            self.extrato_screen.gridLayout.addWidget(label_3, 0, 6, 1, 2)
-            line_3 = QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
-            line_3.setLineWidth(5)
-            line_3.setMidLineWidth(5)
-            line_3.setFrameShape(QtWidgets.QFrame.VLine)
-            line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
-            line_3.setObjectName("line_3")
-            self.extrato_screen.gridLayout.addWidget(line_3, 0, 5, 1, 1)
+            self.extrato_screen.gridLayout.addWidget(label_3, 0, 4, 2, 2)
             self.extrato_screen.scrollArea.setWidget(
                 self.extrato_screen.scrollAreaWidgetContents
             )
@@ -459,43 +436,20 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 labels[-1].setText(momento)
                 labels[-1].setStyleSheet("color: #fff;\n")
 
-                vertical.append(
-                    QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
-                )
-                vertical[-1].setFrameShape(QtWidgets.QFrame.VLine)
-                vertical[-1].setFrameShadow(QtWidgets.QFrame.Sunken)
-                self.extrato_screen.gridLayout.addWidget(vertical[-1], height, 2, 1, 1)
-
                 labels.append(
                     QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
                 )
-                self.extrato_screen.gridLayout.addWidget(labels[-1], height, 3, 1, 2)
+                self.extrato_screen.gridLayout.addWidget(labels[-1], height, 2, 1, 2)
                 labels[-1].setText(operacao)
                 labels[-1].setStyleSheet("color: #fff;\n")
-
-                vertical.append(
-                    QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
-                )
-                vertical[-1].setFrameShape(QtWidgets.QFrame.VLine)
-                vertical[-1].setFrameShadow(QtWidgets.QFrame.Sunken)
-                self.extrato_screen.gridLayout.addWidget(vertical[-1], height, 5, 1, 1)
 
                 labels.append(
                     QtWidgets.QLabel(self.extrato_screen.scrollAreaWidgetContents)
                 )
                 labels[-1].setAlignment(QtCore.Qt.AlignCenter)
-                self.extrato_screen.gridLayout.addWidget(labels[-1], height, 6, 1, 2)
+                self.extrato_screen.gridLayout.addWidget(labels[-1], height, 4, 1, 2)
                 labels[-1].setText(f"R$ {valor:.2f}".replace(".", ","))
                 labels[-1].setStyleSheet("color: #fff;\n")
-
-                horizontal.append(
-                    QtWidgets.QFrame(self.extrato_screen.scrollAreaWidgetContents)
-                )
-                horizontal[-1].setFrameShape(QtWidgets.QFrame.HLine)
-                horizontal[-1].setFrameShadow(QtWidgets.QFrame.Sunken)
-                self.extrato_screen.gridLayout.addWidget(
-                    horizontal[-1], height + 1, 0, 1, 8
-                )
 
                 height += 2
         else:
@@ -583,7 +537,6 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         cp = busca_conta_por_cpf(cpf_destino, "cp")
         # Busca o id do cliente de destino no banco de dados através do cpf
         id_destino = get_cliente_id_by_cpf(cpf_destino)
-        print(id_destino)
         # verifica campos vazios
         if cpf_destino == "" or valor == "":
             QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")

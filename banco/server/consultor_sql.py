@@ -3,13 +3,14 @@ from datetime import datetime
 from cliente import Cliente
 from conta import ContaCorrente, ContaPoupanca
 
-banco = conex.connect(
+
+conection = conex.connect(
     host="localhost", user="myuser", password="mypassword", database="mydb"
 )
 
 
 def add_cliente(nome, cpf, nascimento, email, senha):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     try:
         cursor.execute(
             "INSERT INTO cliente (nome, cpf, nascimento, email, senha_acesso, criacao) VALUES (%s, %s, %s, %s, MD5(%s), %s)",
@@ -27,19 +28,19 @@ def add_cliente(nome, cpf, nascimento, email, senha):
         raise Exception(
             f"O {campo_duplicado[-2]} {campo_duplicado[1]} já está cadastrado!"
         )
-    banco.commit()
+    conection.commit()
     cursor.close()
 
 
 def get_cliente_id_by_cpf(cpf):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     result = cursor.execute("SELECT idcliente FROM cliente WHERE cpf = (%s)", (cpf,))
     result = cursor.fetchone()[0]
     return result
 
 
 def login(email, senha):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute(
         "SELECT * FROM cliente WHERE email = %s AND senha_acesso = MD5(%s)",
         (email, senha),
@@ -60,14 +61,14 @@ def login(email, senha):
 
 
 def create_conta_corrente(id, senha):
-    numero_de_contas = banco.cursor()
+    numero_de_contas = conection.cursor()
     numero_de_contas.execute("SELECT max(idconta_corrente) FROM conta_corrente")
     numero_de_contas = numero_de_contas.fetchone()
     if numero_de_contas[0] == None:
         numero_de_contas = (0,)
     numero_da_conta = numero_de_contas[0] + 100000
 
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     criacao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cursor.execute(
         "INSERT INTO conta_corrente (numero, senha, cliente_idcliente, saldo, criacao, limite) VALUES (%s,MD5(%s), %s, %s, %s, %s)",
@@ -80,8 +81,8 @@ def create_conta_corrente(id, senha):
             800,
         ),
     )
-    banco.commit()
-    cursor = banco.cursor()
+    conection.commit()
+    cursor = conection.cursor()
     cursor.execute(
         f"SELECT idconta_corrente FROM conta_corrente WHERE numero = {numero_da_conta}"
     )
@@ -93,12 +94,12 @@ def create_conta_corrente(id, senha):
 
 
 def create_conta_poupanca(id, senha):
-    numero_de_contas = banco.cursor()
+    numero_de_contas = conection.cursor()
     numero_de_contas.execute("SELECT max(idconta_poupanca) FROM conta_poupanca")
     numero_de_contas = numero_de_contas.fetchone()
     if numero_de_contas[0] == None:
         numero_de_contas = (0,)
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     criacao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cursor.execute(
         "INSERT INTO conta_poupanca (numero, senha, cliente_idcliente, saldo, criacao) VALUES (%s, MD5(%s), %s, %s, %s)",
@@ -110,8 +111,8 @@ def create_conta_poupanca(id, senha):
             criacao,
         ),
     )
-    banco.commit()
-    cursor = banco.cursor()
+    conection.commit()
+    cursor = conection.cursor()
     cursor.execute(
         f"SELECT idconta_poupanca FROM conta_poupanca WHERE numero = {int(numero_de_contas[0])+100000}"
     )
@@ -124,7 +125,7 @@ def create_conta_poupanca(id, senha):
 
 
 def get_conta_corrente(id):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute("SELECT * FROM conta_corrente WHERE cliente_idcliente = %s", (id,))
     result = cursor.fetchall()
     try:
@@ -143,7 +144,7 @@ def get_conta_corrente(id):
 
 
 def get_conta_poupanca(id):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute("SELECT * FROM conta_poupanca WHERE cliente_idcliente = %s", (id,))
     result = cursor.fetchall()
     try:
@@ -159,7 +160,7 @@ def get_conta_poupanca(id):
 
 
 def valida_senha_conta_corrente(id, senha):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute(
         "SELECT * FROM conta_corrente WHERE idconta_corrente = %s AND senha = MD5(%s)",
         (id, senha),
@@ -173,7 +174,7 @@ def valida_senha_conta_corrente(id, senha):
 
 
 def valida_senha_conta_poupanca(id, senha):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute(
         "SELECT * FROM conta_poupanca WHERE idconta_poupanca = %s AND senha = MD5(%s)",
         (id, senha),
@@ -187,7 +188,7 @@ def valida_senha_conta_poupanca(id, senha):
 
 
 def add_transacao(id_da_conta, tipo_da_conta, valor, tipo):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     if tipo_da_conta == "cc":
         cursor.execute(
             f"INSERT INTO historico (momento, tipo, valor, conta_corrente_idconta_corrente) VALUES ('{str(datetime.now()).split('.')[0]}', '{tipo}', '{valor}', '{id_da_conta}')"
@@ -197,14 +198,14 @@ def add_transacao(id_da_conta, tipo_da_conta, valor, tipo):
             f"INSERT INTO historico (momento, tipo, valor, conta_poupanca_idconta_poupanca) VALUES ('{str(datetime.now()).split('.')[0]}', '{tipo}', '{valor}', '{id_da_conta}')"
         )
 
-    banco.commit()
+    conection.commit()
     cursor.close()
 
 
 def get_transacoes(id_da_conta, tipo_da_conta):
     if isinstance(id_da_conta, tuple):
         id_da_conta = id_da_conta[0]
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     if tipo_da_conta == "cc":
         cursor.execute(
             f"SELECT * FROM historico WHERE conta_corrente_idconta_corrente = {id_da_conta}"
@@ -221,7 +222,7 @@ def get_transacoes(id_da_conta, tipo_da_conta):
 def deposito_conta_corrente(
     id, numero, valor, eh_transferencia=False, id_user_origem=None, tipo_origem=None
 ):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute("SELECT saldo FROM conta_corrente WHERE numero = %s", (numero,))
     result = cursor.fetchone()
     if valor <= 0:
@@ -237,23 +238,19 @@ def deposito_conta_corrente(
             conta_origem = get_conta_poupanca(id_user_origem)
         else:
             conta_origem = None
-        id_user = cursor.execute(
-            "SELECT cliente_idcliente FROM conta_corrente WHERE numero = %s", (numero,)
-        )
-        id_user = cursor.fetchone()[0]
         user = cursor.execute(
-            "SELECT nome FROM cliente WHERE idcliente = %s", (id_user,)
+            "SELECT nome FROM cliente WHERE idcliente = %s", (id_user_origem,)
         )
         user = cursor.fetchone()[0]
         add_transacao(
             id,
             "cc",
             valor,
-            f"transferência realizada para conta {conta_origem.numero} de {user}",
+            f"transferência recebida da conta {'corrente' if tipo_origem == 'cc' else 'poupanca'} nº {conta_origem.numero} de {user}",
         )
     else:
         add_transacao(id, "cc", valor, "deposito")
-    banco.commit()
+    conection.commit()
     cursor.close()
     return True, "Depósito realizado com sucesso!"
 
@@ -261,7 +258,7 @@ def deposito_conta_corrente(
 def deposito_conta_poupanca(
     id, numero, valor, eh_transferencia=False, id_user_origem=None, tipo_origem=None
 ):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute("SELECT saldo FROM conta_poupanca WHERE numero = %s", (numero,))
     result = cursor.fetchone()
     if valor <= 0:
@@ -278,23 +275,19 @@ def deposito_conta_poupanca(
         else:
             conta_origem = None
 
-        id_user = cursor.execute(
-            "SELECT cliente_idcliente FROM conta_corrente WHERE numero = %s", (numero,)
-        )
-        id_user = cursor.fetchone()[0]
         user = cursor.execute(
-            "SELECT nome FROM cliente WHERE idcliente = %s", (id_user,)
+            "SELECT nome FROM cliente WHERE idcliente = %s", (id_user_origem,)
         )
         user = cursor.fetchone()[0]
         add_transacao(
             id,
             "cp",
             valor,
-            f"transferência recebida da conta {conta_origem.numero} de {user}",
+            f"transferência recebida da conta {'corrente' if tipo_origem == 'cc' else 'poupanca'} nº {conta_origem.numero} de {user}",
         )
     else:
         add_transacao(id, "cp", valor, "deposito")
-    banco.commit()
+    conection.commit()
     cursor.close()
     return True, "Depósito realizado com sucesso!"
 
@@ -302,7 +295,7 @@ def deposito_conta_poupanca(
 def saque_conta_corrente(
     id, numero, valor, eh_transferencia=False, id_user_destino=None, tipo_destino=None
 ):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute(
         "SELECT saldo, limite FROM conta_corrente WHERE numero = %s", (numero,)
     )
@@ -327,23 +320,19 @@ def saque_conta_corrente(
             conta_destino = get_conta_poupanca(id_user_destino)
         else:
             conta_destino = None
-        id_user = cursor.execute(
-            "SELECT cliente_idcliente FROM conta_corrente WHERE numero = %s", (numero,)
-        )
-        id_user = cursor.fetchone()[0]
         user = cursor.execute(
-            "SELECT nome FROM cliente WHERE idcliente = %s", (id_user,)
+            "SELECT nome FROM cliente WHERE idcliente = %s", (id_user_destino,)
         )
         user = cursor.fetchone()[0]
         add_transacao(
             id,
             "cc",
             valor,
-            f"transferência realizada para conta {conta_destino.numero} de {user}",
+            f"transferência realizada para conta {'corrente' if tipo_destino == 'cc' else 'poupanca'} nº {conta_destino.numero} de {user}",
         )
     else:
         add_transacao(id, "cc", valor, "saque")
-    banco.commit()
+    conection.commit()
     cursor.close()
     return True, "Saque realizado com sucesso!"
 
@@ -351,7 +340,7 @@ def saque_conta_corrente(
 def saque_conta_poupanca(
     id, numero, valor, eh_transferencia=False, id_user_destino=None, tipo_destino=None
 ):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute("SELECT saldo FROM conta_poupanca WHERE numero = %s", (numero,))
     result = cursor.fetchone()
     if result[0] < valor:
@@ -371,29 +360,25 @@ def saque_conta_poupanca(
             conta_destino = get_conta_poupanca(id_user_destino)
         else:
             conta_destino = None
-        id_user = cursor.execute(
-            "SELECT cliente_idcliente FROM conta_corrente WHERE numero = %s", (numero,)
-        )
-        id_user = cursor.fetchone()[0]
         user = cursor.execute(
-            "SELECT nome FROM cliente WHERE idcliente = %s", (id_user,)
+            "SELECT nome FROM cliente WHERE idcliente = %s", (id_user_destino,)
         )
         user = cursor.fetchone()[0]
         add_transacao(
             id,
             "cp",
             valor,
-            f"transferência realizada para conta {conta_destino.numero} de {user}",
+            f"transferência realizada para conta {'corrente' if tipo_destino == 'cc' else 'poupanca'} nº {conta_destino.numero} de {user}",
         )
     else:
         add_transacao(id, "cp", valor, "saque")
-    banco.commit()
+    conection.commit()
     cursor.close()
     return True, "Saque realizado com sucesso!"
 
 
 def busca_conta_por_cpf(cpf, tipo_da_conta):
-    cursor = banco.cursor()
+    cursor = conection.cursor()
     cursor.execute("SELECT * FROM cliente WHERE cpf = %s", (cpf,))
     try:
         id_user = cursor.fetchone()[0]

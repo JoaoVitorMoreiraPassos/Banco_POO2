@@ -29,7 +29,7 @@ from bibs.conta import ContaCorrente, ContaPoupanca
 
 def connect():
     host = "0.0.0.0"
-    port = 50001
+    port = 50000
 
     cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     cliente.connect((host, port))

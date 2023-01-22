@@ -71,7 +71,7 @@ def do_search_by_cpf(cpf, tipo):
 
 
 host = "0.0.0.0"
-port = 50001
+port = 50000
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host, port))
 server.listen()
