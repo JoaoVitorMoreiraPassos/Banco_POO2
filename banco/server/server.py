@@ -26,8 +26,13 @@ from consultor_sql import (
 
 
 def do_login(email, senha):
+    # O retorno será um objeto do tipo Cliente
     retorno = login(email, senha)
     if retorno[0]:
+        """As contas do cliente são objetos do tipo ContaCorrente ou ContaPoupanca que herdam do ojeto Conta
+        Para enviar as informções para o cliente é necessário transformar os objetos em dicionários,
+        para depois transformar em string e codifica-las em bytes.
+        """
         contas = {}
         contas = retorno[1].contas
         if "cc" in contas.keys():
@@ -47,6 +52,7 @@ def do_login(email, senha):
                 "criacao": contas["cp"].criacao,
                 "saldo": contas["cp"].saldo,
             }
+        # Empacota as informações do cliente e das contas em um dicionário e retorna como string
         user = f'{{"id": {retorno[1].id},"nome": "{retorno[1].nome}","cpf": "{retorno[1].cpf}","email": "{retorno[1].email}", "nascimento": "{retorno[1].nascimento}", "contas": {contas}}}'
         user = str(user)
         return True, user
@@ -55,6 +61,11 @@ def do_login(email, senha):
 
 
 def do_search_by_cpf(cpf, tipo):
+    # O retorno será um objeto do tipo ContaCorrente ou ContaPoupanca que herdam do ojeto Conta
+    """
+    Para enviar as informções para o cliente é necessário transformar os objetos em dicionários,
+    para depois transformar em string e codifica-las em bytes.
+    """
     conta = busca_conta_por_cpf(cpf, tipo)
     if conta != None:
         if data["tipo"] == "cc":
@@ -205,7 +216,6 @@ while True:
 
             elif operacao == "10":
                 # Operação de depósito em uma conta corrente
-                deposito = None
                 try:
                     deposito = deposito_conta_corrente(
                         data["id"],
@@ -221,7 +231,6 @@ while True:
 
             elif operacao == "11":
                 # Operação de depósito em uma conta poupança
-                deposito = None
                 try:
                     deposito = deposito_conta_poupanca(
                         data["id"],
