@@ -16,6 +16,14 @@ from consultor_sql import (
     valida_senha_conta_poupanca,
 )
 
+"""
+    O serivdor irá receber uma mensagem do cliente, que é uma string no formato JSON.
+    seguindo seguinte padrão: {"operacao": "01", "info_nessaria_para_a_operacao1": "inf1", "info_necessria_para_a_operacao2": "info2"} 
+    será feita a identificação da operação desejada, com isso será realizada a conexão com o banco de dados através dos modulos
+    do arquivo consultor_sql.py, e será retornado uma mensagem para o cliente, que será uma string no formato JSON
+    de acordo com os dados retornados pelas funções axiliares que acessam o banco de dados.
+"""
+
 
 def do_login(email, senha):
     retorno = login(email, senha)
@@ -77,17 +85,27 @@ server.bind((host, port))
 server.listen()
 
 while True:
+    # Faz o servidor aguardar por uma conexão
     con, ende = server.accept()
     while True:
+        # Faz o servidor aguardar por uma mensagem
         try:
+            # Recebe a mensagem do cliente
             msg = con.recv(1024)
+            # Se a mensagem for vazia, encerra a conexão
             if not msg:
                 con.close()
                 break
+            # Decodifica a mensagem
             data = msg.decode()
+            # Pega a string recebida e transforma em um dicionário
             data = eval(msg)
+            # Pega o tipo de operação
             operacao = data["operacao"]
+            # A partir daqui as operações serão identificadas e e realizadas
             if operacao == "01":
+                # Operação de login
+                # Faz a verificação do login
                 result_login = do_login(data["email"], data["senha"])
                 if result_login[0]:
                     con.send(result_login[1].encode())
@@ -95,6 +113,7 @@ while True:
                     con.send("False".encode())
 
             elif operacao == "02":
+                # Operação de cadastro
                 try:
                     add_cliente(
                         data["nome"],
@@ -108,10 +127,12 @@ while True:
                     con.send("False".encode())
 
             elif operacao == "03":
+                # Operação de busca de transações
                 transations = get_transacoes(data["id"], data["tipo"])
                 con.send(str(transations).encode())
 
             elif operacao == "04":
+                # Operação de busca de conta por cpf
                 retorno = do_search_by_cpf(data["cpf"], data["tipo"])
                 if retorno != None:
                     con.send(str(retorno).encode())
@@ -119,6 +140,7 @@ while True:
                     con.send("False".encode())
 
             elif operacao == "05":
+                # Operação de saque em uma conta corrente
                 saque = None
                 try:
                     saque = saque_conta_corrente(
@@ -135,6 +157,7 @@ while True:
                     con.send(str(E).encode())
 
             elif operacao == "06":
+                # Operação de saque em uma conta poupança
                 saque = None
                 try:
                     saque = saque_conta_poupanca(
@@ -150,6 +173,7 @@ while True:
                 except Exception as E:
                     con.send(str(E).encode())
             elif operacao == "07":
+                # Operação de criação de conta corrente
                 conta = create_conta_corrente(data["id"], data["senha"])
                 conta = {
                     "id": conta.id,
@@ -161,6 +185,7 @@ while True:
                 }
                 con.send(str(conta).encode())
             elif operacao == "08":
+                # Operação de criação de conta poupança
                 conta = create_conta_poupanca(data["id"], data["senha"])
                 conta = {
                     "id": conta.id,
@@ -171,6 +196,7 @@ while True:
                 }
                 con.send(str(conta).encode())
             elif operacao == "09":
+                # Operação de busca de id de cliente por cpf
                 id = get_cliente_id_by_cpf(data["cpf"])
                 if id != None:
                     con.send(str(id).encode())
@@ -178,6 +204,7 @@ while True:
                     con.send("False".encode())
 
             elif operacao == "10":
+                # Operação de depósito em uma conta corrente
                 deposito = None
                 try:
                     deposito = deposito_conta_corrente(
@@ -193,6 +220,7 @@ while True:
                     con.send(str(E).encode())
 
             elif operacao == "11":
+                # Operação de depósito em uma conta poupança
                 deposito = None
                 try:
                     deposito = deposito_conta_poupanca(
@@ -208,6 +236,7 @@ while True:
                     con.send(str(E).encode())
 
             elif operacao == "12":
+                # Operação de validação de senha de conta corrente
                 validacao = valida_senha_conta_corrente(data["id"], data["senha"])
                 if validacao:
                     con.send("True".encode())
@@ -215,6 +244,7 @@ while True:
                     con.send("False".encode())
 
             elif operacao == "13":
+                # Operação de validação de senha de conta poupança
                 validacao = valida_senha_conta_poupanca(data["id"], data["senha"])
                 if validacao:
                     con.send("True".encode())
