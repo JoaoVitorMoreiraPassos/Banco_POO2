@@ -1,13 +1,12 @@
 import mysql.connector as conex
+from datetime import datetime
 from bibs.cliente import Cliente
 from bibs.conta import ContaCorrente, ContaPoupanca
-from datetime import datetime
 
 banco = conex.connect(
     host="localhost", user="myuser", password="mypassword", database="mydb"
-)
-
-
+)   
+    
 def add_cliente(nome, cpf, nascimento, email, senha):
     cursor = banco.cursor()
     try:
@@ -33,7 +32,8 @@ def add_cliente(nome, cpf, nascimento, email, senha):
 
 def get_cliente_id_by_cpf(cpf):
     cursor = banco.cursor()
-    result = cursor.execute(f"SELECT idcliente FROM cliente WHERE cpf = {cpf}")
+    result = cursor.execute("SELECT idcliente FROM cliente WHERE cpf = (%s)", (cpf,))
+    print(result)
     result = cursor.fetchone()[0]
     return result
 
@@ -124,9 +124,11 @@ def create_conta_poupanca(id, senha):
 
 
 def get_conta_corrente(id):
+    print("entrou aqui")
     cursor = banco.cursor()
     cursor.execute("SELECT * FROM conta_corrente WHERE cliente_idcliente = %s", (id,))
     result = cursor.fetchall()
+    print("conta: ", result)
     try:
         result = result[0]
     except:
@@ -302,6 +304,7 @@ def deposito_conta_poupanca(
 def saque_conta_corrente(
     id, numero, valor, eh_transferencia=False, id_user_destino=None, tipo_destino=None
 ):
+    print("id", id, "numero", numero, "valor", valor, "eh_transferencia", eh_transferencia, "id_user_destino", id_user_destino, "tipo_destino", tipo_destino)
     cursor = banco.cursor()
     cursor.execute(
         "SELECT saldo, limite FROM conta_corrente WHERE numero = %s", (numero,)
@@ -322,12 +325,15 @@ def saque_conta_corrente(
     )
     if eh_transferencia:
         if tipo_destino == "cc":
+            print("aqui")
             conta_destino = get_conta_corrente(id_user_destino)
         elif tipo_destino == "cp":
+            print("aqui1")
             conta_destino = get_conta_poupanca(id_user_destino)
         else:
+            print("aqui2")
             conta_destino = None
-
+        print("conta destino: ", conta_destino)
         id_user = cursor.execute(
             "SELECT cliente_idcliente FROM conta_corrente WHERE numero = %s", (numero,)
         )
@@ -345,7 +351,6 @@ def saque_conta_corrente(
     else:
         add_transacao(id, "cc", valor, "saque")
     banco.commit()
-    cursor.close()
     cursor.close()
     return True, "Saque realizado com sucesso!"
 

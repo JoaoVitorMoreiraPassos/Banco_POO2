@@ -1,25 +1,25 @@
 from PIL import Image
 from PyQt5 import QtCore, QtGui, QtWidgets
+from screens.extrato import Ui_MainWindow as TelaDeExtrato
 from screens.login_screen import Ui_MainWindow as TelaDeLogin
-from screens.cadastro_screen import Ui_MainWindow as TelaDeCadastro
 from screens.user_painel import Ui_MainWindow as TelaDoUsuario
 from screens.account_painel import Ui_MainWindow as TelaDasContas
 from screens.criar_conta import Ui_MainWindow as TelaDeCriarContas
-from screens.extrato import Ui_MainWindow as TelaDeExtrato
-from screens.deposito_e_saque import Ui_MainWindow as TelaDeDepositoESaque
+from screens.cadastro_screen import Ui_MainWindow as TelaDeCadastro
 from screens.transferencia import Ui_MainWindow as TelaDeTransferencia
-from bibs.consultor_sql import (
+from screens.deposito_e_saque import Ui_MainWindow as TelaDeDepositoESaque
+from bibs.client import (
     login,
     add_cliente,
-    create_conta_corrente,
-    create_conta_poupanca,
-    deposito_conta_corrente,
-    deposito_conta_poupanca,
     get_transacoes,
-    get_cliente_id_by_cpf,
+    busca_conta_por_cpf,
     saque_conta_corrente,
     saque_conta_poupanca,
-    busca_conta_por_cpf,
+    create_conta_corrente,
+    create_conta_poupanca,
+    get_cliente_id_by_cpf,
+    deposito_conta_corrente,
+    deposito_conta_poupanca,
     valida_senha_conta_corrente,
     valida_senha_conta_poupanca,
 )
@@ -568,6 +568,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             self.openPainel(MainWindow, user)
 
     def transferir(self, MainWindow, user, valor, conta, cpf_destino, tipo, senha):
+        tipo = tipo.split(" - ")[0]
         # Inicializando o tipo da conta
         tipo_origem = None
         try:
@@ -582,6 +583,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         cp = busca_conta_por_cpf(cpf_destino, "cp")
         # Busca o id do cliente de destino no banco de dados através do cpf
         id_destino = get_cliente_id_by_cpf(cpf_destino)
+        print(id_destino)
         # verifica campos vazios
         if cpf_destino == "" or valor == "":
             QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
@@ -824,7 +826,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             QtWidgets.QMessageBox.warning(None, "Erro", "Senha muito curta!")
             return
         if len(infos[4]) > 45:
-            QtWidgets.QMessageBox.warning(None, "Erro", "Senha muito comda!")
+            QtWidgets.QMessageBox.warning(None, "Erro", "Senha muito comprida!")
             return
         try:
             add_cliente(infos[0], infos[1], infos[2], infos[3], infos[4])

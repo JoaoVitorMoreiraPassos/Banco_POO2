@@ -10,6 +10,8 @@ class Cliente:
         self._email = email
         self._contas = {}
 
+    def __str__(self):
+        return f"id: {self._id} | Nome: {self._nome} | CPF: {self._cpf} | Nascimento: {self._nascimento} | Email: {self._email} | Contas: {self._contas}"
     def add_cc(self, conta):
         self._contas["cc"] = conta
 
