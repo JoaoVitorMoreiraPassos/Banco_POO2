@@ -18,7 +18,7 @@ from consultor_sql import (
 
 """
     O serivdor irá receber uma mensagem do cliente, que é uma string no formato JSON.
-    seguindo seguinte padrão: {"operacao": "01", "info_nessaria_para_a_operacao1": "inf1", "info_necessria_para_a_operacao2": "info2"} 
+    seguindo seguinte padrão: {"operacao": "01", "info_nessaria_para_a_operacao1": "info1", "info_necessria_para_a_operacao2": "info2"} 
     será feita a identificação da operação desejada, com isso será realizada a conexão com o banco de dados através dos modulos
     do arquivo consultor_sql.py, e será retornado uma mensagem para o cliente, que será uma string no formato JSON
     de acordo com os dados retornados pelas funções axiliares que acessam o banco de dados.
@@ -27,65 +27,65 @@ from consultor_sql import (
 
 def do_login(email, senha):
     # O retorno será um objeto do tipo Cliente
-    retorno = login(email, senha)
-    if retorno[0]:
+    authorization = login(email, senha)
+    if authorization[0]:
         """As contas do cliente são objetos do tipo ContaCorrente ou ContaPoupanca que herdam do ojeto Conta
         Para enviar as informções para o cliente é necessário transformar os objetos em dicionários,
         para depois transformar em string e codifica-las em bytes.
         """
-        contas = {}
-        contas = retorno[1].contas
-        if "cc" in contas.keys():
-            contas["cc"] = {
-                "id": contas["cc"].id,
-                "numero": contas["cc"].numero,
-                "senha": contas["cc"].senha,
-                "criacao": contas["cc"].criacao,
-                "saldo": contas["cc"].saldo,
-                "limite": contas["cc"].limite,
+        accounts = {}
+        accounts = authorization[1].accounts
+        if "cc" in accounts.keys():
+            accounts["cc"] = {
+                "id": accounts["cc"].id,
+                "numero": accounts["cc"].numero,
+                "senha": accounts["cc"].senha,
+                "criacao": accounts["cc"].criacao,
+                "saldo": accounts["cc"].saldo,
+                "limite": accounts["cc"].limite,
             }
-        if "cp" in contas.keys():
-            contas["cp"] = {
-                "id": contas["cp"].id,
-                "numero": contas["cp"].numero,
-                "senha": contas["cp"].senha,
-                "criacao": contas["cp"].criacao,
-                "saldo": contas["cp"].saldo,
+        if "cp" in accounts.keys():
+            accounts["cp"] = {
+                "id": accounts["cp"].id,
+                "numero": accounts["cp"].numero,
+                "senha": accounts["cp"].senha,
+                "criacao": accounts["cp"].criacao,
+                "saldo": accounts["cp"].saldo,
             }
         # Empacota as informações do cliente e das contas em um dicionário e retorna como string
-        user = f'{{"id": {retorno[1].id},"nome": "{retorno[1].nome}","cpf": "{retorno[1].cpf}","email": "{retorno[1].email}", "nascimento": "{retorno[1].nascimento}", "contas": {contas}}}'
+        user = f'{{"id": {authorization[1].id},"nome": "{authorization[1].nome}","cpf": "{authorization[1].cpf}","email": "{authorization[1].email}", "nascimento": "{authorization[1].nascimento}", "contas": {accounts}}}'
         user = str(user)
         return True, user
     else:
         return False, None
 
 
-def do_search_by_cpf(cpf, tipo):
+def do_search_by_cpf(cpf, account_type):
     # O retorno será um objeto do tipo ContaCorrente ou ContaPoupanca que herdam do ojeto Conta
     """
     Para enviar as informções para o cliente é necessário transformar os objetos em dicionários,
     para depois transformar em string e codifica-las em bytes.
     """
-    conta = busca_conta_por_cpf(cpf, tipo)
-    if conta != None:
-        if data["tipo"] == "cc":
-            retorno = {
-                "id": conta.id,
-                "numero": conta.numero,
-                "senha": conta.senha,
-                "criacao": conta.criacao,
-                "saldo": conta.saldo,
-                "limite": conta.limite,
+    account = busca_conta_por_cpf(cpf, account_type)
+    if account != None:
+        if account_type == "cc":
+            account = {
+                "id": account.id,
+                "numero": account.numero,
+                "senha": account.senha,
+                "criacao": account.criacao,
+                "saldo": account.saldo,
+                "limite": account.limite,
             }
-        elif data["tipo"] == "cp":
-            retorno = {
-                "id": conta.id,
-                "numero": conta.numero,
-                "senha": conta.senha,
-                "criacao": conta.criacao,
-                "saldo": conta.saldo,
+        elif account_type == "cp":
+            account = {
+                "id": account.id,
+                "numero": account.numero,
+                "senha": account.senha,
+                "criacao": account.criacao,
+                "saldo": account.saldo,
             }
-        return retorno
+        return account
     return None
 
 
@@ -102,19 +102,19 @@ while True:
         # Faz o servidor aguardar por uma mensagem
         try:
             # Recebe a mensagem do cliente
-            msg = con.recv(1024)
+            request = con.recv(1024)
             # Se a mensagem for vazia, encerra a conexão
-            if not msg:
+            if not request:
                 con.close()
                 break
             # Decodifica a mensagem
-            data = msg.decode()
+            data = request.decode()
             # Pega a string recebida e transforma em um dicionário
-            data = eval(msg)
+            data = eval(request)
             # Pega o tipo de operação
-            operacao = data["operacao"]
+            operation = data["operacao"]
             # A partir daqui as operações serão identificadas e e realizadas
-            if operacao == "01":
+            if operation == "01":
                 # Operação de login
                 # Faz a verificação do login
                 result_login = do_login(data["email"], data["senha"])
@@ -123,7 +123,7 @@ while True:
                 else:
                     con.send("False".encode())
 
-            elif operacao == "02":
+            elif operation == "02":
                 # Operação de cadastro
                 try:
                     add_cliente(
@@ -137,24 +137,24 @@ while True:
                 except Exception as E:
                     con.send("False".encode())
 
-            elif operacao == "03":
+            elif operation == "03":
                 # Operação de busca de transações
-                transations = get_transacoes(data["id"], data["tipo"])
-                con.send(str(transations).encode())
+                transactions = get_transacoes(data["id"], data["tipo"])
+                con.send(str(transactions).encode())
 
-            elif operacao == "04":
+            elif operation == "04":
                 # Operação de busca de conta por cpf
-                retorno = do_search_by_cpf(data["cpf"], data["tipo"])
-                if retorno != None:
-                    con.send(str(retorno).encode())
+                account = do_search_by_cpf(data["cpf"], data["tipo"])
+                if account != None:
+                    con.send(str(account).encode())
                 else:
                     con.send("False".encode())
 
-            elif operacao == "05":
+            elif operation == "05":
                 # Operação de saque em uma conta corrente
-                saque = None
+                withdraw_result = None
                 try:
-                    saque = saque_conta_corrente(
+                    withdraw_result = saque_conta_corrente(
                         data["id"],
                         data["numero"],
                         data["valor"],
@@ -162,16 +162,16 @@ while True:
                         data["id_user_destino"],
                         data["tipo_conta_destino"],
                     )
-                    if saque[0]:
-                        con.send(saque[1].encode())
+                    if withdraw_result[0]:
+                        con.send(withdraw_result[1].encode())
                 except Exception as E:
                     con.send(str(E).encode())
 
-            elif operacao == "06":
+            elif operation == "06":
                 # Operação de saque em uma conta poupança
-                saque = None
+                withdraw_result = None
                 try:
-                    saque = saque_conta_poupanca(
+                    withdraw_result = saque_conta_poupanca(
                         data["id"],
                         data["numero"],
                         data["valor"],
@@ -179,34 +179,34 @@ while True:
                         data["id_user_destino"],
                         data["tipo_conta_destino"],
                     )
-                    if saque[0]:
-                        con.send(saque[1].encode())
+                    if withdraw_result[0]:
+                        con.send(withdraw_result[1].encode())
                 except Exception as E:
                     con.send(str(E).encode())
-            elif operacao == "07":
+            elif operation == "07":
                 # Operação de criação de conta corrente
-                conta = create_conta_corrente(data["id"], data["senha"])
-                conta = {
-                    "id": conta.id,
-                    "numero": conta.numero,
-                    "senha": conta.senha,
-                    "criacao": conta.criacao,
-                    "saldo": conta.saldo,
-                    "limite": conta.limite,
+                account = create_conta_corrente(data["id"], data["senha"])
+                account = {
+                    "id": account.id,
+                    "numero": account.numero,
+                    "senha": account.senha,
+                    "criacao": account.criacao,
+                    "saldo": account.saldo,
+                    "limite": account.limite,
                 }
-                con.send(str(conta).encode())
-            elif operacao == "08":
+                con.send(str(account).encode())
+            elif operation == "08":
                 # Operação de criação de conta poupança
-                conta = create_conta_poupanca(data["id"], data["senha"])
-                conta = {
-                    "id": conta.id,
-                    "numero": conta.numero,
-                    "senha": conta.senha,
-                    "criacao": conta.criacao,
-                    "saldo": conta.saldo,
+                account = create_conta_poupanca(data["id"], data["senha"])
+                account = {
+                    "id": account.id,
+                    "numero": account.numero,
+                    "senha": account.senha,
+                    "criacao": account.criacao,
+                    "saldo": account.saldo,
                 }
-                con.send(str(conta).encode())
-            elif operacao == "09":
+                con.send(str(account).encode())
+            elif operation == "09":
                 # Operação de busca de id de cliente por cpf
                 id = get_cliente_id_by_cpf(data["cpf"])
                 if id != None:
@@ -214,10 +214,10 @@ while True:
                 else:
                     con.send("False".encode())
 
-            elif operacao == "10":
+            elif operation == "10":
                 # Operação de depósito em uma conta corrente
                 try:
-                    deposito = deposito_conta_corrente(
+                    deposit_result = deposito_conta_corrente(
                         data["id"],
                         data["numero"],
                         data["valor"],
@@ -225,14 +225,14 @@ while True:
                         data["id_user_origem"],
                         data["tipo_conta_origem"],
                     )
-                    con.send(str(deposito[1]).encode())
+                    con.send(str(deposit_result[1]).encode())
                 except Exception as E:
                     con.send(str(E).encode())
 
-            elif operacao == "11":
+            elif operation == "11":
                 # Operação de depósito em uma conta poupança
                 try:
-                    deposito = deposito_conta_poupanca(
+                    deposit_result = deposito_conta_poupanca(
                         data["id"],
                         data["numero"],
                         data["valor"],
@@ -240,22 +240,22 @@ while True:
                         data["id_user_origem"],
                         data["tipo_conta_origem"],
                     )
-                    con.send(str(deposito[1]).encode())
+                    con.send(str(deposit_result[1]).encode())
                 except Exception as E:
                     con.send(str(E).encode())
 
-            elif operacao == "12":
+            elif operation == "12":
                 # Operação de validação de senha de conta corrente
-                validacao = valida_senha_conta_corrente(data["id"], data["senha"])
-                if validacao:
+                validation = valida_senha_conta_corrente(data["id"], data["senha"])
+                if validation:
                     con.send("True".encode())
                 else:
                     con.send("False".encode())
 
-            elif operacao == "13":
+            elif operation == "13":
                 # Operação de validação de senha de conta poupança
-                validacao = valida_senha_conta_poupanca(data["id"], data["senha"])
-                if validacao:
+                validation = valida_senha_conta_poupanca(data["id"], data["senha"])
+                if validation:
                     con.send("True".encode())
                 else:
                     con.send("False".encode())
