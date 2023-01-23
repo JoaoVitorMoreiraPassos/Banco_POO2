@@ -2,16 +2,17 @@
 -- Sun Dec 18 20:35:02 2022
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
-
+-- Aqui são testes
 -- drop database mydb;
 -- drop table cliente;
-drop table conta_corrente;
-drop table conta_poupanca;
+-- drop table conta_corrente;
+-- drop table conta_poupanca;
 -- DROP TABLE historico;
 -- INSERT INTO historico (momento, tipo, valor, conta_corrente_idconta_corrente) VALUES ('2022-12-27 16:53:02', 'deposito', 150, 1);
 -- SELECT idconta_corrente FROM conta_corrente WHERE numero = 100000;
+-- select * from cliente;
 
-select * from cliente;
+-- Daqui para baixo é o que importa
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -83,7 +84,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`historico` (
   `idtransacao` INT NOT NULL AUTO_INCREMENT,
   `momento` DATETIME,
-  `tipo` VARCHAR(45) ,
+  `tipo` VARCHAR(128),
   `valor` FLOAT ,
   `conta_poupanca_idconta_poupanca` INT,
   `conta_corrente_idconta_corrente` INT,

@@ -1,6 +1,6 @@
 import socket
 import json
-from consultor_sql import (
+from sql_querys import (
     login,
     add_cliente,
     get_transacoes,
@@ -25,9 +25,9 @@ from consultor_sql import (
 """
 
 
-def do_login(email, senha):
+def do_login(email, password):
     # O retorno será um objeto do tipo Cliente
-    authorization = login(email, senha)
+    authorization = login(email, password)
     if authorization[0]:
         """As contas do cliente são objetos do tipo ContaCorrente ou ContaPoupanca que herdam do ojeto Conta
         Para enviar as informções para o cliente é necessário transformar os objetos em dicionários,
@@ -119,6 +119,7 @@ while True:
                 # Faz a verificação do login
                 result_login = do_login(data["email"], data["senha"])
                 if result_login[0]:
+                    print(f"um cliente entrou.")
                     con.send(result_login[1].encode())
                 else:
                     con.send("False".encode())
@@ -133,6 +134,7 @@ while True:
                         data["email"],
                         data["senha"],
                     )
+                    print("um novo cliente foi cadastrado")
                     con.send("True".encode())
                 except Exception as E:
                     con.send("False".encode())
@@ -163,6 +165,10 @@ while True:
                         data["tipo_conta_destino"],
                     )
                     if withdraw_result[0]:
+                        if data["transferencia"]:
+                            print("transferencia realizada")
+                        else:
+                            print("saque realizado")
                         con.send(withdraw_result[1].encode())
                 except Exception as E:
                     con.send(str(E).encode())
@@ -180,6 +186,10 @@ while True:
                         data["tipo_conta_destino"],
                     )
                     if withdraw_result[0]:
+                        if data["transferencia"]:
+                            print("transferencia realizada")
+                        else:
+                            print("saque realizado")
                         con.send(withdraw_result[1].encode())
                 except Exception as E:
                     con.send(str(E).encode())
@@ -194,6 +204,7 @@ while True:
                     "saldo": account.saldo,
                     "limite": account.limite,
                 }
+                print("conta corrente criada")
                 con.send(str(account).encode())
             elif operation == "08":
                 # Operação de criação de conta poupança
@@ -205,6 +216,7 @@ while True:
                     "criacao": account.criacao,
                     "saldo": account.saldo,
                 }
+                print("conta poupanca criada")
                 con.send(str(account).encode())
             elif operation == "09":
                 # Operação de busca de id de cliente por cpf

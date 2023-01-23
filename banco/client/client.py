@@ -1,7 +1,7 @@
 import socket
 import datetime
-from bibs.cliente import Cliente
-from bibs.conta import ContaCorrente, ContaPoupanca
+from client.cliente_obj import Cliente
+from client.account_obj import ContaCorrente, ContaPoupanca
 
 """
     Operações: 

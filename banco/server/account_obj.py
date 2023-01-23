@@ -1,5 +1,4 @@
 from datetime import datetime
-from bibs.cliente import Cliente
 
 # from sgbd import get_conta_corrente, get_conta_poupanca
 

@@ -8,7 +8,7 @@ from screens.criar_conta import Ui_MainWindow as TelaDeCriarContas
 from screens.cadastro_screen import Ui_MainWindow as TelaDeCadastro
 from screens.transferencia import Ui_MainWindow as TelaDeTransferencia
 from screens.deposito_e_saque import Ui_MainWindow as TelaDeDepositoESaque
-from bibs.client import (
+from client.client import (
     login,
     add_cliente,
     get_transacoes,

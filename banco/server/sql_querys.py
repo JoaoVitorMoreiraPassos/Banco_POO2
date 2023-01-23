@@ -1,7 +1,7 @@
 import mysql.connector as conex
 from datetime import datetime
-from cliente import Cliente
-from conta import ContaCorrente, ContaPoupanca
+from client_obj import Cliente
+from account_obj import ContaCorrente, ContaPoupanca
 
 
 conection = conex.connect(
