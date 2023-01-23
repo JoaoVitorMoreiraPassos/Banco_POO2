@@ -155,7 +155,6 @@ def busca_conta_por_cpf(cpf, account_type):
                 account["criacao"],
                 account["saldo"],
             )
-        # print(conta.id, conta.numero, conta.senha, conta.criacao, conta.saldo)
         return account
 
 

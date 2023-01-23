@@ -34,7 +34,7 @@ def do_login(email, senha):
         para depois transformar em string e codifica-las em bytes.
         """
         accounts = {}
-        accounts = authorization[1].accounts
+        accounts = authorization[1].contas
         if "cc" in accounts.keys():
             accounts["cc"] = {
                 "id": accounts["cc"].id,
@@ -267,4 +267,4 @@ while True:
         except Exception as E:
             con.close()
             server.close()
-            break
+            quit()
