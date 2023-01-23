@@ -34,7 +34,7 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.checkBox.stateChanged.connect(
             lambda: self.mostraSenha(self.checkBox, self.senha)
         )
-        self.email.setText("moreirapassosj@gmail.com")
+        self.email.setText("test")
         self.senha.setText("12345678")
         exit_icon_img = Image.open("./icons/exit.png")
         exit_icon_img = exit_icon_img.resize((30, 30), Image.Resampling.LANCZOS)
