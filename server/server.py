@@ -119,7 +119,7 @@ while True:
                 # Faz a verificação do login
                 result_login = do_login(data["email"], data["senha"])
                 if result_login[0]:
-                    print(f"um cliente entrou.")
+                    print(f"Um cliente entrou.")
                     con.send(result_login[1].encode())
                 else:
                     con.send("False".encode())
@@ -134,7 +134,7 @@ while True:
                         data["email"],
                         data["senha"],
                     )
-                    print("um novo cliente foi cadastrado")
+                    print("Um novo cliente foi cadastrado")
                     con.send("True".encode())
                 except Exception as E:
                     con.send("False".encode())
@@ -166,9 +166,9 @@ while True:
                     )
                     if withdraw_result[0]:
                         if data["transferencia"]:
-                            print("transferencia realizada")
+                            print("Transferencia realizada")
                         else:
-                            print("saque realizado")
+                            print("Saque realizado")
                         con.send(withdraw_result[1].encode())
                 except Exception as E:
                     con.send(str(E).encode())
@@ -187,9 +187,9 @@ while True:
                     )
                     if withdraw_result[0]:
                         if data["transferencia"]:
-                            print("transferencia realizada")
+                            print("Transferencia realizada")
                         else:
-                            print("saque realizado")
+                            print("Saque realizado")
                         con.send(withdraw_result[1].encode())
                 except Exception as E:
                     con.send(str(E).encode())
@@ -204,7 +204,7 @@ while True:
                     "saldo": account.saldo,
                     "limite": account.limite,
                 }
-                print("conta corrente criada")
+                print("Conta corrente criada")
                 con.send(str(account).encode())
             elif operation == "08":
                 # Operação de criação de conta poupança
@@ -216,7 +216,7 @@ while True:
                     "criacao": account.criacao,
                     "saldo": account.saldo,
                 }
-                print("conta poupanca criada")
+                print("Conta poupanca criada")
                 con.send(str(account).encode())
             elif operation == "09":
                 # Operação de busca de id de cliente por cpf
