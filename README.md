@@ -23,7 +23,7 @@ Instale as bibliotecas presentes no projeto:
 
 ## Execução
 
-- Para executar a applicação é necessário criar um servidor mysql ou compatível com o mysql-connector com os comando presentes no aquivo `banco/msql/data.sql.`
+- Para executar a applicação é necessário criar um servidor mysql ou compatível com o mysql-connector com os comando presentes no aquivo `banco/server/msql/data.sql.`
 
 - No arquivo banco/server/consultor.sql configure a conexão com o banco de acordo as suas definições.
 
