@@ -37,7 +37,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.email.setText("test")
         self.senha.setText("12345678")
         exit_icon_img = Image.open("./icons/exit.png")
-        exit_icon_img = exit_icon_img.resize((30, 30), Image.Resampling.LANCZOS)
+        exit_icon_img = exit_icon_img.resize(
+            (30, 30), Image.Resampling.LANCZOS)
         exit_icon_img = QtGui.QPixmap(exit_icon_img.toqpixmap())
         self.img.setPixmap(exit_icon_img)
         self.voltar.clicked.connect(lambda: self.close())
@@ -66,7 +67,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         )
         # importando incone para o botão de saída
         exit_icon_img = Image.open("./icons/exit.png")
-        exit_icon_img = exit_icon_img.resize((30, 30), Image.Resampling.LANCZOS)
+        exit_icon_img = exit_icon_img.resize(
+            (30, 30), Image.Resampling.LANCZOS)
         exit_icon_img = QtGui.QPixmap(exit_icon_img.toqpixmap())
         self.login_screen.img.setPixmap(exit_icon_img)
         self.login_screen.voltar.clicked.connect(lambda: self.window.close())
@@ -94,10 +96,12 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         )
         # importando incone para o botão de saída
         exit_icon_img = Image.open("./icons/exit.png")
-        exit_icon_img = exit_icon_img.resize((30, 30), Image.Resampling.LANCZOS)
+        exit_icon_img = exit_icon_img.resize(
+            (30, 30), Image.Resampling.LANCZOS)
         exit_icon_img = QtGui.QPixmap(exit_icon_img.toqpixmap())
         self.registration_screen.img.setPixmap(exit_icon_img)
-        self.registration_screen.voltar.clicked.connect(lambda: self.window.close())
+        self.registration_screen.voltar.clicked.connect(
+            lambda: self.window.close())
         # mostra a janela de cadastro
         self.window.show()
         # fecha a janela anterior
@@ -108,7 +112,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.user_screen = TelaDoUsuario()
         self.user_screen.setupUi(self.window)
         # Setando o nome do usuário
-        self.user_screen.label.setText(f"Bem-vindo(a), {user.nome.split()[0]}!")
+        self.user_screen.label.setText(
+            f"Bem-vindo(a), {user.nome.split()[0]}!")
         # definindo as ações dos botões
         self.user_screen.pushButton_2.clicked.connect(
             lambda: self.openCriadorDeConta(self.window, user, "corrente")
@@ -160,7 +165,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         )  # se o checkbox for marcado, mostra a senha, se não, esconde
         # importando incone para o botão de voltar
         back_icon_img = Image.open("./icons/back.png")
-        back_icon_img = back_icon_img.resize((30, 30), Image.Resampling.LANCZOS)
+        back_icon_img = back_icon_img.resize(
+            (30, 30), Image.Resampling.LANCZOS)
         back_icon_img = QtGui.QPixmap(back_icon_img.toqpixmap())
         self.account_creator_screen.img.setPixmap(back_icon_img)
         self.account_creator_screen.voltar.clicked.connect(
@@ -219,7 +225,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
 
         # Botão que abre a tela de transferência
         self.accounts_screen.transferencia.clicked.connect(
-            lambda: self.openTransferencia(self.window, user, account, account_type)
+            lambda: self.openTransferencia(
+                self.window, user, account, account_type)
         )
         # Importando o ícone para o botão de transferência
         tranfer_icon_img = QtGui.QPixmap(
@@ -285,7 +292,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         )
         # Importando o ícone para o botão de voltar
         back_icon_img = Image.open("./icons/back.png")
-        back_icon_img = back_icon_img.resize((30, 30), Image.Resampling.LANCZOS)
+        back_icon_img = back_icon_img.resize(
+            (30, 30), Image.Resampling.LANCZOS)
         back_icon_img = QtGui.QPixmap(back_icon_img.toqpixmap())
         self.deposit_screen.img.setPixmap(back_icon_img)
         # fecha a janela anterior
@@ -371,7 +379,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         )
         # Importando o ícone para o botão de voltar
         back_icon_img = Image.open("./icons/back.png")
-        back_icon_img = back_icon_img.resize((30, 30), Image.Resampling.LANCZOS)
+        back_icon_img = back_icon_img.resize(
+            (30, 30), Image.Resampling.LANCZOS)
         back_icon_img = QtGui.QPixmap(back_icon_img.toqpixmap())
         self.transfer_screen.img.setPixmap(back_icon_img)
         # fecha a janela anterior
@@ -390,7 +399,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             + " "
             + account_data_creation[1]
         )
-        self.historic_screen.criacao.setText("Conta criada em " + account_data_creation)
+        self.historic_screen.criacao.setText(
+            "Conta criada em " + account_data_creation)
         # Busca no banco de dados as últimas 10 transações da conta
         historic = get_transacoes(account.id, account_type)
         historic.sort(key=lambda x: x[1], reverse=True)
@@ -399,19 +409,22 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         labels = []
         # Verifica se há transações no histórico. Se houver, cria os labels e adiciona no grid layout
         if len(historic) > 0:
-            label_6 = QtWidgets.QLabel(self.historic_screen.scrollAreaWidgetContents)
+            label_6 = QtWidgets.QLabel(
+                self.historic_screen.scrollAreaWidgetContents)
             label_6.setStyleSheet("color: #fff")
             label_6.setLineWidth(2)
             label_6.setObjectName("label_6")
             label_6.setText("Data")
             self.historic_screen.gridLayout.addWidget(label_6, 0, 0, 2, 2)
-            label_2 = QtWidgets.QLabel(self.historic_screen.scrollAreaWidgetContents)
+            label_2 = QtWidgets.QLabel(
+                self.historic_screen.scrollAreaWidgetContents)
             label_2.setStyleSheet("color: #fff;")
             label_2.setLineWidth(2)
             label_2.setObjectName("label_2")
             label_2.setText("Tipo")
             self.historic_screen.gridLayout.addWidget(label_2, 0, 2, 2, 2)
-            label_3 = QtWidgets.QLabel(self.historic_screen.scrollAreaWidgetContents)
+            label_3 = QtWidgets.QLabel(
+                self.historic_screen.scrollAreaWidgetContents)
             label_3.setEnabled(True)
             label_3.setStyleSheet("color: #fff;")
             label_3.setLineWidth(2)
@@ -435,32 +448,40 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
 
                 # Criando os labels e linhas
                 labels.append(
-                    QtWidgets.QLabel(self.historic_screen.scrollAreaWidgetContents)
+                    QtWidgets.QLabel(
+                        self.historic_screen.scrollAreaWidgetContents)
                 )
-                self.historic_screen.gridLayout.addWidget(labels[-1], height, 0, 1, 2)
+                self.historic_screen.gridLayout.addWidget(
+                    labels[-1], height, 0, 1, 2)
                 labels[-1].setText(time)
                 labels[-1].setStyleSheet("color: #fff;\n")
 
                 labels.append(
-                    QtWidgets.QLabel(self.historic_screen.scrollAreaWidgetContents)
+                    QtWidgets.QLabel(
+                        self.historic_screen.scrollAreaWidgetContents)
                 )
-                self.historic_screen.gridLayout.addWidget(labels[-1], height, 2, 1, 2)
+                self.historic_screen.gridLayout.addWidget(
+                    labels[-1], height, 2, 1, 2)
                 labels[-1].setText(operation)
                 labels[-1].setStyleSheet("color: #fff;\n")
 
                 labels.append(
-                    QtWidgets.QLabel(self.historic_screen.scrollAreaWidgetContents)
+                    QtWidgets.QLabel(
+                        self.historic_screen.scrollAreaWidgetContents)
                 )
                 labels[-1].setAlignment(QtCore.Qt.AlignCenter)
-                self.historic_screen.gridLayout.addWidget(labels[-1], height, 4, 1, 2)
+                self.historic_screen.gridLayout.addWidget(
+                    labels[-1], height, 4, 1, 2)
                 labels[-1].setText(f"R$ {valor:.2f}".replace(".", ","))
                 labels[-1].setStyleSheet("color: #fff;\n")
 
                 height += 2
         else:
             # Se não houver nenhuma transação, cria um label dizendo que não há transações
-            label = QtWidgets.QLabel(self.historic_screen.scrollAreaWidgetContents)
-            label.setStyleSheet("color: #fff;\n" 'font: 75 14pt "MS Shell Dlg 2";')
+            label = QtWidgets.QLabel(
+                self.historic_screen.scrollAreaWidgetContents)
+            label.setStyleSheet(
+                "color: #fff;\n" 'font: 75 14pt "MS Shell Dlg 2";')
             label.setLineWidth(2)
             label.setAlignment(QtCore.Qt.AlignCenter)
             label.setObjectName("label")
@@ -488,7 +509,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         email = inputs_window.email.text()
         password = inputs_window.senha.text()
         if email == "" or password == "":
-            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "Preencha todos os campos!")
         else:
             operacao, user = login(email, password)
             if operacao:
@@ -503,10 +525,12 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
     def criarContaCorrente(self, MainWindow, inputs_window, user):
         password = inputs_window.senha.text()
         if len(password) != 6:
-            QtWidgets.QMessageBox.warning(None, "Erro", "A senha deve ter 6 dígitos!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "A senha deve ter 6 dígitos!")
             return
         if password == "":
-            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "Preencha todos os campos!")
             return
         else:
             cc = create_conta_corrente(user.id, password)
@@ -516,10 +540,12 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
     def criarContaPoupanca(self, MainWindow, inputs_window, user):
         password = inputs_window.senha.text()
         if len(password) != 6:
-            QtWidgets.QMessageBox.warning(None, "Erro", "A senha deve ter 6 dígitos!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "A senha deve ter 6 dígitos!")
             return
         if password == "":
-            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "Preencha todos os campos!")
             return
         else:
             cp = create_conta_poupanca(user.id, password)
@@ -553,7 +579,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         target_user_id = get_cliente_id_by_cpf(target_cpf)
         # verifica campos vazios
         if target_cpf == "" or value == "":
-            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "Preencha todos os campos!")
             return
         try:
             # Verifica se o valor passado é um valor numérico
@@ -601,7 +628,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                             )
                         except Exception as E:
                             # se não conseguir fazer o depósito, faz o estorno na conta de origem
-                            deposito_conta_corrente(account.id, account.numero, value)
+                            deposito_conta_corrente(
+                                account.id, account.numero, value)
                             QtWidgets.QMessageBox.warning(None, "Erro", str(E))
                             return
                     else:  # se não for conta corrente, é conta poupança
@@ -625,7 +653,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                             )
                         except Exception as E:
                             # Se não conseguir fazer o depósito, faz o estorno na conta de origem
-                            deposito_conta_corrente(account.id, account.numero, value)
+                            deposito_conta_corrente(
+                                account.id, account.numero, value)
                             QtWidgets.QMessageBox.warning(
                                 None,
                                 "Erro",
@@ -633,7 +662,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                             )
                             return
                 except:
-                    QtWidgets.QMessageBox.warning(None, "Erro", "CPF não encontrado!")
+                    QtWidgets.QMessageBox.warning(
+                        None, "Erro", "CPF não encontrado!")
                     return
             except Exception as E:
                 # Se não coseguir fazer o saque.
@@ -674,7 +704,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                                 MainWindow, user, account, account_source_type
                             )
                         except:
-                            deposito_conta_poupanca(account.id, account.numero, value)
+                            deposito_conta_poupanca(
+                                account.id, account.numero, value)
                             account.deposita(value)
                             QtWidgets.QMessageBox.warning(
                                 None,
@@ -699,7 +730,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                                 MainWindow, user, account, account_source_type
                             )
                         except:
-                            deposito_conta_poupanca(account.id, account.numero, value)
+                            deposito_conta_poupanca(
+                                account.id, account.numero, value)
                             account.deposita(value)
                             QtWidgets.QMessageBox.warning(
                                 None,
@@ -708,7 +740,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                             )
                             return
                 except:
-                    QtWidgets.QMessageBox.warning(None, "Erro", "CPF não encontrado!")
+                    QtWidgets.QMessageBox.warning(
+                        None, "Erro", "CPF não encontrado!")
                     return
             except Exception as E:
                 QtWidgets.QMessageBox.warning(None, "Erro", str(E))
@@ -723,14 +756,16 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             return
         # Verifica se campo valor está vazio
         if value == "":
-            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "Preencha todos os campos!")
             return
         else:
             # Verifica o tipo da conta e faz o depósito
             if account_type == "cc":
                 # Verifica se a senha está correta
                 if not valida_senha_conta_corrente(account.id, password):
-                    QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                    QtWidgets.QMessageBox.warning(
+                        None, "Erro", "Senha incorreta!")
                     return
                 try:
                     # Faz o depósito
@@ -747,7 +782,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             # Mesma lógica da conta corrente, só que para conta poupança
             if account_type == "cp":
                 if not valida_senha_conta_poupanca(account.id, password):
-                    QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                    QtWidgets.QMessageBox.warning(
+                        None, "Erro", "Senha incorreta!")
                     return
                 try:
                     deposito_conta_poupanca(account.id, account.numero, value)
@@ -769,14 +805,16 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             return
         # Verifica o campo está vazio
         if value == "":
-            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "Preencha todos os campos!")
             return
         else:
             # Verifica se o tipo da conta é conta corrente
             if account_type == "cc":
                 # Verifica se a senha é válida
                 if not valida_senha_conta_corrente(account.id, password):
-                    QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                    QtWidgets.QMessageBox.warning(
+                        None, "Erro", "Senha incorreta!")
                     return
                 try:
                     # Realiza o saque
@@ -793,7 +831,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             # Mesma lógica da conta corrente, só que para conta poupança
             if account_type == "cp":
                 if not valida_senha_conta_poupanca(account.id, password):
-                    QtWidgets.QMessageBox.warning(None, "Erro", "Senha incorreta!")
+                    QtWidgets.QMessageBox.warning(
+                        None, "Erro", "Senha incorreta!")
                     return
                 try:
                     saque_conta_poupanca(account.id, account.numero, value)
@@ -815,13 +854,16 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             or infos[3] == ""
             or infos[4] == ""
         ):
-            QtWidgets.QMessageBox.warning(None, "Erro", "Preencha todos os campos!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "Preencha todos os campos!")
             return
         if len(infos[4]) < 8:
             QtWidgets.QMessageBox.warning(None, "Erro", "Senha muito curta!")
             return
         if len(infos[4]) > 45:
-            QtWidgets.QMessageBox.warning(None, "Erro", "Senha muito comprida!")
+            QtWidgets.QMessageBox.warning(
+                None, "Erro", "Senha muito comprida!"
+            )
             return
         try:
             add_cliente(infos[0], infos[1], infos[2], infos[3], infos[4])
@@ -844,7 +886,9 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         if state.isChecked():
             label.setText(f"Saldo : R$ {balance:.2f}".replace(".", ","))
         else:
-            label.setText(f"Saldo : R$ {'*' * len(str(balance))}".replace(".", ","))
+            label.setText(
+                f"Saldo : R$ {'*' * len(str(balance))}".replace(".", ",")
+            )
 
     @staticmethod
     def mostraSenha(check, password):
