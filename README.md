@@ -7,7 +7,7 @@ a Objetos 2.
 
 ## Instalação
 
-Crie um ambiente virtual python:
+Crie um ambiente virtual python para o cliente e outro para o servidor:
 
 ```bash
   python3 -m venv venv
