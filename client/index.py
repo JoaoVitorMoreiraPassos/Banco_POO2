@@ -1,5 +1,5 @@
 import sys
-import UiToPy
+import UiToPy as UiToPy
 from PyQt5 import QtWidgets
 
 

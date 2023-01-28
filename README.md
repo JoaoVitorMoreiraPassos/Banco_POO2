@@ -36,4 +36,4 @@ Após seguir esses passos basta rodar o seguinte comando:
   python index.py
 ```
 
-Lembre-se de exectuar a aplicação dentro do escopo da pasta banco.
+Lembre-se de exectuar a aplicação dentro do escopo ou do server ou do client.
