@@ -57,7 +57,7 @@ def login(email, password):
     if result:
         # 0 = id, 4 = nome, 1 = cpf, 2 = nascimento, 3 = email
         client = Cliente(result[0], result[4],
-                        result[1], result[2], result[3])
+                         result[1], result[2], result[3])
         cc = get_conta_corrente(client.id)
         cp = get_conta_poupanca(client.id)
         if cc:
@@ -105,7 +105,7 @@ def create_conta_corrente(user_id, account_password):
 
 def create_conta_poupanca(user_id, account_password):
     tot_accounts = None
-    account_number = None 
+    account_number = None
     creation_date = None
     account_id = None
     with connect() as conection:
@@ -171,7 +171,7 @@ def get_conta_poupanca(id):
         return None
     try:
         return ContaPoupanca(result[0], result[1],
-                            result[2], result[4], result[3])
+                             result[2], result[4], result[3])
     except:
         return None
 
@@ -239,8 +239,8 @@ def get_transacoes(account_id, account_type):
 
 
 def deposito_conta_corrente(
-        account_id, account_number, value, transfer=False, source_user_id=None, source_account_type=None
-    ):
+    account_id, account_number, value, transfer=False, source_user_id=None, source_account_type=None
+):
     source_account = None
     source_user = None
     if value <= 0:
@@ -265,7 +265,8 @@ def deposito_conta_corrente(
         with connect() as conection:
             with conection.cursor() as cursor:
                 source_user = cursor.execute(
-                    "SELECT nome FROM cliente WHERE idcliente = %s", (source_user_id,)
+                    "SELECT nome FROM cliente WHERE idcliente = %s", (
+                        source_user_id,)
                 )
                 source_user = cursor.fetchone()[0]
         add_transacao(
@@ -306,7 +307,8 @@ def deposito_conta_poupanca(
         with connect() as conection:
             with conection.cursor() as cursor:
                 source_user = cursor.execute(
-                    "SELECT nome FROM cliente WHERE idcliente = %s", (source_user_id,)
+                    "SELECT nome FROM cliente WHERE idcliente = %s", (
+                        source_user_id,)
                 )
                 source_user = cursor.fetchone()[0]
         add_transacao(
@@ -328,7 +330,8 @@ def saque_conta_corrente(
     with connect() as conection:
         with conection.cursor() as cursor:
             cursor.execute(
-                "SELECT saldo, limite FROM conta_corrente WHERE numero = %s", (account_number,)
+                "SELECT saldo, limite FROM conta_corrente WHERE numero = %s", (
+                    account_number,)
             )
             result = cursor.fetchone()
     if result[1] < value:
@@ -354,7 +357,8 @@ def saque_conta_corrente(
         with connect() as conection:
             with conection.cursor() as cursor:
                 target_user = cursor.execute(
-                    "SELECT nome FROM cliente WHERE idcliente = %s", (target_user_id,)
+                    "SELECT nome FROM cliente WHERE idcliente = %s", (
+                        target_user_id,)
                 )
                 target_user = cursor.fetchone()[0]
         add_transacao(
@@ -401,7 +405,8 @@ def saque_conta_poupanca(
         with connect() as conection:
             with conection.cursor() as cursor:
                 target_user = cursor.execute(
-                    "SELECT nome FROM cliente WHERE idcliente = %s", (target_user_id,)
+                    "SELECT nome FROM cliente WHERE idcliente = %s", (
+                        target_user_id,)
                 )
                 target_user = cursor.fetchone()[0]
         add_transacao(
