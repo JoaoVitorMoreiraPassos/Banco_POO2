@@ -89,12 +89,14 @@ def do_search_by_cpf(cpf, account_type):
     return None
 
 
-def manager_operations(data):
+def manager_operations(data, sinc):
     operation = data["operacao"]
     if operation == "01":
         # Operação de login
         # Faz a verificação do login
+        sinc.acquire()
         result_login = do_login(data["email"], data["senha"])
+        sinc.release()
         if result_login[0]:
             print(f"Um cliente entrou.")
             return (result_login[1].encode())
@@ -104,6 +106,7 @@ def manager_operations(data):
     elif operation == "02":
         # Operação de cadastro
         try:
+            sinc.acquire()
             add_cliente(
                 data["nome"],
                 data["cpf"],
@@ -111,6 +114,7 @@ def manager_operations(data):
                 data["email"],
                 data["senha"],
             )
+            sinc.release()
             print("Um novo cliente foi cadastrado")
             return ("True".encode())
         except Exception as E:
@@ -118,12 +122,16 @@ def manager_operations(data):
 
     elif operation == "03":
         # Operação de busca de transações
+        sinc.acquire()
         transactions = get_transacoes(data["id"], data["tipo"])
+        sinc.release()
         return (str(transactions).encode())
 
     elif operation == "04":
         # Operação de busca de conta por cpf
+        sinc.acquire()
         account = do_search_by_cpf(data["cpf"], data["tipo"])
+        sinc.release()
         if account != None:
             return (str(account).encode())
         else:
@@ -133,6 +141,7 @@ def manager_operations(data):
         # Operação de saque em uma conta corrente
         withdraw_result = None
         try:
+            sinc.acquire()
             withdraw_result = saque_conta_corrente(
                 data["id"],
                 data["numero"],
@@ -141,6 +150,7 @@ def manager_operations(data):
                 data["id_user_destino"],
                 data["tipo_conta_destino"],
             )
+            sinc.release()
             if withdraw_result[0]:
                 if data["transferencia"]:
                     print("Transferencia realizada")
@@ -154,6 +164,7 @@ def manager_operations(data):
         # Operação de saque em uma conta poupança
         withdraw_result = None
         try:
+            sinc.acquire()
             withdraw_result = saque_conta_poupanca(
                 data["id"],
                 data["numero"],
@@ -162,6 +173,7 @@ def manager_operations(data):
                 data["id_user_destino"],
                 data["tipo_conta_destino"],
             )
+            sinc.release()
             if withdraw_result[0]:
                 if data["transferencia"]:
                     print("Transferencia realizada")
@@ -172,7 +184,9 @@ def manager_operations(data):
             return (str(E).encode())
     elif operation == "07":
         # Operação de criação de conta corrente
+        sinc.acquire()
         account = create_conta_corrente(data["id"], data["senha"])
+        sinc.release()
         account = {
             "id": account.id,
             "numero": account.numero,
@@ -185,7 +199,9 @@ def manager_operations(data):
         return (str(account).encode())
     elif operation == "08":
         # Operação de criação de conta poupança
+        sinc.acquire()
         account = create_conta_poupanca(data["id"], data["senha"])
+        sinc.release()
         account = {
             "id": account.id,
             "numero": account.numero,
@@ -197,7 +213,9 @@ def manager_operations(data):
         return (str(account).encode())
     elif operation == "09":
         # Operação de busca de id de cliente por cpf
+        sinc.acquire()
         id = get_cliente_id_by_cpf(data["cpf"])
+        sinc.release()
         if id != None:
             return (str(id).encode())
         else:
@@ -206,6 +224,7 @@ def manager_operations(data):
     elif operation == "10":
         # Operação de depósito em uma conta corrente
         try:
+            sinc.acquire()
             deposit_result = deposito_conta_corrente(
                 data["id"],
                 data["numero"],
@@ -214,6 +233,7 @@ def manager_operations(data):
                 data["id_user_origem"],
                 data["tipo_conta_origem"],
             )
+            sinc.release()
             return (str(deposit_result[1]).encode())
         except Exception as E:
             return (str(E).encode())
@@ -221,6 +241,7 @@ def manager_operations(data):
     elif operation == "11":
         # Operação de depósito em uma conta poupança
         try:
+            sinc.acquire()
             deposit_result = deposito_conta_poupanca(
                 data["id"],
                 data["numero"],
@@ -229,15 +250,18 @@ def manager_operations(data):
                 data["id_user_origem"],
                 data["tipo_conta_origem"],
             )
+            sinc.release()
             return (str(deposit_result[1]).encode())
         except Exception as E:
             return (str(E).encode())
 
     elif operation == "12":
         # Operação de validação de senha de conta corrente
+        sinc.acquire()
         validation = valida_senha_conta_corrente(
             data["id"], data["senha"]
         )
+        sinc.release()
         if validation:
             return ("True".encode())
         else:
@@ -245,9 +269,11 @@ def manager_operations(data):
 
     elif operation == "13":
         # Operação de validação de senha de conta poupança
+        sinc.acquire()
         validation = valida_senha_conta_poupanca(
             data["id"], data["senha"]
         )
+        sinc.release()
         if validation:
             return ("True".encode())
         else:
@@ -255,7 +281,7 @@ def manager_operations(data):
 
 
 host = "0.0.0.0"
-port = 50001
+port = 50002
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host, port))
 server.listen()

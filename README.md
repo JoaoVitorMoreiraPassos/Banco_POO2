@@ -1,8 +1,8 @@
-.
+
 # Projeto Banco - POO II
 
-Projeto de um Banco, utilizando interface gráfica,
-banco de dados e multithread, feita na matéria de Programação Orientada
+Projeto de um Banco, utilizando interface gráfica e
+banco de dados da matéria de Programação Orientada
 a Objetos 2.
 
 ## Instalação

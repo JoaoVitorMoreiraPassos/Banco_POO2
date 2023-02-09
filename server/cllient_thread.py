@@ -14,4 +14,10 @@ class ClientThread(threading.Thread):
             return 
         
         self.data = eval(self.data)
-        self.csocket.send(self.function(self.data))
+        if self.data["operacao"] == "01":
+            if self.data["email"] == "test2":
+                from time import sleep
+                print(f"{self.data['email']} está tentando logar")
+                sleep(5)
+        sinc = threading.Lock() 
+        self.csocket.send(self.function(self.data, sinc))
