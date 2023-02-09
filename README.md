@@ -1,4 +1,4 @@
-
+.
 # Projeto Banco - POO II
 
 Projeto de um Banco, utilizando interface gráfica,
