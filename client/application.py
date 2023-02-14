@@ -787,8 +787,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         ----------
         inputs_window : Qt class
             tela de login
-        MainWindow : Qt class
-            Tela de onde as informações serão extraídas
+        MainWindow : Qt class, optional
+            Tela de onde as informações serão extraídas (Default value = None)
 
         Returns
         ----------
