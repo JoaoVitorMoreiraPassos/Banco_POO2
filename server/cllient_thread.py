@@ -28,13 +28,16 @@ class ClientThread(threading.Thread):
         Constructs all the necessary attributes for the ClientThread object.
 
         Parameters
+        ----------
             clientAddress : tuple
                 Endereço do cliente.
             csocket : socket
                 Socket do cliente.
             function : function
                 que será executada pela thread.
-            
+        Returns
+        -------
+        None
         """
         threading.Thread.__init__(self)
         self.clientAddress = clientAddress
@@ -49,10 +52,13 @@ class ClientThread(threading.Thread):
         classe e envia a resposta para o cliente utilizando o socket passado
         como atributo da classe.
 
-                Parametros:
-                        None
-                retorno:
-                        None
+        Parameters
+        ----------
+        None
+                    
+        return
+        ----------
+        None
         """
         try:
             self.data = self.csocket.recv(1024).decode()
