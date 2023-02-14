@@ -5,6 +5,14 @@ from account_obj import ContaCorrente, ContaPoupanca
 
 
 def connect():
+    """
+    Função para fazer a conexão com banco de dados
+
+            Parametros:
+                    None
+            retorno:
+                    conexão com o banco de dados
+    """
     return conex.connect(
         host="localhost", user="myuser", password="mypassword", database="mydb"
     )

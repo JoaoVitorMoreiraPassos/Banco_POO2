@@ -2,7 +2,40 @@ import threading
 
 
 class ClientThread(threading.Thread):
+    """
+    Essa classe é responsável por criar uma thread para cada operação
+    que se conecta ao servidor.
+    
+    ...
+    
+    Attributes
+    ----------
+    clientAddress : tuple
+        Endereço do cliente.
+    csocket : socket
+        Socket do cliente.
+    function : function
+        Que será executada pela thread.
+    
+    Methods
+    ---------
+    run()
+        Executa a função passada como parâmetro.
+    
+    """
     def __init__(self, clientAddress, clientsocket, function):
+        """
+        Constructs all the necessary attributes for the ClientThread object.
+
+        Parameters
+            clientAddress : tuple
+                Endereço do cliente.
+            csocket : socket
+                Socket do cliente.
+            function : function
+                que será executada pela thread.
+            
+        """
         threading.Thread.__init__(self)
         self.clientAddress = clientAddress
         self.csocket = clientsocket
@@ -10,6 +43,17 @@ class ClientThread(threading.Thread):
         print("[+] New thread started for ", clientAddress)
 
     def run(self):
+        """
+        Função que irá ser executada ao chamar o método start() da thread.
+        Recebe os dados do cliente, executa a função passada como atributo da
+        classe e envia a resposta para o cliente utilizando o socket passado
+        como atributo da classe.
+
+                Parametros:
+                        None
+                retorno:
+                        None
+        """
         try:
             self.data = self.csocket.recv(1024).decode()
             if not self.data:
