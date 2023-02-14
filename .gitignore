@@ -4,6 +4,8 @@ build
 dist
 index.spec
 __pycache__
+__pycache__copy/*
+__pycache__copy
 screens/__pycache__/*
 bibs/__pycache__
 bibs/__pycache__/*
