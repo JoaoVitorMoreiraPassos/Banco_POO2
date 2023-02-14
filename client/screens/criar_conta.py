@@ -3,9 +3,35 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
         """
+        Este é o código gerado pelo Qt Designer, para a tela de criar conta do usuário no banco.
+
+        ...
+
+        Attributes
+        ----------
+        MainWindow : QMainWindow
+                Janela principal da tela de criar conta do usuário no banco.
         
+        Methods
+        -------
+        setupUi(MainWindow)
+                Configura a tela de criar conta do usuário no banco.
+        retranslateUi(MainWindow)
+                Traduz a tela de criar conta do usuário no banco.
         """
         def setupUi(self, MainWindow):
+                """
+                Configura a tela de criar conta do usuário no banco.
+
+                Parameters
+                ----------
+                MainWindow : QMainWindow
+                        Janela principal da tela de criar conta do usuário no banco.
+                
+                Returns
+                -------
+                None
+                """
                 MainWindow.setObjectName("MainWindow")
                 MainWindow.resize(1366, 768)
                 MainWindow.setStyleSheet("background-color: #498f97;\n"
@@ -130,6 +156,18 @@ class Ui_MainWindow(object):
                 QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         def retranslateUi(self, MainWindow):
+                """
+                Método para traduzir os textos da interface
+
+                Parameters
+                ----------
+                MainWindow : QMainWindow
+                        Janela principal da interface.
+                
+                Returns
+                -------
+                None
+                """
                 _translate = QtCore.QCoreApplication.translate
                 MainWindow.setWindowTitle(_translate("MainWindow", "Criar Conta"))
                 self.Titulo.setText(_translate("MainWindow", "Criar Conta "))

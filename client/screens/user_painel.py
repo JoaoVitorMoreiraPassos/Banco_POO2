@@ -12,7 +12,36 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
+        """
+        Este é o painel do usuário do banco, onde ele pode realizar as operações básicas e foi gerado pelo Qt Designer.
+
+        ...
+
+        Attributes
+        ----------
+        MainWindow : QMainWindow
+                Janela principal do painel do usuário do banco.
+
+        Methods
+        -------
+        setupUi(MainWindow)
+                Configura a interface gráfica do painel do usuário do banco.
+        retranslateUi(MainWindow)
+                Traduz a interface gráfica do painel do usuário do banco.
+        """
         def setupUi(self, MainWindow):
+                """
+                Esse método configura a interface gráfica do painel do usuário do banco.
+
+                Parameters
+                ----------
+                MainWindow : QMainWindow
+                        Janela principal do painel do usuário do banco.
+                
+                Returns
+                -------
+                None
+                """
                 MainWindow.setObjectName("MainWindow")
                 MainWindow.resize(1373, 768)
                 font = QtGui.QFont()
@@ -161,6 +190,18 @@ class Ui_MainWindow(object):
                 QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         def retranslateUi(self, MainWindow):
+                """
+                Método para traduzir os textos da interface
+
+                Parameters
+                ----------
+                MainWindow : QMainWindow
+                        Janela principal da interface.
+                
+                Returns
+                -------
+                None
+                """
                 _translate = QtCore.QCoreApplication.translate
                 MainWindow.setWindowTitle(_translate("MainWindow", "Dashboard"))
                 self.label_2.setText(_translate("MainWindow", "Beast Bank"))

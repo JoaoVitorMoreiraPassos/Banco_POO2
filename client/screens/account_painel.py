@@ -17,8 +17,7 @@ class Ui_MainWindow(object):
         setupUi(MainWindow)
             Este método configura a tela de acordo com o arquivo .ui.
         retranslateUi(MainWindow)
-            Este método configura o texto de acordo com o arquivo .ui.
-            
+            Este método configura o texto de acordo com o arquivo .ui.   
     """    
     def setupUi(self, MainWindow):
         """
