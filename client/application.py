@@ -28,15 +28,19 @@ from client import (
 
 class Main(QtWidgets.QMainWindow, TelaDeLogin):
     """
-    A classe Main é a classe principal do programa, ela é responsável por gerenciar as janelas do programa e as ações dos botões de cada uma delas.
+    A classe Main é a classe principal do programa, ela é responsável por
+    gerenciar as janelas do programa e as ações dos botões de cada uma delas.
 
-    A classe Main herda de duas classes, a classe QtWidgets.QMainWindow e a classe TelaDeLogin, a primeira é a classe principal do PyQt5, a segunda é a classe que contém os métodos e atributos da tela de login.
+    A classe Main herda de duas classes, a classe QtWidgets.QMainWindow e a
+    classe TelaDeLogin, a primeira é a classe principal do PyQt5, a segunda
+    é a classe que contém os métodos e atributos da tela de login.
 
     ...
 
     Attributes
     ----------
-    Muitos atributos são herdados da classe TelaDeLogin, que contém os métodos e atributos da tela de login.
+    Muitos atributos são herdados da classe TelaDeLogin, que contém os métodos
+    e atributos da tela de login.
 
     Methods
     -------
@@ -48,9 +52,57 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         Abre a tela do usuário e fecha a tela anterior.
     openCriadorDeConta(MainWindow, MainWindow, user, account_type):
         Abre a tela de criação de contas e fecha a tela anterior.
-    Continua aqui
+    openContas(MainWindow, user, account, account_type):
+        Abre a tela de contas e fecha a tela anterior.
+    openDeposito(MainWindow, user, account_type):
+        Abre a tela de depósito e fecha a tela anterior.
+    openSaque(MainWindow, user, account, account_type):
+        Abre a tela de saque e fecha a tela anterior.
+    openTransferencia(MainWindow, user, account, account_type):
+        Abre a tela de transferência e fecha a tela anterior.
+    openExtrato(MainWindow, user, account_type):
+        Abre a tela de extrato e fecha a tela anterior.
+    logIn(inputs_window, MainWindow):
+        Verifica se o usuário existe no banco de dados e se a senha
+        está correta, se sim, abre a tela do usuário, se não, mostra
+        uma mensagem de erro.
+    criarContaCorrente(MainWindow, inputs_window, user):
+        Requisita para o servidor a criação de uma conta corrente
+    criarContaPoupanca(MainWindow, inputs_window, user):
+        Requisita para o servidor a criação de uma conta poupanca
+    transferir(MainWindow, user, value, account, target_cpf, target_account_type, password):
+        Gerencia a operação de transeferencia no lado do front-end
+    depositar(MainWindow, user, value, account, account_type, password):
+        Gerencia a operação de depósito do lado do front-end
+    sacar( MainWindow, user, value, account, account_type, password):
+        Gerencia a operação de saque do lado do front-end
+    cadastrar(MainWindow):
+        Cadastra um novo usuário no banco de dados.
+    mostraSaldo(state, label, balance):
+        Mostra ou oculta o saldo da conta do cliente na tela de contas
+    mostraSenha(checkbox, password):
+        Mostra ou oculta a senha digitada no campo de senha.
+    convertDate(date):
+        Converte uma data do padrão americano para o padrão brasileiro
+    atualizaContas(user, source_account_type, target_cpf_input, select_input):
+        Busca pelas contas de um usuário utilizando como chave seu cpf,
+        ao encontrar uma ou duas contas adiciona essas contas em um
+        input do tipo select.
+    getInfos(registration_inputs_window):
+        Extrai as informaçoes dos inputs da tela de cadastro e retorna
+        uma tupla com as informações.
     """
     def __init__(self, parent=None):
+        """
+        Constrói a tela inicial que no caso dessa aplicação é a tela de login
+
+        Parameters
+        ----------
+            parent : None
+        Returns
+        -------
+        None
+        """
         super().__init__(parent)
         self.setupUi(self)
         self.pushButton.clicked.connect(lambda: self.logIn(self, self))
@@ -74,6 +126,17 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
     """
 
     def openLogin(self, MainWindow):
+        """
+        Função responsável por abrir a tela de login e fechar a janela anterior.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+
+        Returns
+        ----------
+        None
+        """
         self.window = QtWidgets.QMainWindow()
         self.login_screen = TelaDeLogin()
         self.login_screen.setupUi(self.window)
@@ -102,6 +165,17 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         MainWindow.close()
 
     def openCadastro(self, MainWindow):
+        """
+        Função responsável por abrir a tela de Cadastro e fechar a janela anterior.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+
+        Returns
+        ----------
+        None
+        """
         self.window = QtWidgets.QMainWindow()
         self.registration_screen = TelaDeCadastro()
         self.registration_screen.setupUi(self.window)
@@ -133,6 +207,19 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         MainWindow.close()
 
     def openPainel(self, MainWindow, user):
+        """
+        Função responsável por abrir a tela de dashboard do usuario
+        e fechar a janela anterior.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+        user: Cliente
+
+        Returns
+        ----------
+        None
+        """
         user = get_user_by_id(user.id)
         self.window = QtWidgets.QMainWindow()
         self.user_screen = TelaDoUsuario()
@@ -188,6 +275,22 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         MainWindow.close()
 
     def openCriadorDeConta(self, MainWindow, user, account_type):
+        """
+        Função responsável por abrir a tela de criação de contas
+        e fechar a janela anterior.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        user: Cliente
+            objeto contendo os dados do cliente
+        account_type: str
+            tipo da conta a ser criada
+        Returns
+        ----------
+        None
+        """
         self.window = QtWidgets.QMainWindow()
         self.account_creator_screen = TelaDeCriarContas()
         self.account_creator_screen.setupUi(self.window)
@@ -229,6 +332,24 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         MainWindow.close()
 
     def openContas(self, MainWindow, user, account, account_type):
+        """
+        Função responsável por abrir a tela de gerenciamento de contas
+        e fechar a janela anterior.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        user: Cliente
+            objeto contendo os dados do cliente
+        account: dict
+            dicionario com as informações da conta
+        account_type: str
+            tipo da conta a ser acessada
+        Returns
+        ----------
+        None
+        """
         user = get_user_by_id(user.id)
         if account_type == "cc":
             account = user.contas["cc"]
@@ -320,6 +441,25 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.window.show()
 
     def openDeposito(self, MainWindow, user, account, account_type):
+        """
+        Função responsável por abrir a tela de Déposito
+        e fechar a janela anterior.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        user: Cliente
+            objeto contendo os dados do cliente
+        account: dict
+            dicionario com as informações da conta
+        account_type: str
+            tipo da conta a ser acessada
+
+        Returns
+        ----------
+        None
+        """
         self.window = QtWidgets.QMainWindow()
         self.window.setWindowTitle("Depósito")
         self.deposit_screen = TelaDeDepositoESaque()
@@ -360,6 +500,24 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.window.show()
 
     def openSaque(self, MainWindow, user, account, account_type):
+        """
+        Função responsável por abrir a tela de saque e fechar a janela anterior.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        user: Cliente
+            objeto contendo os dados do cliente
+        account: dict
+            dicionario com as informações da conta
+        account_type: str
+            tipo da conta a ser acessada
+
+        Returns
+        ----------
+        None
+        """
         self.window = QtWidgets.QMainWindow()
         self.window.setWindowTitle("Saque")
         self.withdraw_screnn = TelaDeDepositoESaque()
@@ -399,6 +557,25 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.window.show()
 
     def openTransferencia(self, MainWindow, user, account, account_type):
+        """
+        Função responsável por abrir a tela de transferencia
+        e fechar a janela anterior.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        user: Cliente
+            objeto contendo os dados do cliente
+        account: dict
+            dicionario com as informações da conta
+        account_type: str
+            tipo da conta a ser acessada
+
+        Returns
+        ----------
+        None
+        """
         self.window = QtWidgets.QMainWindow()
         self.transfer_screen = TelaDeTransferencia()
         self.transfer_screen.setupUi(self.window)
@@ -450,6 +627,25 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         self.window.show()
 
     def openExtrato(self, MainWindow, user, account, account_type):
+        """
+        Função responsável por abrir a tela de extrato com as transações do 
+        cliente e fechar a janela anterior.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        user: Cliente
+            objeto contendo os dados do cliente
+        account: dict
+            dicionario com as informações da conta
+        account_type: str
+            tipo da conta a ser acessada
+
+        Returns
+        ----------
+        None
+        """
         self.window = QtWidgets.QMainWindow()
         self.historic_screen = TelaDeExtrato()
         self.historic_screen.setupUi(self.window)
@@ -579,6 +775,22 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
     """
 
     def logIn(self, inputs_window, MainWindow=None):
+        """
+        Verifica se o usuário existe no banco de dados e se a senha
+        está correta, se sim, abre a tela do usuário, se não, mostra
+        uma mensagem de erro.
+        
+        Parameters
+        ----------
+        inputs_window : Qt class
+            tela de login
+        MainWindow : Qt class
+            Tela de onde as informações serão extraídas
+
+        Returns
+        ----------
+        None
+        """
         email = inputs_window.email.text()
         password = inputs_window.senha.text()
         if email == "" or password == "":
@@ -596,6 +808,22 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 )
 
     def criarContaCorrente(self, MainWindow, inputs_window, user):
+        """
+        Requisita para o servidor a criação de uma conta corrente.
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        inputs_window : Qt class
+            Tela de onde as informações serão extraídas
+        user : Cliente
+
+
+        Returns
+        ----------
+        None
+        """
         password = inputs_window.senha.text()
         if len(password) != 6:
             QtWidgets.QMessageBox.warning(
@@ -611,6 +839,22 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             self.openPainel(MainWindow, user)
 
     def criarContaPoupanca(self, MainWindow, inputs_window, user):
+        """
+        Requisita para o servidor a criação de uma conta poupanca.
+        
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        inputs_window : Qt class
+            Tela de onde as informações serão extraídas
+        user : Cliente
+            Objeto que possui as informações do cliente.
+
+        Returns
+        ----------
+        None
+        """
         password = inputs_window.senha.text()
         if len(password) != 6:
             QtWidgets.QMessageBox.warning(
@@ -635,6 +879,29 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
         target_account_type,
         password,
     ):
+        """
+        Gerencia a operação de transeferencia no lado do front-end
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        user : Cliente
+            Objeto que possui as informações do cliente.
+        value : float
+            Valor da transferencia realizada.
+        account : dict
+            Dicionário com as informações da conta de origem.
+        target_cpf : str
+            Cpf do cliente de destino.
+        target_account_type : str
+            Tipo da conta de destino.
+        password : str
+            Senha da conta de origem.
+
+        Returns
+        ----------
+        None
+        """
         target_account_type = target_account_type.split(" - ")[0]
         # Inicializando o tipo da conta
         account_source_type = None
@@ -842,6 +1109,27 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
     def depositar(
         self, MainWindow, user, value, account, account_type, password
     ):
+        """
+        Gerencia a operação de depósito no lado do front-end
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        user : Cliente
+            Objeto que possui as informações do cliente.
+        value : float
+            Valor do depósito
+        account : dict
+            Dicionário com as informações da conta.
+        account_type : str
+            Tipo da conta
+        password : str
+            Senha da conta
+
+        Returns
+        ----------
+        None
+        """
         try:
             # Verifica se o valor passado é um valor númerico
             value = float(value)
@@ -891,6 +1179,28 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                     return
 
     def sacar(self, MainWindow, user, value, account, account_type, password):
+        """
+        Gerencia a operação de saque no lado do front-end
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+        user : Cliente
+            Objeto que possui as informações do cliente.
+        value : float
+            Valor do depósito
+        account : dict
+            Dicionário com as informações da conta.
+        account_type : str
+            Tipo da conta
+        password : str
+            Senha da conta
+
+        Returns
+        ----------
+        None
+        """
         try:
             # Verifica se o valor passado é um valor numérico
             value = float(value)
@@ -940,6 +1250,18 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                     return
 
     def cadastrar(self, MainWindow):
+        """
+        Gerencia a operação de cadastro de usuário no lado do front-end
+
+        Parameters
+        ----------
+        MainWindow : Qt class
+            Janela anterior
+
+        Returns
+        ----------
+        None
+        """
         infos = self.getInfos(MainWindow)
         if (
             infos[0] == ""
@@ -977,6 +1299,24 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
 
     @staticmethod
     def mostraSaldo(state, label, balance):
+        """
+        Mostra ou oculta o saldo da conta do cliente na tela de contas
+
+        Parameters
+        ----------
+        state : QtWidgets.QCheckBox
+            checkbox para verificar se o saldo está em estado de ocultar ou
+            exibir.
+        label : QtWidgets.QLabel
+            label responsável por mostrar o saldo da conta.
+        balance: float
+            Saldo da conta
+
+        Returns
+        -------
+        None
+
+        """
         if state.isChecked():
             label.setText(f"Saldo : R$ {balance:.2f}".replace(".", ","))
         else:
@@ -985,21 +1325,73 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
             )
 
     @staticmethod
-    def mostraSenha(check, password):
-        if check.isChecked():
+    def mostraSenha(checkbox, password):
+        """
+        Mostra ou oculta o senha da conta do cliente na tela de contas
+
+        Parameters
+        ----------
+        checkbox : QtWidgets.QCheckBox
+            checkbox para verificar se a senha está em estado de ocultar ou
+            exibir.
+        password : QtWidgets.QLineEdit
+            Input da senha que irá ser oculta ou exibida.
+
+        Returns
+        -------
+        None
+
+        """
+        if checkbox.isChecked():
             password.setEchoMode(QtWidgets.QLineEdit.Normal)
         else:
             password.setEchoMode(QtWidgets.QLineEdit.Password)
 
     @staticmethod
     def convertDate(date):
+        """
+        Converte uma data do padrão americano para o padrão brasileiro
+
+        Parameters
+        ----------
+        date : str
+            data recebida do servidor no padrão americano.
+
+        Returns
+        -------
+        date : str
+            data formatada para o padrão brasileiro.
+
+        """
         date = date.split("/")
-        return f"{date[2]}-{date[1]}-{date[0]}"
+        date = f"{date[2]}-{date[1]}-{date[0]}"
+        return date
 
     @staticmethod
     def atualizaContas(
         user, source_account_type, target_cpf_input, select_input
     ):
+        """
+        Recebe o cpf de um cliente, busca as contas desse cliente e atualiza
+        os inputs de seleção de conta.
+
+        Parameters
+        ----------
+        user : Cliente
+            Objeto do cliente que está logado.
+        source_account_type : str
+            Tipo da conta de origem.
+        target_cpf_input : Qt.Widgets.
+            Input do cpf do cliente que irá receber o dinheiro.
+        select_input : Qt.Widgets.QComboBox
+            Input do tipo da conta que irá receber o dinheiro.
+
+        Returns
+        -------
+        date : str
+            None
+
+        """
         cc = busca_conta_por_cpf(target_cpf_input.text(), "cc")
         cp = busca_conta_por_cpf(target_cpf_input.text(), "cp")
         select_input.clear()
@@ -1017,9 +1409,25 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
                 select_input.addItem(f"Conta Poupança - {cp.numero}")
 
     def getInfos(self, registration_inputs_window):
+        """
+        Extrai as informaçoes dos inputs da tela de cadastro e retorna
+        uma tupla com as informações.
+
+        Parameters
+        ----------
+        registration_inputs_window : Qt class
+            tela de cadastro.
+
+        Returns
+        -------
+        infos : tuple
+            Informações do novo cliente.
+
+        """
         name = registration_inputs_window.nome.text()
         cpf = registration_inputs_window.cpf.text()
         email = registration_inputs_window.email.text()
         password = registration_inputs_window.senha.text()
         birth = self.convertDate(registration_inputs_window.nascimento.text())
-        return name, cpf, birth, email, password
+        infos = (name, cpf, email, birth, password)
+        return infos
