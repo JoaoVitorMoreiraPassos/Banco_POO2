@@ -4,6 +4,24 @@ from datetime import datetime
 
 
 class Historico:
+    """
+    A classe representa o histórico de transações de uma conta.
+
+    ...
+
+    Attributes
+    ----------
+    data_abertura : datetime
+        data de abertura da conta
+    transacoes : list
+        lista de transações
+
+    Methods
+    -------
+    imprime():
+        Mostra o histórico de transações de uma conta
+
+    """
 
     __slots__ = ["data_abertura", "transacoes"]
 
@@ -20,7 +38,6 @@ class Historico:
 
 
 class Conta:
-
     __slots__ = [
         "_id",
         "_numero",
@@ -151,9 +168,7 @@ class Conta:
 
 
 class ContaCorrente(Conta):
-
-    __slots__ = ["_numero", "_senha", "_criacao",
-                 "_saldo", "_limite", "_historico"]
+    __slots__ = ["_numero", "_senha", "_criacao", "_saldo", "_limite", "_historico"]
 
     def __init__(self, id, numero, senha, criacao, saldo=0, limite=800):
         super().__init__(id, numero, senha, criacao, saldo)
@@ -178,13 +193,7 @@ class ContaCorrente(Conta):
 
 
 class ContaPoupanca(Conta):
-
-    __slots__ = ["_numero",
-                 "_senha",
-                 "_criacao",
-                 "_saldo",
-                 "_limite",
-                 "_historico"]
+    __slots__ = ["_numero", "_senha", "_criacao", "_saldo", "_limite", "_historico"]
 
     def __init__(self, id, numero, senha, criacao, saldo=0):
         super().__init__(id, numero, senha, criacao, saldo)
