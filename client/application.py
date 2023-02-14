@@ -127,7 +127,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
 
     def openLogin(self, MainWindow):
         """
-        Função responsável por abrir a tela de login e fechar a janela anterior.
+        Função responsável por abrir a tela de login e fechar a janela
+        anterior.
 
         Parameters
         ----------
@@ -166,7 +167,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
 
     def openCadastro(self, MainWindow):
         """
-        Função responsável por abrir a tela de Cadastro e fechar a janela anterior.
+        Função responsável por abrir a tela de Cadastro e fechar a janela
+        anterior.
 
         Parameters
         ----------
@@ -501,7 +503,8 @@ class Main(QtWidgets.QMainWindow, TelaDeLogin):
 
     def openSaque(self, MainWindow, user, account, account_type):
         """
-        Função responsável por abrir a tela de saque e fechar a janela anterior.
+        Função responsável por abrir a tela de saque e fechar a janela
+        anterior.
 
         Parameters
         ----------
