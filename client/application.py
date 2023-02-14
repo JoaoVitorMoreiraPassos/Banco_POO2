@@ -27,6 +27,29 @@ from client import (
 
 
 class Main(QtWidgets.QMainWindow, TelaDeLogin):
+    """
+    A classe Main é a classe principal do programa, ela é responsável por gerenciar as janelas do programa e as ações dos botões de cada uma delas.
+
+    A classe Main herda de duas classes, a classe QtWidgets.QMainWindow e a classe TelaDeLogin, a primeira é a classe principal do PyQt5, a segunda é a classe que contém os métodos e atributos da tela de login.
+
+    ...
+
+    Attributes
+    ----------
+    Muitos atributos são herdados da classe TelaDeLogin, que contém os métodos e atributos da tela de login.
+
+    Methods
+    -------
+    openLogin(MainWindow):
+        Abre a tela de login e fecha a tela anterior.
+    openCadastro(MainWindow):
+        Abre a tela de cadastro e fecha a tela anterior.
+    openPainel(MainWindow, user):
+        Abre a tela do usuário e fecha a tela anterior.
+    openCriadorDeConta(MainWindow, MainWindow, user, account_type):
+        Abre a tela de criação de contas e fecha a tela anterior.
+    Continua aqui
+    """
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
