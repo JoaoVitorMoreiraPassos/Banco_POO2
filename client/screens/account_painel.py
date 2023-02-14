@@ -9,7 +9,8 @@ class Ui_MainWindow(object):
 
         Attributes
         ----------
-        Muitos atributos são herdados de Ui_MainWindow, que é a classe pai.
+        MainWindow : QMainWindow
+                A tela principal do programa.
 
         Methods
         -------
