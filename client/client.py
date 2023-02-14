@@ -1,5 +1,4 @@
 import socket
-import datetime
 from cliente_obj import Cliente
 from account_obj import ContaCorrente, ContaPoupanca
 
@@ -22,8 +21,12 @@ from account_obj import ContaCorrente, ContaPoupanca
 
 """
     Funcionamento das funções:
-        As funções recebem os dados necessários para a operação desejada, empacotam os dados em um json e enviam para o servidor que é responsável pela conexão e operações com o banco de dados mysql.
-        O servidor retorna um json com o resultado da operação e informações necessárias para a funciolidade que o usuário deseja acessar no sistema.
+        - As funções recebem os dados necessários para a operação desejada,
+        empacotam os dados em um json e enviam para o servidor que é
+        responsável pela conexão e operações com o banco de dados mysql.
+        - O servidor retorna um json com o resultado da operação e
+        informações necessárias para a funciolidade que o usuário deseja
+        acessar no sistema.
 """
 
 
@@ -54,7 +57,11 @@ def login(email, senha):
         # Transforma o resultado em um objeto Cliente
         user = eval(login_result)
         temp = Cliente(
-            user["id"], user["nome"], user["cpf"], user["nascimento"], user["email"]
+            user["id"],
+            user["nome"],
+            user["cpf"],
+            user["nascimento"],
+            user["email"]
         )
         # Transforma os dicionários em objetos ContaCorrente e ContaPoupança
         try:
@@ -68,7 +75,7 @@ def login(email, senha):
                 cc["limite"],
             )
             temp.add_cc(cc)
-        except Exception as E:
+        except Exception:
             pass
         try:
             cp = user["contas"]["cp"]
@@ -76,7 +83,7 @@ def login(email, senha):
                 cp["id"], cp["numero"], cp["senha"], cp["criacao"], cp["saldo"]
             )
             temp.add_cp(cp)
-        except Exception as E:
+        except Exception:
             pass
         user = temp
         return True, user
@@ -99,7 +106,10 @@ def add_cliente(name, cpf, birth, email, password):
     add_result = client.recv(1024).decode()
     # Fecha a conexão
     client.close()
-    # Verifica se o cadastro foi bem sucedido e retorna o resultado para o usuário
+    """
+    Verifica se o cadastro foi bem sucedido e retorna o resultado para o
+    usuário.
+    """
     if add_result == "False":
         raise Exception("Erro ao adicionar cliente")
     else:
@@ -116,7 +126,10 @@ def get_transacoes(id, account_type):
     trasactions_getter_result = client.recv(2048).decode()
     # Fecha a conexão
     client.close()
-    # Verifica se a busca por transações foi bem sucessida e retorna o resultado para o usuário
+    """
+    Verifica se a busca por transações foi bem sucessida e retorna o resultado
+    para o usuário
+    """
     if trasactions_getter_result == "False":
         raise Exception("Erro ao adicionar cliente")
     else:
@@ -133,7 +146,10 @@ def busca_conta_por_cpf(cpf, account_type):
     account_getter_result = client.recv(1024).decode()
     # Fecha a conexão
     client.close()
-    # Verifica se a busca por transações foi bem sucessida e retorna o resultado para o usuário
+    """
+    Verifica se a busca por transações foi bem sucessida e retorna o resultado
+    para o usuário
+    """
     if account_getter_result == "False":
         return None
     else:
@@ -369,3 +385,46 @@ def valida_senha_conta_poupanca(id, password):
         return True
     else:
         return False
+
+
+def get_user_by_id(id):
+    client = connect()
+
+    data = {"operacao": "14", "id": id}
+    data = str(data)
+    client.send(data.encode())
+    user = client.recv(1024).decode()
+    client.close()
+
+    if not user[0]:
+        return False, None
+    else:
+        user = eval(user)
+        temp = temp = Cliente(
+            user["id"], user["nome"], user["cpf"], user["nascimento"], user["email"]
+        )
+        # Transforma os dicionários em objetos ContaCorrente e ContaPoupança
+        try:
+            cc = user["contas"]["cc"]
+            cc = ContaCorrente(
+                cc["id"],
+                cc["numero"],
+                cc["senha"],
+                cc["criacao"],
+                cc["saldo"],
+                cc["limite"],
+            )
+            temp.add_cc(cc)
+        except Exception as E:
+            print(E)
+        try:
+            cp = user["contas"]["cp"]
+            cp = ContaPoupanca(
+                cp["id"], cp["numero"], cp["senha"], cp["criacao"], cp["saldo"]
+            )
+            temp.add_cp(cp)
+        except Exception as E:
+            print(E)
+        user = temp
+        print(user.nome)
+        return user

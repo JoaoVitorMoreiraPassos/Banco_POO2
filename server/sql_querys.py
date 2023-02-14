@@ -69,6 +69,28 @@ def login(email, password):
         return False, None
 
 
+def get_user_by_id(id):
+    result = None
+    with connect() as conection:
+        with conection.cursor() as cursor:
+            cursor.execute(
+                "SELECT * FROM cliente WHERE idcliente = %s", (id,))
+            result = cursor.fetchone()
+    if result:
+        # 0 = id, 4 = nome, 1 = cpf, 2 = nascimento, 3 = email
+        client = Cliente(result[0], result[4],
+                         result[1], result[2], result[3])
+        cc = get_conta_corrente(client.id)
+        cp = get_conta_poupanca(client.id)
+        if cc:
+            client.add_cc(cc)
+        if cp:
+            client.add_cp(cp)
+        return client
+    else:
+        return None
+
+
 def create_conta_corrente(user_id, account_password):
     tot_accounts = None
     account_number = None

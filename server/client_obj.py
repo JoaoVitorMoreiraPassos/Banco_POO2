@@ -18,9 +18,6 @@ class Cliente:
     def add_cp(self, conta):
         self._contas["cp"] = conta
 
-    def __str__(self):
-        return f"id: {self._id} | Nome: {self._nome} | CPF: {self._cpf} | Nascimento: {self._nascimento} | Email: {self._email}"
-
     @property
     def id(self):
         return self._id

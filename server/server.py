@@ -14,6 +14,7 @@ from sql_querys import (
     deposito_conta_poupanca,
     valida_senha_conta_corrente,
     valida_senha_conta_poupanca,
+    get_user_by_id
 )
 
 """
@@ -278,6 +279,36 @@ def manager_operations(data, sinc):
             return ("True".encode())
         else:
             return ("False".encode())
+    elif operation == "14":
+        """Busca um usuário pelo id"""
+        sinc.acquire()
+        user = get_user_by_id(data["id"])
+        sinc.release()
+        if user:
+            accounts = user.contas
+            if "cc" in accounts:
+                accounts["cc"] = {
+                    "id": accounts["cc"].id,
+                    "numero": accounts["cc"].numero,
+                    "senha": accounts["cc"].senha,
+                    "criacao": accounts["cc"].criacao,
+                    "saldo": accounts["cc"].saldo,
+                    "limite": accounts["cc"].limite,
+                }
+            if "cp" in accounts:
+                accounts["cp"] = {
+                    "id": accounts["cp"].id,
+                    "numero": accounts["cp"].numero,
+                    "senha": accounts["cp"].senha,
+                    "criacao": accounts["cp"].criacao,
+                    "saldo": accounts["cp"].saldo,
+                }
+
+            user = f'{{"id": {user.id},"nome": "{user.nome}","cpf": "{user.cpf}","email": "{user.email}", "nascimento": "{user.nascimento}", "contas": {accounts}}}'
+            user = str(user)
+            return user.encode()
+        else:
+            return "False".encode()
 
 
 host = "0.0.0.0"

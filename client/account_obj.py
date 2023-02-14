@@ -96,7 +96,7 @@ class Conta:
     def deposita(self, valor, transferencia=False):
         try:
             valor = float(valor)
-        except:
+        except Exception:
             return False, "Valor inválido"
         if valor < 0:
             return False, "Valor inválido"
@@ -118,7 +118,7 @@ class Conta:
     def saca(self, valor, transferencia=False):
         try:
             valor = float(valor)
-        except:
+        except Exception:
             return False, "Valor inválido"
         if valor > self.saldo:
             return False, "Saldo insuficiente"
@@ -152,7 +152,8 @@ class Conta:
 
 class ContaCorrente(Conta):
 
-    __slots__ = ["_numero", "_senha", "_criacao", "_saldo", "_limite", "_historico"]
+    __slots__ = ["_numero", "_senha", "_criacao",
+                 "_saldo", "_limite", "_historico"]
 
     def __init__(self, id, numero, senha, criacao, saldo=0, limite=800):
         super().__init__(id, numero, senha, criacao, saldo)
@@ -178,7 +179,12 @@ class ContaCorrente(Conta):
 
 class ContaPoupanca(Conta):
 
-    __slots__ = ["_numero", "_senha", "_criacao", "_saldo", "_limite", "_historico"]
+    __slots__ = ["_numero",
+                 "_senha",
+                 "_criacao",
+                 "_saldo",
+                 "_limite",
+                 "_historico"]
 
     def __init__(self, id, numero, senha, criacao, saldo=0):
         super().__init__(id, numero, senha, criacao, saldo)
