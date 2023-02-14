@@ -4,7 +4,24 @@ from datetime import datetime
 
 
 class Historico:
+    """
+    A classe representa o histórico de transações de uma conta.
 
+    ...
+
+    Attributes
+    ----------
+    data_abertura : datetime
+        data de abertura da conta
+    transacoes : list
+        lista de transações
+
+    Methods
+    -------
+    imprime():
+        Mostra o histórico de transações de uma conta
+
+    """
     __slots__ = ["data_abertura", "transacoes"]
 
     def __init__(self):
