@@ -1,5 +1,31 @@
 class Cliente:
+    """
+    A classe representa um cliente do banco.
 
+    ...
+
+    Attributes
+    ----------
+    _id : int
+        id do cliente
+    _nome : str
+        nome do cliente
+    _cpf : str
+        cpf do cliente
+    _nascimento : str
+        data de nascimento do cliente
+    _email : str
+        email do cliente
+    _contas : dict
+        dicionário com as contas do cliente
+
+    Methods
+    -------
+    add_cc(conta):
+        adiciona uma conta corrente ao cliente
+    add_cp(conta):
+        adiciona uma conta poupança ao cliente
+    """
     __slots__ = ["_id", "_nome", "_cpf", "_nascimento", "_email", "_contas"]
 
     def __init__(self, id, nome, cpf, nascimento, email):
