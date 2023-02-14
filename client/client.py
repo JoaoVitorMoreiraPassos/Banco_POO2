@@ -3,7 +3,7 @@ from cliente_obj import Cliente
 from account_obj import ContaCorrente, ContaPoupanca
 
 """
-    Operações:
+    Operações: 
     01 - Login,
     02 - Cadastro,
     03 - Busca por transações de uma conta,
@@ -31,6 +31,15 @@ from account_obj import ContaCorrente, ContaPoupanca
 
 
 def connect():
+    """
+    Faz a conexão com o servidor e retorna o objeto socket para se usado nas conexões futuras.
+
+            Parameters:
+                    None
+            
+            Returns:
+                    client (socket): Objeto socket para se fazer as conexões com o servidor.
+    """
     host = "0.0.0.0"
     port = 50002
 
@@ -41,6 +50,16 @@ def connect():
 
 
 def login(email, senha):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de login para o servidor.
+
+            Parameters:
+                    email (str): Email do usuário.
+                    senha (str): Senha do usuário.
+            
+            Returns:
+                    (bool, user): Retorna um booleano indicando se o login foi bem sucedido e um objeto Cliente com as informações do usuário.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -90,6 +109,19 @@ def login(email, senha):
 
 
 def add_cliente(name, cpf, birth, email, password):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de cadastro para o servidor e recebe a reposta.
+
+            Parameters:
+                    name (str): Nome do usuário.
+                    cpf (str): CPF do usuário.
+                    birth (str): Data de nascimento do usuário.
+                    email (str): Email do usuário.
+                    password (str): Senha do usuário.
+            
+            Returns:
+                    (bool, None): Retorna um booleano indicando se o cadastro foi bem sucedido e o resultado para o usuário.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -117,6 +149,17 @@ def add_cliente(name, cpf, birth, email, password):
 
 
 def get_transacoes(id, account_type):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de busca de transações para o servidor e recebe a reposta.
+
+            Parameters:
+                    id (int): Id da conta.
+                    account_type (str): Tipo da conta.
+            
+            Returns:
+                    (list): Retorna uma lista com as transações da conta.
+    """
+
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -137,6 +180,16 @@ def get_transacoes(id, account_type):
 
 
 def busca_conta_por_cpf(cpf, account_type):
+    """
+    Esse método faz a conexão com o servidor e busca uma conta pelo cpf do usuário.
+
+            Parameters:
+                    cpf (str): CPF do usuário.
+                    account_type (str): Tipo da conta.
+            
+            Returns:
+                    account (object): Retorna um objeto ContaCorrente ou ContaPoupança.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -182,6 +235,19 @@ def saque_conta_corrente(
     target_user_id=None,
     target_account_target=None,
 ):
+    """
+    Esse métdo faz a conexão com o servidor e envia os dados de saque da conta corrente para o servidor e recebe a reposta.
+            Parameters:
+                    id (int): Id da conta.
+                    account_number (str): Número da conta.
+                    value (float): Valor do saque.
+                    transfer (bool, optional): Indica se o saque é uma transferência (Default = False).
+                    target_user_id (int, optional): Id do usuário que receberá a transferência (Default = None).
+                    target_account_target (str, optional): Tipo da conta que receberá a transferência (Default = None).
+                
+            Returns:
+                    (bool, str): Retorna um booleano indicando se o saque foi bem sucedido e o resultado para o usuário.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -206,14 +272,21 @@ def saque_conta_corrente(
         return True, withdraw_result
 
 
-def saque_conta_poupanca(
-    id,
-    account_number,
-    value,
-    transfer=False,
-    target_user_id=None,
-    target_account_type=None,
-):
+def saque_conta_poupanca(id, account_number, value, transfer=False, target_user_id=None, target_account_type=None,):
+    """
+    Esse métdo faz a conexão com o servidor e envia os dados de saque da conta poupança para o servidor e recebe a reposta.
+
+            Parameters:
+                    id (int): Id da conta.
+                    account_number (str): Número da conta.
+                    value (float): Valor do saque.
+                    transfer (bool, optional): Indica se o saque é uma transferência (Default = False).
+                    target_user_id (int, optional): Id do usuário que receberá a transferência (Default = None).
+                    target_account_type (str, optional): Tipo da conta que receberá a transferência (Default = None).
+                
+            Returns:
+                    (bool, str): Retorna um booleano indicando se o saque foi bem sucedido e o resultado para o usuário.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -239,6 +312,16 @@ def saque_conta_poupanca(
 
 
 def create_conta_corrente(id, password):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de criação de conta corrente para o servidor e recebe a reposta.
+
+            Parameters:
+                    id (int): Id do usuário.
+                    password (str): Senha da conta.
+                
+            Returns:
+                    current_account (object): Retorna um objeto ContaCorrente.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -261,6 +344,16 @@ def create_conta_corrente(id, password):
 
 
 def create_conta_poupanca(id, password):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de criação de conta poupança para o servidor e recebe a reposta.
+    
+                Parameters:
+                        id (int): Id do usuário.
+                        password (str): Senha da conta.
+                    
+                Returns:
+                        savings_account (object): Retorna um objeto ContaPoupanca.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -282,6 +375,15 @@ def create_conta_poupanca(id, password):
 
 
 def get_cliente_id_by_cpf(cpf):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de busca de id do cliente pelo cpf para o servidor e recebe a reposta.
+    
+                Parameters:
+                        cpf (str): CPF do cliente.
+                    
+                Returns:
+                        id (int): Retorna o id do cliente.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -303,6 +405,20 @@ def deposito_conta_corrente(
     source_user_id=None,
     source_account_type=None,
 ):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de depósito da conta corrente para o servidor e recebe a reposta.
+
+            Parameters:
+                    id (int): Id da conta.
+                    account_number (str): Número da conta.
+                    value (float): Valor do depósito.
+                    transfer (bool, optional): Indica se o depósito é uma transferência (Default = False).
+                    source_user_id (int, optional): Id do usuário que efetuou a transferência (Default = None).
+                    source_account_type (str, optional): Tipo da conta que efetuou a transferência (Default = None).
+                
+            Returns:
+                    (bool, str): Retorna um booleano indicando se o depósito foi bem sucedido e o resultado para o usuário.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -335,6 +451,20 @@ def deposito_conta_poupanca(
     source_user_id=None,
     source_account_type=None,
 ):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de depósito da conta poupança para o servidor e recebe a reposta.
+
+            Parameters:
+                    id (int): Id da conta.
+                    account_number (str): Número da conta.
+                    value (float): Valor do depósito.
+                    transfer (bool, optional): Indica se o depósito é uma transferência (Default = False).
+                    source_user_id (int, optional): Id do usuário que efetuou a transferência (Default = None).
+                    source_account_type (str, optional): Tipo da conta que efetuou a transferência (Default = None).
+                
+            Returns:
+                    (bool, str): Retorna um booleano indicando se o depósito foi bem sucedido e o resultado para o usuário.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -360,6 +490,16 @@ def deposito_conta_poupanca(
 
 
 def valida_senha_conta_corrente(id, password):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de validação da senha da conta corrente para o servidor e recebe a reposta.
+    
+            Parameters:
+                    id (int): Id da conta.
+                    password (str): Senha da conta.
+            
+            Returns:
+                    (bool): Retorna um booleano indicando se a senha é válida.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -374,6 +514,16 @@ def valida_senha_conta_corrente(id, password):
 
 
 def valida_senha_conta_poupanca(id, password):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de validação da senha da conta poupança para o servidor e recebe a reposta.
+
+            Parameters:
+                    id (int): Id da conta.
+                    password (str): Senha da conta.
+            
+            Returns:
+                    (bool): Retorna um booleano indicando se a senha é válida.
+    """
     # Faz a conexão com o servidor
     client = connect()
     # Envia os dados para o servidor e recebe a resposta
@@ -388,6 +538,15 @@ def valida_senha_conta_poupanca(id, password):
 
 
 def get_user_by_id(id):
+    """
+    Esse método faz a conexão com o servidor e envia os dados de busca de usuário por id para o servidor e recebe a reposta.
+
+            Parameters:
+                    id (int): Id do usuário.
+            
+            Returns:
+                    (bool, Cliente): Retorna um booleano indicando se o usuário foi encontrado e o objeto Cliente.
+    """
     client = connect()
 
     data = {"operacao": "14", "id": id}
@@ -401,11 +560,7 @@ def get_user_by_id(id):
     else:
         user = eval(user)
         temp = temp = Cliente(
-            user["id"],
-            user["nome"],
-            user["cpf"],
-            user["nascimento"],
-            user["email"]
+            user["id"], user["nome"], user["cpf"], user["nascimento"], user["email"]
         )
         # Transforma os dicionários em objetos ContaCorrente e ContaPoupança
         try:
