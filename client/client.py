@@ -3,7 +3,7 @@ from cliente_obj import Cliente
 from account_obj import ContaCorrente, ContaPoupanca
 
 """
-    Operações: 
+    Operações:
     01 - Login,
     02 - Cadastro,
     03 - Busca por transações de uma conta,
@@ -401,7 +401,11 @@ def get_user_by_id(id):
     else:
         user = eval(user)
         temp = temp = Cliente(
-            user["id"], user["nome"], user["cpf"], user["nascimento"], user["email"]
+            user["id"],
+            user["nome"],
+            user["cpf"],
+            user["nascimento"],
+            user["email"]
         )
         # Transforma os dicionários em objetos ContaCorrente e ContaPoupança
         try:
