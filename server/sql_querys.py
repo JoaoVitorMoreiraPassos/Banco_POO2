@@ -2,9 +2,7 @@ import mysql.connector as conex
 from datetime import datetime
 from client_obj import Cliente
 from account_obj import ContaCorrente, ContaPoupanca
-    """
-    test
-    """
+
 
 def connect():
     """

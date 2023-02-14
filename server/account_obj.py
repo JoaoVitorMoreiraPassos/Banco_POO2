@@ -4,8 +4,24 @@ from datetime import datetime
 
 
 class Historico:
-
     """
+    A classe representa o histórico de transações de uma conta.
+
+    ...
+
+    Attributes
+    ----------
+    data_abertura : datetime
+        data de abertura da conta
+    transacoes : list
+        lista de transações
+
+    Methods
+    -------
+    imprime():
+        Mostra o histórico de transações de uma conta.
+    """
+    
     __slots__ = ["data_abertura", "transacoes"]
 
     def __init__(self):
@@ -76,7 +92,6 @@ class Conta:
     extrato():
         Mostra o extrato da conta bancária.
     """
-
     __slots__ = [
         "_id",
         "_numero",
@@ -190,7 +205,7 @@ class Conta:
         """
         try:
             valor = float(valor)
-        except Exception:
+        except:
             return False, "Valor inválido"
         if valor < 0:
             return False, "Valor inválido"
@@ -226,7 +241,7 @@ class Conta:
         """
         try:
             valor = float(valor)
-        except Exception:
+        except:
             return False, "Valor inválido"
         if valor > self.saldo:
             return False, "Saldo insuficiente"
@@ -298,28 +313,6 @@ class ContaCorrente(Conta):
     __slots__ = ["_numero", "_senha", "_criacao", "_saldo", "_limite", "_historico"]
 
     def __init__(self, id, numero, senha, criacao, saldo=0, limite=800):
-        """
-        Construtor da classe ContaCorrente, que chama o construtor da classe Conta.
-
-        Parameters
-        ----------
-        id : int
-            id da conta bancária
-        numero : int
-            número da conta bancária
-        senha : int
-            senha da conta bancária
-        criacao : datetime
-            data de criação da conta bancária
-        saldo : float, opcional
-            saldo da conta bancária (default é 0)
-        limite : float, opcional
-            limite da conta bancária (default é 800)
-
-        Returns
-        -------
-        None
-        """
         super().__init__(id, numero, senha, criacao, saldo)
         self._limite = limite
 
@@ -406,6 +399,7 @@ class ContaPoupanca(Conta):
         """
         super().__init__(id, numero, senha, criacao, saldo)
 
+    
     def deposita(self, valor):
         """
         Método que realiza um depósito na conta bancária, chamando o método deposita da classe Conta.
