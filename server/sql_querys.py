@@ -5,12 +5,33 @@ from account_obj import ContaCorrente, ContaPoupanca
 
 
 def connect():
+    """
+    Função para fazer a conexão com banco de dados
+
+            Parameters:
+                    None
+            Returns:
+                    conexão com o banco de dados
+    """
     return conex.connect(
         host="localhost", user="myuser", password="mypassword", database="mydb"
     )
 
 
 def add_cliente(nome, cpf, nascimento, email, senha):
+    """
+    Função para adicionar um cliente no banco de dados.
+
+            Parameters:
+                    nome (str): nome do cliente.
+                    cpf (str): cpf do cliente.
+                    nascimento (str): data de nascimento do cliente.
+                    email (str): email do cliente.
+                    senha (str): senha do cliente.
+
+            Returns:
+                    conexão com o banco de dados.
+    """
     with connect() as conection:
         with conection.cursor() as cursor:
             try:
@@ -36,6 +57,14 @@ def add_cliente(nome, cpf, nascimento, email, senha):
 
 
 def get_cliente_id_by_cpf(cpf):
+    """
+    Busca o id de cliente no banco de dados pelo cpf.
+
+            Parameters:
+                    cpf (str): cpf do cliente.
+            Returns:
+                    result (int): id do cliente.
+    """
     result = None
     with connect() as conection:
         with conection.cursor() as cursor:
@@ -46,6 +75,16 @@ def get_cliente_id_by_cpf(cpf):
 
 
 def login(email, password):
+    """
+    Função para fazer o login do cliente. 
+
+            Parameters:
+                    email (str): email do cliente.
+                    password (str): senha do cliente.
+            Returns:
+                    result (tuple): (True, client) se o login foi bem sucedido,
+                    (False, None) se não.
+    """
     result = None
     with connect() as conection:
         with conection.cursor() as cursor:
@@ -70,6 +109,15 @@ def login(email, password):
 
 
 def get_user_by_id(id):
+    """
+    Busca o cliente no banco de dados pelo id.
+
+            Parameters:
+                    id (int): id do cliente.
+            Returns:
+                    result (Cliente): objeto do tipo cliente se a conta for
+                    encontrada e None se não for.
+    """
     result = None
     with connect() as conection:
         with conection.cursor() as cursor:
@@ -92,6 +140,15 @@ def get_user_by_id(id):
 
 
 def create_conta_corrente(user_id, account_password):
+    """
+    Função para adiconar uma conta corrente no banco de dados.
+
+            Parameters:
+                    user_id (int): id do cliente.
+                    account_password (str): senha da conta.
+            Returns:
+                    ContaCorrente: objeto do tipo conta corrente.
+    """
     tot_accounts = None
     account_number = None
     criation_date = None
@@ -126,6 +183,15 @@ def create_conta_corrente(user_id, account_password):
 
 
 def create_conta_poupanca(user_id, account_password):
+    """
+    Função para adiconar uma conta poupança no banco de dados.
+
+            Parameters:
+                    user_id (int): id do cliente.
+                    account_password (str): senha da conta.
+            Returns:
+                    ContaPoupanca: objeto do tipo conta poupança.
+    """
     tot_accounts = None
     account_number = None
     creation_date = None
@@ -160,6 +226,15 @@ def create_conta_poupanca(user_id, account_password):
 
 
 def get_conta_corrente(id):
+    """
+    Função para buscar uma conta corrente no banco de dados.
+
+            Parameters:
+                    id (int): id do cliente.
+            Returns:
+                    ContaCorrente: objeto do tipo conta corrente se a busca for 
+                    bem sucessida, senão retorna None.
+    """
     result = None
     with connect() as conection:
         with conection.cursor() as cursor:
@@ -168,18 +243,27 @@ def get_conta_corrente(id):
             result = cursor.fetchall()
     try:
         result = result[0]
-    except:
+    except Exception:
         return None
     try:
         # 0 = id, 1 = numero, 2 = senha, 3 = saldo, 4 = limite, 5 = criacao
         return ContaCorrente(
             result[0], result[1], result[2], result[5], result[3], result[4]
         )
-    except:
+    except Exception:
         return None
 
 
 def get_conta_poupanca(id):
+    """
+    Função para buscar uma conta poupança no banco de dados.
+
+            Parameters:
+                    id (int): id do cliente.
+            Returns:
+                    ContaPoupanca: objeto do tipo conta poupança se a busca for
+                    bem sucessida, senão retorna None.
+    """
     result = None
     with connect() as conection:
         with conection.cursor() as cursor:
@@ -199,6 +283,15 @@ def get_conta_poupanca(id):
 
 
 def valida_senha_conta_corrente(id, password):
+    """
+    Função para validar a senha de uma conta corrente.
+
+            Parameters:
+                    id (int): id da conta corrente.
+                    password (str): senha da conta corrente.
+            Returns:
+                    bool: True se a senha for válida, senão retorna False.
+    """
     result = None
     with connect() as conection:
         with conection.cursor() as cursor:
@@ -214,6 +307,15 @@ def valida_senha_conta_corrente(id, password):
 
 
 def valida_senha_conta_poupanca(id, password):
+    """
+    Função para validar a senha de uma conta poupança.
+
+            Parameters:
+                    id (int): id da conta poupança.
+                    password (str): senha da conta poupança.
+            Returns:
+                    bool: True se a senha for válida, senão retorna False.
+    """
     result = None
     with connect() as conection:
         with conection.cursor() as cursor:
@@ -229,6 +331,17 @@ def valida_senha_conta_poupanca(id, password):
 
 
 def add_transacao(account_id, account_type, value, description):
+    """
+    Função para adicionar uma transação no banco de dados.
+
+            Parameters: 
+                    account_id (int): id da conta.
+                    account_type (str): tipo da conta.
+                    value (float): valor da transação.
+                    description (str): descrição da transação.
+            Returns:
+                    None.
+    """
     with connect() as conection:
         with conection.cursor() as cursor:
             if account_type == "cc":
@@ -243,6 +356,15 @@ def add_transacao(account_id, account_type, value, description):
 
 
 def get_transacoes(account_id, account_type):
+    """
+    Função para buscar as transações de uma conta.
+
+            Parameters:
+                    account_id (int): id da conta.
+                    account_type (str): tipo da conta.
+            Returns:
+                    result (tuple): tupla de transações.
+    """
     result = None
     if isinstance(account_id, tuple):
         account_id = account_id[0]
@@ -263,6 +385,19 @@ def get_transacoes(account_id, account_type):
 def deposito_conta_corrente(
     account_id, account_number, value, transfer=False, source_user_id=None, source_account_type=None
 ):
+    """
+    Função para aumentar o saldo de uma conta corrente.
+
+            Parameters:
+                    account_id (int): id da conta corrente.
+                    account_number (str): número da conta corrente.
+                    value (float): valor a ser depositado.
+                    transfer (bool): se a transação é uma transferência.
+                    source_user_id (int): id do usuário que está transferindo.
+                    source_account_type (str): tipo da conta que está transferindo.
+            Returns:
+                    Tuple: (True, mensagem) se a função executar sem erros.
+    """
     source_account = None
     source_user = None
     if value <= 0:
@@ -305,6 +440,19 @@ def deposito_conta_corrente(
 def deposito_conta_poupanca(
     account_id, account_number, value, transfer=False, source_user_id=None, source_account_type=None
 ):
+    """
+    Função para aumentar o saldo de uma conta poupanca.
+
+            Parameters:
+                    account_id (int): id da conta poupanca.
+                    account_number (str): número da conta poupanca.
+                    value (float): valor a ser depositado.
+                    transfer (bool): se a transação é uma transferência.
+                    source_user_id (int): id do usuário que está transferindo.
+                    source_account_type (str): tipo da conta que está transferindo.
+            Returns:
+                    Tuple: (True, mensagem) se a função executar sem erros.
+    """
     source_account = None
     source_user = None
     if value <= 0:
@@ -347,6 +495,19 @@ def deposito_conta_poupanca(
 def saque_conta_corrente(
     account_id, account_number, value, transfer=False, target_user_id=None, target_account_type=None
 ):
+    """
+    Função para diminuir o saldo de uma conta corrente.
+
+            Parameters:
+                    account_id (int): id da conta corrente.
+                    account_number (str): número da conta corrente.
+                    value (float): valor a ser depositado.
+                    transfer (bool): se a transação é uma transferência.
+                    source_user_id (int): id do usuário que está transferindo.
+                    source_account_type (str): tipo da conta que está transferindo.
+            Returns:
+                    Tuple: (True, mensagem) se a função executar sem erros.
+    """
     target_account = None
     target_user = None
     with connect() as conection:
@@ -397,6 +558,19 @@ def saque_conta_corrente(
 def saque_conta_poupanca(
     account_id, account_number, value, transfer=False, target_user_id=None, target_account_type=None
 ):
+    """
+    Função para diminuir o saldo de uma conta poupanca.
+
+            Parameters:
+                    account_id (int): id da conta poupanca.
+                    account_number (str): número da conta poupanca.
+                    value (float): valor a ser depositado.
+                    transfer (bool): se a transação é uma transferência.
+                    source_user_id (int): id do usuário que está transferindo.
+                    source_account_type (str): tipo da conta que está transferindo.
+            Returns:
+                    Tuple: (True, mensagem) se a função executar sem erros.
+    """
     target_account = None
     target_user = None
     with connect() as conection:
@@ -443,6 +617,15 @@ def saque_conta_poupanca(
 
 
 def busca_conta_por_cpf(cpf, account_type):
+    """
+    Função para buscar uma conta corrente ou poupança pelo cpf do usuário.
+
+            Parameters:
+                    cpf (str): cpf do usuário.
+                    account_type (str): tipo da conta a ser buscada.
+            Returns:
+                    ContaCorrente ou ContaPoupanca: conta encontrada.
+    """
     user_id = None
     with connect() as conection:
         with conection.cursor() as cursor:

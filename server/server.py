@@ -27,13 +27,20 @@ from sql_querys import (
 
 
 def do_login(email, password):
+    """
+    Busca a credenciais passadas pelo cliente no banco de dados. e autentica o
+    cliente.
+
+            Parametros: 
+                    email (str): email do cliente
+                    password (str): senha do cliente
+            retorno:
+                    (bool, Cliente): True e um objeto do tipo Cliente,
+                    caso o login seja bem sucedido,
+    """
     # O retorno será um objeto do tipo Cliente
     authorization = login(email, password)
     if authorization[0]:
-        """As contas do cliente são objetos do tipo ContaCorrente ou ContaPoupanca que herdam do ojeto Conta
-        Para enviar as informções para o cliente é necessário transformar os objetos em dicionários,
-        para depois transformar em string e codifica-las em bytes.
-        """
         accounts = {}
         accounts = authorization[1].contas
         if "cc" in accounts.keys():
@@ -62,13 +69,18 @@ def do_login(email, password):
 
 
 def do_search_by_cpf(cpf, account_type):
-    # O retorno será um objeto do tipo ContaCorrente ou ContaPoupanca que herdam do ojeto Conta
     """
-    Para enviar as informções para o cliente é necessário transformar os objetos em dicionários,
-    para depois transformar em string e codifica-las em bytes.
+    Busca uma conta no banco de dados, a partir do cpf do cliente
+    e do tipo da conta.
+
+            Parametros:
+                    cpf (str): cpf do cliente
+                    account_type (str): tipo da conta
+            retorno:
+                    (dict): dicionário com as informações da conta
     """
     account = busca_conta_por_cpf(cpf, account_type)
-    if account != None:
+    if account is not None:
         if account_type == "cc":
             account = {
                 "id": account.id,
@@ -91,6 +103,17 @@ def do_search_by_cpf(cpf, account_type):
 
 
 def manager_operations(data, sinc):
+    """
+    Gerencia as operações que serão realizadas pelo servidor,
+    de acordo com a operação.
+
+            Parametros:
+                    data (dict): dicionário com as informações da operação.
+                    sinc (threading.Semaphore): semáforo para sincronizar
+                    o acesso ao banco de dados.
+            retorno:
+                    (str): string codificada com as informações da operação.
+    """
     operation = data["operacao"]
     if operation == "01":
         # Operação de login
