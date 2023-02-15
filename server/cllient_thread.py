@@ -56,7 +56,7 @@ class ClientThread(threading.Thread):
         ----------
         None
                     
-        return
+        Returns
         ----------
         None
         """

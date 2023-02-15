@@ -31,10 +31,10 @@ def do_login(email, password):
     Busca a credenciais passadas pelo cliente no banco de dados. e autentica o
     cliente.
 
-            Parametros: 
+            Parameters:
                     email (str): email do cliente
                     password (str): senha do cliente
-            retorno:
+            Returns:
                     (bool, Cliente): True e um objeto do tipo Cliente,
                     caso o login seja bem sucedido,
     """
@@ -73,10 +73,10 @@ def do_search_by_cpf(cpf, account_type):
     Busca uma conta no banco de dados, a partir do cpf do cliente
     e do tipo da conta.
 
-            Parametros:
+            Parameters:
                     cpf (str): cpf do cliente
                     account_type (str): tipo da conta
-            retorno:
+            Returns:
                     (dict): dicionário com as informações da conta
     """
     account = busca_conta_por_cpf(cpf, account_type)
@@ -107,11 +107,11 @@ def manager_operations(data, sinc):
     Gerencia as operações que serão realizadas pelo servidor,
     de acordo com a operação.
 
-            Parametros:
+            Parameters:
                     data (dict): dicionário com as informações da operação.
                     sinc (threading.Semaphore): semáforo para sincronizar
                     o acesso ao banco de dados.
-            retorno:
+            Returns:
                     (str): string codificada com as informações da operação.
     """
     operation = data["operacao"]
