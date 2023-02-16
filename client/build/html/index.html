@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to banco’s documentation! &mdash; documentação banco 1.0</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Buscar" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            banco
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Pesquisar documentos" aria-label="Pesquisar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu de navegação">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to banco’s documentation!</a><ul>
+<li><a class="reference internal" href="#UiToPy.convert_ui_to_py"><code class="docutils literal notranslate"><span class="pre">convert_ui_to_py()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main"><code class="docutils literal notranslate"><span class="pre">Main</span></code></a><ul>
+<li><a class="reference internal" href="#application.Main.atualizaContas"><code class="docutils literal notranslate"><span class="pre">Main.atualizaContas()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.cadastrar"><code class="docutils literal notranslate"><span class="pre">Main.cadastrar()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.convertDate"><code class="docutils literal notranslate"><span class="pre">Main.convertDate()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.criarContaCorrente"><code class="docutils literal notranslate"><span class="pre">Main.criarContaCorrente()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.criarContaPoupanca"><code class="docutils literal notranslate"><span class="pre">Main.criarContaPoupanca()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.depositar"><code class="docutils literal notranslate"><span class="pre">Main.depositar()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.getInfos"><code class="docutils literal notranslate"><span class="pre">Main.getInfos()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.logIn"><code class="docutils literal notranslate"><span class="pre">Main.logIn()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.mostraSaldo"><code class="docutils literal notranslate"><span class="pre">Main.mostraSaldo()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.mostraSenha"><code class="docutils literal notranslate"><span class="pre">Main.mostraSenha()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.openCadastro"><code class="docutils literal notranslate"><span class="pre">Main.openCadastro()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.openContas"><code class="docutils literal notranslate"><span class="pre">Main.openContas()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.openCriadorDeConta"><code class="docutils literal notranslate"><span class="pre">Main.openCriadorDeConta()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.openDeposito"><code class="docutils literal notranslate"><span class="pre">Main.openDeposito()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.openExtrato"><code class="docutils literal notranslate"><span class="pre">Main.openExtrato()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.openLogin"><code class="docutils literal notranslate"><span class="pre">Main.openLogin()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.openPainel"><code class="docutils literal notranslate"><span class="pre">Main.openPainel()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.openSaque"><code class="docutils literal notranslate"><span class="pre">Main.openSaque()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.openTransferencia"><code class="docutils literal notranslate"><span class="pre">Main.openTransferencia()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.sacar"><code class="docutils literal notranslate"><span class="pre">Main.sacar()</span></code></a></li>
+<li><a class="reference internal" href="#application.Main.transferir"><code class="docutils literal notranslate"><span class="pre">Main.transferir()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#client.add_cliente"><code class="docutils literal notranslate"><span class="pre">add_cliente()</span></code></a></li>
+<li><a class="reference internal" href="#client.busca_conta_por_cpf"><code class="docutils literal notranslate"><span class="pre">busca_conta_por_cpf()</span></code></a></li>
+<li><a class="reference internal" href="#client.connect"><code class="docutils literal notranslate"><span class="pre">connect()</span></code></a></li>
+<li><a class="reference internal" href="#client.create_conta_corrente"><code class="docutils literal notranslate"><span class="pre">create_conta_corrente()</span></code></a></li>
+<li><a class="reference internal" href="#client.create_conta_poupanca"><code class="docutils literal notranslate"><span class="pre">create_conta_poupanca()</span></code></a></li>
+<li><a class="reference internal" href="#client.deposito_conta_corrente"><code class="docutils literal notranslate"><span class="pre">deposito_conta_corrente()</span></code></a></li>
+<li><a class="reference internal" href="#client.deposito_conta_poupanca"><code class="docutils literal notranslate"><span class="pre">deposito_conta_poupanca()</span></code></a></li>
+<li><a class="reference internal" href="#client.get_cliente_id_by_cpf"><code class="docutils literal notranslate"><span class="pre">get_cliente_id_by_cpf()</span></code></a></li>
+<li><a class="reference internal" href="#client.get_transacoes"><code class="docutils literal notranslate"><span class="pre">get_transacoes()</span></code></a></li>
+<li><a class="reference internal" href="#client.get_user_by_id"><code class="docutils literal notranslate"><span class="pre">get_user_by_id()</span></code></a></li>
+<li><a class="reference internal" href="#client.login"><code class="docutils literal notranslate"><span class="pre">login()</span></code></a></li>
+<li><a class="reference internal" href="#client.saque_conta_corrente"><code class="docutils literal notranslate"><span class="pre">saque_conta_corrente()</span></code></a></li>
+<li><a class="reference internal" href="#client.saque_conta_poupanca"><code class="docutils literal notranslate"><span class="pre">saque_conta_poupanca()</span></code></a></li>
+<li><a class="reference internal" href="#client.valida_senha_conta_corrente"><code class="docutils literal notranslate"><span class="pre">valida_senha_conta_corrente()</span></code></a></li>
+<li><a class="reference internal" href="#client.valida_senha_conta_poupanca"><code class="docutils literal notranslate"><span class="pre">valida_senha_conta_poupanca()</span></code></a></li>
+<li><a class="reference internal" href="#cliente_obj.Cliente"><code class="docutils literal notranslate"><span class="pre">Cliente</span></code></a></li>
+<li><a class="reference internal" href="#account_obj.Conta"><code class="docutils literal notranslate"><span class="pre">Conta</span></code></a><ul>
+<li><a class="reference internal" href="#account_obj.Conta.deposita"><code class="docutils literal notranslate"><span class="pre">Conta.deposita()</span></code></a></li>
+<li><a class="reference internal" href="#account_obj.Conta.extrato"><code class="docutils literal notranslate"><span class="pre">Conta.extrato()</span></code></a></li>
+<li><a class="reference internal" href="#account_obj.Conta.saca"><code class="docutils literal notranslate"><span class="pre">Conta.saca()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#account_obj.ContaCorrente"><code class="docutils literal notranslate"><span class="pre">ContaCorrente</span></code></a><ul>
+<li><a class="reference internal" href="#account_obj.ContaCorrente.transfere"><code class="docutils literal notranslate"><span class="pre">ContaCorrente.transfere()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#account_obj.ContaPoupanca"><code class="docutils literal notranslate"><span class="pre">ContaPoupanca</span></code></a><ul>
+<li><a class="reference internal" href="#account_obj.ContaPoupanca.deposita"><code class="docutils literal notranslate"><span class="pre">ContaPoupanca.deposita()</span></code></a></li>
+<li><a class="reference internal" href="#account_obj.ContaPoupanca.saca"><code class="docutils literal notranslate"><span class="pre">ContaPoupanca.saca()</span></code></a></li>
+<li><a class="reference internal" href="#account_obj.ContaPoupanca.transfere"><code class="docutils literal notranslate"><span class="pre">ContaPoupanca.transfere()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#account_obj.Historico"><code class="docutils literal notranslate"><span class="pre">Historico</span></code></a><ul>
+<li><a class="reference internal" href="#account_obj.Historico.imprime"><code class="docutils literal notranslate"><span class="pre">Historico.imprime()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu de navegação móvel" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">banco</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Navegação da página">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to banco’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> Ver código-fonte da página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-index">
+<span id="welcome-to-banco-s-documentation"></span><h1>Welcome to banco’s documentation!<a class="headerlink" href="#module-index" title="Link permanente para este cabeçalho"></a></h1>
+<span class="target" id="module-UiToPy"></span><dl class="py function">
+<dt class="sig sig-object py" id="UiToPy.convert_ui_to_py">
+<span class="sig-prename descclassname"><span class="pre">UiToPy.</span></span><span class="sig-name descname"><span class="pre">convert_ui_to_py</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UiToPy.convert_ui_to_py" title="Link permanente para esta definição"></a></dt>
+<dd><p>Essa função converte todos os arquivos .ui para .py e os salva na pasta screens do projeto client.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>None</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<span class="target" id="module-application"></span><dl class="py class">
+<dt class="sig sig-object py" id="application.Main">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">application.</span></span><span class="sig-name descname"><span class="pre">Main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main" title="Link permanente para esta definição"></a></dt>
+<dd><p>A classe Main é a classe principal do programa, ela é responsável por
+gerenciar as janelas do programa e as ações dos botões de cada uma delas.</p>
+<p>A classe Main herda de duas classes, a classe QtWidgets.QMainWindow e a
+classe TelaDeLogin, a primeira é a classe principal do PyQt5, a segunda
+é a classe que contém os métodos e atributos da tela de login.</p>
+<p>…</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link permanente para este cabeçalho"></a></h2>
+<p>Muitos atributos são herdados da classe TelaDeLogin, que contém os métodos
+e atributos da tela de login.</p>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>openLogin(MainWindow):</dt><dd><p>Abre a tela de login e fecha a tela anterior.</p>
+</dd>
+<dt>openCadastro(MainWindow):</dt><dd><p>Abre a tela de cadastro e fecha a tela anterior.</p>
+</dd>
+<dt>openPainel(MainWindow, user):</dt><dd><p>Abre a tela do usuário e fecha a tela anterior.</p>
+</dd>
+<dt>openCriadorDeConta(MainWindow, MainWindow, user, account_type):</dt><dd><p>Abre a tela de criação de contas e fecha a tela anterior.</p>
+</dd>
+<dt>openContas(MainWindow, user, account, account_type):</dt><dd><p>Abre a tela de contas e fecha a tela anterior.</p>
+</dd>
+<dt>openDeposito(MainWindow, user, account_type):</dt><dd><p>Abre a tela de depósito e fecha a tela anterior.</p>
+</dd>
+<dt>openSaque(MainWindow, user, account, account_type):</dt><dd><p>Abre a tela de saque e fecha a tela anterior.</p>
+</dd>
+<dt>openTransferencia(MainWindow, user, account, account_type):</dt><dd><p>Abre a tela de transferência e fecha a tela anterior.</p>
+</dd>
+<dt>openExtrato(MainWindow, user, account_type):</dt><dd><p>Abre a tela de extrato e fecha a tela anterior.</p>
+</dd>
+<dt>logIn(inputs_window, MainWindow):</dt><dd><p>Verifica se o usuário existe no banco de dados e se a senha
+está correta, se sim, abre a tela do usuário, se não, mostra
+uma mensagem de erro.</p>
+</dd>
+<dt>criarContaCorrente(MainWindow, inputs_window, user):</dt><dd><p>Requisita para o servidor a criação de uma conta corrente</p>
+</dd>
+<dt>criarContaPoupanca(MainWindow, inputs_window, user):</dt><dd><p>Requisita para o servidor a criação de uma conta poupanca</p>
+</dd>
+<dt>transferir(MainWindow, user, value, account, target_cpf, target_account_type, password):</dt><dd><p>Gerencia a operação de transeferencia no lado do front-end</p>
+</dd>
+<dt>depositar(MainWindow, user, value, account, account_type, password):</dt><dd><p>Gerencia a operação de depósito do lado do front-end</p>
+</dd>
+<dt>sacar( MainWindow, user, value, account, account_type, password):</dt><dd><p>Gerencia a operação de saque do lado do front-end</p>
+</dd>
+<dt>cadastrar(MainWindow):</dt><dd><p>Cadastra um novo usuário no banco de dados.</p>
+</dd>
+<dt>mostraSaldo(state, label, balance):</dt><dd><p>Mostra ou oculta o saldo da conta do cliente na tela de contas</p>
+</dd>
+<dt>mostraSenha(checkbox, password):</dt><dd><p>Mostra ou oculta a senha digitada no campo de senha.</p>
+</dd>
+<dt>convertDate(date):</dt><dd><p>Converte uma data do padrão americano para o padrão brasileiro</p>
+</dd>
+<dt>atualizaContas(user, source_account_type, target_cpf_input, select_input):</dt><dd><p>Busca pelas contas de um usuário utilizando como chave seu cpf,
+ao encontrar uma ou duas contas adiciona essas contas em um
+input do tipo select.</p>
+</dd>
+<dt>getInfos(registration_inputs_window):</dt><dd><p>Extrai as informaçoes dos inputs da tela de cadastro e retorna
+uma tupla com as informações.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.atualizaContas">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">atualizaContas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_account_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_cpf_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select_input</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.atualizaContas" title="Link permanente para esta definição"></a></dt>
+<dd><p>Recebe o cpf de um cliente, busca as contas desse cliente e atualiza
+os inputs de seleção de conta.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>user<span class="classifier">Cliente</span></dt><dd><p>Objeto do cliente que está logado.</p>
+</dd>
+<dt>source_account_type<span class="classifier">str</span></dt><dd><p>Tipo da conta de origem.</p>
+</dd>
+<dt>target_cpf_input<span class="classifier">Qt.Widgets.</span></dt><dd><p>Input do cpf do cliente que irá receber o dinheiro.</p>
+</dd>
+<dt>select_input<span class="classifier">Qt.Widgets.QComboBox</span></dt><dd><p>Input do tipo da conta que irá receber o dinheiro.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>date<span class="classifier">str</span></dt><dd><p>None</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.cadastrar">
+<span class="sig-name descname"><span class="pre">cadastrar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.cadastrar" title="Link permanente para esta definição"></a></dt>
+<dd><p>Gerencia a operação de cadastro de usuário no lado do front-end</p>
+<section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.convertDate">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convertDate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.convertDate" title="Link permanente para esta definição"></a></dt>
+<dd><p>Converte uma data do padrão americano para o padrão brasileiro</p>
+<section id="id3">
+<h3>Parameters<a class="headerlink" href="#id3" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>date<span class="classifier">str</span></dt><dd><p>data recebida do servidor no padrão americano.</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h3>Returns<a class="headerlink" href="#id4" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>date<span class="classifier">str</span></dt><dd><p>data formatada para o padrão brasileiro.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.criarContaCorrente">
+<span class="sig-name descname"><span class="pre">criarContaCorrente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs_window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.criarContaCorrente" title="Link permanente para esta definição"></a></dt>
+<dd><p>Requisita para o servidor a criação de uma conta corrente.</p>
+<section id="id5">
+<h3>Parameters<a class="headerlink" href="#id5" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+<dt>inputs_window<span class="classifier">Qt class</span></dt><dd><p>Tela de onde as informações serão extraídas</p>
+</dd>
+</dl>
+<p>user : Cliente</p>
+</section>
+<section id="id6">
+<h3>Returns<a class="headerlink" href="#id6" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.criarContaPoupanca">
+<span class="sig-name descname"><span class="pre">criarContaPoupanca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs_window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.criarContaPoupanca" title="Link permanente para esta definição"></a></dt>
+<dd><p>Requisita para o servidor a criação de uma conta poupanca.</p>
+<section id="id7">
+<h3>Parameters<a class="headerlink" href="#id7" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+<dt>inputs_window<span class="classifier">Qt class</span></dt><dd><p>Tela de onde as informações serão extraídas</p>
+</dd>
+<dt>user<span class="classifier">Cliente</span></dt><dd><p>Objeto que possui as informações do cliente.</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3>Returns<a class="headerlink" href="#id8" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.depositar">
+<span class="sig-name descname"><span class="pre">depositar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.depositar" title="Link permanente para esta definição"></a></dt>
+<dd><p>Gerencia a operação de depósito no lado do front-end
+Parameters
+———-
+MainWindow : Qt class</p>
+<blockquote>
+<div><p>Janela anterior</p>
+</div></blockquote>
+<dl class="simple">
+<dt>user<span class="classifier">Cliente</span></dt><dd><p>Objeto que possui as informações do cliente.</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>Valor do depósito</p>
+</dd>
+<dt>account<span class="classifier">dict</span></dt><dd><p>Dicionário com as informações da conta.</p>
+</dd>
+<dt>account_type<span class="classifier">str</span></dt><dd><p>Tipo da conta</p>
+</dd>
+<dt>password<span class="classifier">str</span></dt><dd><p>Senha da conta</p>
+</dd>
+</dl>
+<section id="id9">
+<h3>Returns<a class="headerlink" href="#id9" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.getInfos">
+<span class="sig-name descname"><span class="pre">getInfos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registration_inputs_window</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.getInfos" title="Link permanente para esta definição"></a></dt>
+<dd><p>Extrai as informaçoes dos inputs da tela de cadastro e retorna
+uma tupla com as informações.</p>
+<section id="id10">
+<h3>Parameters<a class="headerlink" href="#id10" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>registration_inputs_window<span class="classifier">Qt class</span></dt><dd><p>tela de cadastro.</p>
+</dd>
+</dl>
+</section>
+<section id="id11">
+<h3>Returns<a class="headerlink" href="#id11" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>infos<span class="classifier">tuple</span></dt><dd><p>Informações do novo cliente.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.logIn">
+<span class="sig-name descname"><span class="pre">logIn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs_window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.logIn" title="Link permanente para esta definição"></a></dt>
+<dd><p>Verifica se o usuário existe no banco de dados e se a senha
+está correta, se sim, abre a tela do usuário, se não, mostra
+uma mensagem de erro.</p>
+<section id="id12">
+<h3>Parameters<a class="headerlink" href="#id12" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>inputs_window<span class="classifier">Qt class</span></dt><dd><p>tela de login</p>
+</dd>
+<dt>MainWindow<span class="classifier">Qt class, optional</span></dt><dd><p>Tela de onde as informações serão extraídas (Default value = None)</p>
+</dd>
+</dl>
+</section>
+<section id="id13">
+<h3>Returns<a class="headerlink" href="#id13" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.mostraSaldo">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mostraSaldo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.mostraSaldo" title="Link permanente para esta definição"></a></dt>
+<dd><p>Mostra ou oculta o saldo da conta do cliente na tela de contas</p>
+<section id="id14">
+<h3>Parameters<a class="headerlink" href="#id14" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>state<span class="classifier">QtWidgets.QCheckBox</span></dt><dd><p>checkbox para verificar se o saldo está em estado de ocultar ou
+exibir.</p>
+</dd>
+<dt>label<span class="classifier">QtWidgets.QLabel</span></dt><dd><p>label responsável por mostrar o saldo da conta.</p>
+</dd>
+<dt>balance: float</dt><dd><p>Saldo da conta</p>
+</dd>
+</dl>
+</section>
+<section id="id15">
+<h3>Returns<a class="headerlink" href="#id15" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.mostraSenha">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mostraSenha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.mostraSenha" title="Link permanente para esta definição"></a></dt>
+<dd><p>Mostra ou oculta o senha da conta do cliente na tela de contas</p>
+<section id="id16">
+<h3>Parameters<a class="headerlink" href="#id16" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>checkbox<span class="classifier">QtWidgets.QCheckBox</span></dt><dd><p>checkbox para verificar se a senha está em estado de ocultar ou
+exibir.</p>
+</dd>
+<dt>password<span class="classifier">QtWidgets.QLineEdit</span></dt><dd><p>Input da senha que irá ser oculta ou exibida.</p>
+</dd>
+</dl>
+</section>
+<section id="id17">
+<h3>Returns<a class="headerlink" href="#id17" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.openCadastro">
+<span class="sig-name descname"><span class="pre">openCadastro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.openCadastro" title="Link permanente para esta definição"></a></dt>
+<dd><p>Função responsável por abrir a tela de Cadastro e fechar a janela
+anterior.</p>
+<section id="id18">
+<h3>Parameters<a class="headerlink" href="#id18" title="Link permanente para este cabeçalho"></a></h3>
+<p>MainWindow : Qt class</p>
+</section>
+<section id="id19">
+<h3>Returns<a class="headerlink" href="#id19" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.openContas">
+<span class="sig-name descname"><span class="pre">openContas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.openContas" title="Link permanente para esta definição"></a></dt>
+<dd><p>Função responsável por abrir a tela de gerenciamento de contas
+e fechar a janela anterior.</p>
+<section id="id20">
+<h3>Parameters<a class="headerlink" href="#id20" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+<dt>user: Cliente</dt><dd><p>objeto contendo os dados do cliente</p>
+</dd>
+<dt>account: dict</dt><dd><p>dicionario com as informações da conta</p>
+</dd>
+<dt>account_type: str</dt><dd><p>tipo da conta a ser acessada</p>
+</dd>
+</dl>
+</section>
+<section id="id21">
+<h3>Returns<a class="headerlink" href="#id21" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.openCriadorDeConta">
+<span class="sig-name descname"><span class="pre">openCriadorDeConta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.openCriadorDeConta" title="Link permanente para esta definição"></a></dt>
+<dd><p>Função responsável por abrir a tela de criação de contas
+e fechar a janela anterior.</p>
+<section id="id22">
+<h3>Parameters<a class="headerlink" href="#id22" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+<dt>user: Cliente</dt><dd><p>objeto contendo os dados do cliente</p>
+</dd>
+<dt>account_type: str</dt><dd><p>tipo da conta a ser criada</p>
+</dd>
+</dl>
+</section>
+<section id="id23">
+<h3>Returns<a class="headerlink" href="#id23" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.openDeposito">
+<span class="sig-name descname"><span class="pre">openDeposito</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.openDeposito" title="Link permanente para esta definição"></a></dt>
+<dd><p>Função responsável por abrir a tela de Déposito
+e fechar a janela anterior.</p>
+<section id="id24">
+<h3>Parameters<a class="headerlink" href="#id24" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+<dt>user: Cliente</dt><dd><p>objeto contendo os dados do cliente</p>
+</dd>
+<dt>account: dict</dt><dd><p>dicionario com as informações da conta</p>
+</dd>
+<dt>account_type: str</dt><dd><p>tipo da conta a ser acessada</p>
+</dd>
+</dl>
+</section>
+<section id="id25">
+<h3>Returns<a class="headerlink" href="#id25" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.openExtrato">
+<span class="sig-name descname"><span class="pre">openExtrato</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.openExtrato" title="Link permanente para esta definição"></a></dt>
+<dd><p>Função responsável por abrir a tela de extrato com as transações do 
+cliente e fechar a janela anterior.</p>
+<section id="id26">
+<h3>Parameters<a class="headerlink" href="#id26" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+<dt>user: Cliente</dt><dd><p>objeto contendo os dados do cliente</p>
+</dd>
+<dt>account: dict</dt><dd><p>dicionario com as informações da conta</p>
+</dd>
+<dt>account_type: str</dt><dd><p>tipo da conta a ser acessada</p>
+</dd>
+</dl>
+</section>
+<section id="id27">
+<h3>Returns<a class="headerlink" href="#id27" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.openLogin">
+<span class="sig-name descname"><span class="pre">openLogin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.openLogin" title="Link permanente para esta definição"></a></dt>
+<dd><p>Função responsável por abrir a tela de login e fechar a janela
+anterior.</p>
+<section id="id28">
+<h3>Parameters<a class="headerlink" href="#id28" title="Link permanente para este cabeçalho"></a></h3>
+<p>MainWindow : Qt class</p>
+</section>
+<section id="id29">
+<h3>Returns<a class="headerlink" href="#id29" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.openPainel">
+<span class="sig-name descname"><span class="pre">openPainel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.openPainel" title="Link permanente para esta definição"></a></dt>
+<dd><p>Função responsável por abrir a tela de dashboard do usuario
+e fechar a janela anterior.</p>
+<section id="id30">
+<h3>Parameters<a class="headerlink" href="#id30" title="Link permanente para este cabeçalho"></a></h3>
+<p>MainWindow : Qt class
+user: Cliente</p>
+</section>
+<section id="id31">
+<h3>Returns<a class="headerlink" href="#id31" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.openSaque">
+<span class="sig-name descname"><span class="pre">openSaque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.openSaque" title="Link permanente para esta definição"></a></dt>
+<dd><p>Função responsável por abrir a tela de saque e fechar a janela
+anterior.</p>
+<section id="id32">
+<h3>Parameters<a class="headerlink" href="#id32" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+<dt>user: Cliente</dt><dd><p>objeto contendo os dados do cliente</p>
+</dd>
+<dt>account: dict</dt><dd><p>dicionario com as informações da conta</p>
+</dd>
+<dt>account_type: str</dt><dd><p>tipo da conta a ser acessada</p>
+</dd>
+</dl>
+</section>
+<section id="id33">
+<h3>Returns<a class="headerlink" href="#id33" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.openTransferencia">
+<span class="sig-name descname"><span class="pre">openTransferencia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.openTransferencia" title="Link permanente para esta definição"></a></dt>
+<dd><p>Função responsável por abrir a tela de transferencia
+e fechar a janela anterior.</p>
+<section id="id34">
+<h3>Parameters<a class="headerlink" href="#id34" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+<dt>user: Cliente</dt><dd><p>objeto contendo os dados do cliente</p>
+</dd>
+<dt>account: dict</dt><dd><p>dicionario com as informações da conta</p>
+</dd>
+<dt>account_type: str</dt><dd><p>tipo da conta a ser acessada</p>
+</dd>
+</dl>
+</section>
+<section id="id35">
+<h3>Returns<a class="headerlink" href="#id35" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.sacar">
+<span class="sig-name descname"><span class="pre">sacar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.sacar" title="Link permanente para esta definição"></a></dt>
+<dd><p>Gerencia a operação de saque no lado do front-end</p>
+<section id="id36">
+<h3>Parameters<a class="headerlink" href="#id36" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>MainWindow<span class="classifier">Qt class</span></dt><dd><p>Janela anterior</p>
+</dd>
+<dt>user<span class="classifier">Cliente</span></dt><dd><p>Objeto que possui as informações do cliente.</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>Valor do depósito</p>
+</dd>
+<dt>account<span class="classifier">dict</span></dt><dd><p>Dicionário com as informações da conta.</p>
+</dd>
+<dt>account_type<span class="classifier">str</span></dt><dd><p>Tipo da conta</p>
+</dd>
+<dt>password<span class="classifier">str</span></dt><dd><p>Senha da conta</p>
+</dd>
+</dl>
+</section>
+<section id="id37">
+<h3>Returns<a class="headerlink" href="#id37" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="application.Main.transferir">
+<span class="sig-name descname"><span class="pre">transferir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_cpf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_account_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#application.Main.transferir" title="Link permanente para esta definição"></a></dt>
+<dd><p>Gerencia a operação de transeferencia no lado do front-end
+Parameters
+———-
+MainWindow : Qt class</p>
+<blockquote>
+<div><p>Janela anterior</p>
+</div></blockquote>
+<dl class="simple">
+<dt>user<span class="classifier">Cliente</span></dt><dd><p>Objeto que possui as informações do cliente.</p>
+</dd>
+<dt>value<span class="classifier">float</span></dt><dd><p>Valor da transferencia realizada.</p>
+</dd>
+<dt>account<span class="classifier">dict</span></dt><dd><p>Dicionário com as informações da conta de origem.</p>
+</dd>
+<dt>target_cpf<span class="classifier">str</span></dt><dd><p>Cpf do cliente de destino.</p>
+</dd>
+<dt>target_account_type<span class="classifier">str</span></dt><dd><p>Tipo da conta de destino.</p>
+</dd>
+<dt>password<span class="classifier">str</span></dt><dd><p>Senha da conta de origem.</p>
+</dd>
+</dl>
+<section id="id38">
+<h3>Returns<a class="headerlink" href="#id38" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<span class="target" id="module-client"></span><dl class="py function">
+<dt class="sig sig-object py" id="client.add_cliente">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">add_cliente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">birth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.add_cliente" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de cadastro para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>name (str): Nome do usuário.
+cpf (str): CPF do usuário.
+birth (str): Data de nascimento do usuário.
+email (str): Email do usuário.
+password (str): Senha do usuário.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(bool, None): Retorna um booleano indicando se o cadastro foi bem sucedido e o resultado para o usuário.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.busca_conta_por_cpf">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">busca_conta_por_cpf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.busca_conta_por_cpf" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e busca uma conta pelo cpf do usuário.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>cpf (str): CPF do usuário.
+account_type (str): Tipo da conta.</p>
+</dd>
+<dt>Returns:</dt><dd><p>account (object): Retorna um objeto ContaCorrente ou ContaPoupança.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.connect">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.connect" title="Link permanente para esta definição"></a></dt>
+<dd><p>Faz a conexão com o servidor e retorna o objeto socket para se usado nas conexões futuras.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>None</p>
+</dd>
+<dt>Returns:</dt><dd><p>client (socket): Objeto socket para se fazer as conexões com o servidor.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.create_conta_corrente">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">create_conta_corrente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.create_conta_corrente" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de criação de conta corrente para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id do usuário.
+password (str): Senha da conta.</p>
+</dd>
+<dt>Returns:</dt><dd><p>current_account (object): Retorna um objeto ContaCorrente.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.create_conta_poupanca">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">create_conta_poupanca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.create_conta_poupanca" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de criação de conta poupança para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id do usuário.
+password (str): Senha da conta.</p>
+</dd>
+<dt>Returns:</dt><dd><p>savings_account (object): Retorna um objeto ContaPoupanca.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.deposito_conta_corrente">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">deposito_conta_corrente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transfer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_user_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_account_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.deposito_conta_corrente" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de depósito da conta corrente para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id da conta.
+account_number (str): Número da conta.
+value (float): Valor do depósito.
+transfer (bool, optional): Indica se o depósito é uma transferência (Default = False).
+source_user_id (int, optional): Id do usuário que efetuou a transferência (Default = None).
+source_account_type (str, optional): Tipo da conta que efetuou a transferência (Default = None).</p>
+</dd>
+<dt>Returns:</dt><dd><p>(bool, str): Retorna um booleano indicando se o depósito foi bem sucedido e o resultado para o usuário.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.deposito_conta_poupanca">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">deposito_conta_poupanca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transfer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_user_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_account_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.deposito_conta_poupanca" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de depósito da conta poupança para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id da conta.
+account_number (str): Número da conta.
+value (float): Valor do depósito.
+transfer (bool, optional): Indica se o depósito é uma transferência (Default = False).
+source_user_id (int, optional): Id do usuário que efetuou a transferência (Default = None).
+source_account_type (str, optional): Tipo da conta que efetuou a transferência (Default = None).</p>
+</dd>
+<dt>Returns:</dt><dd><p>(bool, str): Retorna um booleano indicando se o depósito foi bem sucedido e o resultado para o usuário.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.get_cliente_id_by_cpf">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">get_cliente_id_by_cpf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.get_cliente_id_by_cpf" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de busca de id do cliente pelo cpf para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>cpf (str): CPF do cliente.</p>
+</dd>
+<dt>Returns:</dt><dd><p>id (int): Retorna o id do cliente.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.get_transacoes">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">get_transacoes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.get_transacoes" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de busca de transações para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id da conta.
+account_type (str): Tipo da conta.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(list): Retorna uma lista com as transações da conta.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.get_user_by_id">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">get_user_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.get_user_by_id" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de busca de usuário por id para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id do usuário.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(bool, Cliente): Retorna um booleano indicando se o usuário foi encontrado e o objeto Cliente.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.login">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">senha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.login" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de login para o servidor.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>email (str): Email do usuário.
+senha (str): Senha do usuário.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(bool, user): Retorna um booleano indicando se o login foi bem sucedido e um objeto Cliente com as informações do usuário.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.saque_conta_corrente">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">saque_conta_corrente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transfer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_user_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_account_target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.saque_conta_corrente" title="Link permanente para esta definição"></a></dt>
+<dd><dl class="simple">
+<dt>Esse métdo faz a conexão com o servidor e envia os dados de saque da conta corrente para o servidor e recebe a reposta.</dt><dd><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id da conta.
+account_number (str): Número da conta.
+value (float): Valor do saque.
+transfer (bool, optional): Indica se o saque é uma transferência (Default = False).
+target_user_id (int, optional): Id do usuário que receberá a transferência (Default = None).
+target_account_target (str, optional): Tipo da conta que receberá a transferência (Default = None).</p>
+</dd>
+<dt>Returns:</dt><dd><p>(bool, str): Retorna um booleano indicando se o saque foi bem sucedido e o resultado para o usuário.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.saque_conta_poupanca">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">saque_conta_poupanca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transfer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_user_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_account_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.saque_conta_poupanca" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse métdo faz a conexão com o servidor e envia os dados de saque da conta poupança para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id da conta.
+account_number (str): Número da conta.
+value (float): Valor do saque.
+transfer (bool, optional): Indica se o saque é uma transferência (Default = False).
+target_user_id (int, optional): Id do usuário que receberá a transferência (Default = None).
+target_account_type (str, optional): Tipo da conta que receberá a transferência (Default = None).</p>
+</dd>
+<dt>Returns:</dt><dd><p>(bool, str): Retorna um booleano indicando se o saque foi bem sucedido e o resultado para o usuário.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.valida_senha_conta_corrente">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">valida_senha_conta_corrente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.valida_senha_conta_corrente" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de validação da senha da conta corrente para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id da conta.
+password (str): Senha da conta.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(bool): Retorna um booleano indicando se a senha é válida.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="client.valida_senha_conta_poupanca">
+<span class="sig-prename descclassname"><span class="pre">client.</span></span><span class="sig-name descname"><span class="pre">valida_senha_conta_poupanca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#client.valida_senha_conta_poupanca" title="Link permanente para esta definição"></a></dt>
+<dd><p>Esse método faz a conexão com o servidor e envia os dados de validação da senha da conta poupança para o servidor e recebe a reposta.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>id (int): Id da conta.
+password (str): Senha da conta.</p>
+</dd>
+<dt>Returns:</dt><dd><p>(bool): Retorna um booleano indicando se a senha é válida.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<span class="target" id="module-cliente_obj"></span><dl class="py class">
+<dt class="sig sig-object py" id="cliente_obj.Cliente">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cliente_obj.</span></span><span class="sig-name descname"><span class="pre">Cliente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nascimento</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cliente_obj.Cliente" title="Link permanente para esta definição"></a></dt>
+<dd><p>A classe representa um cliente do banco.</p>
+<p>…</p>
+<section id="id39">
+<h2>Attributes<a class="headerlink" href="#id39" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>_id<span class="classifier">int</span></dt><dd><p>id do cliente</p>
+</dd>
+<dt>_nome<span class="classifier">str</span></dt><dd><p>nome do cliente</p>
+</dd>
+<dt>_cpf<span class="classifier">str</span></dt><dd><p>cpf do cliente</p>
+</dd>
+<dt>_nascimento<span class="classifier">str</span></dt><dd><p>data de nascimento do cliente</p>
+</dd>
+<dt>_email<span class="classifier">str</span></dt><dd><p>email do cliente</p>
+</dd>
+<dt>_contas<span class="classifier">dict</span></dt><dd><p>dicionário com as contas do cliente</p>
+</dd>
+</dl>
+</section>
+<section id="id40">
+<h2>Methods<a class="headerlink" href="#id40" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>add_cc(conta):</dt><dd><p>adiciona uma conta corrente ao cliente</p>
+</dd>
+<dt>add_cp(conta):</dt><dd><p>adiciona uma conta poupança ao cliente</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<span class="target" id="module-account_obj"></span><dl class="py class">
+<dt class="sig sig-object py" id="account_obj.Conta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">account_obj.</span></span><span class="sig-name descname"><span class="pre">Conta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numero</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">senha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criacao</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saldo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.Conta" title="Link permanente para esta definição"></a></dt>
+<dd><p>A classe representa uma conta de um banco.</p>
+<p>…</p>
+<section id="id41">
+<h2>Attributes<a class="headerlink" href="#id41" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>id<span class="classifier">int</span></dt><dd><p>id da conta bancária</p>
+</dd>
+<dt>numero<span class="classifier">int</span></dt><dd><p>número da conta bancária</p>
+</dd>
+<dt>senha<span class="classifier">int</span></dt><dd><p>senha da conta bancária</p>
+</dd>
+<dt>saldo<span class="classifier">float</span></dt><dd><p>saldo da conta bancária</p>
+</dd>
+<dt>criacao<span class="classifier">datetime</span></dt><dd><p>data de criação da conta bancária</p>
+</dd>
+<dt>historico<span class="classifier">Historico</span></dt><dd><p>histórico de transações da conta bancária</p>
+</dd>
+<dt>total_contas<span class="classifier">int</span></dt><dd><p>total de contas bancárias</p>
+</dd>
+</dl>
+</section>
+<section id="id42">
+<h2>Methods<a class="headerlink" href="#id42" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>get_total_contas():</dt><dd><p>Retorna o total de contas bancárias.</p>
+</dd>
+<dt>deposita(valor, transferencia=False):</dt><dd><p>Realiza um depósito na conta bancária.</p>
+</dd>
+<dt>saca(valor, transferencia=False):</dt><dd><p>Realiza um saque na conta bancária.</p>
+</dd>
+<dt>extrato():</dt><dd><p>Mostra o extrato da conta bancária.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="account_obj.Conta.deposita">
+<span class="sig-name descname"><span class="pre">deposita</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">valor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transferencia</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.Conta.deposita" title="Link permanente para esta definição"></a></dt>
+<dd><p>Método que realiza um depósito na conta bancária.</p>
+<section id="id43">
+<h3>Parameters<a class="headerlink" href="#id43" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>valor<span class="classifier">float</span></dt><dd><p>valor a ser depositado na conta bancária</p>
+</dd>
+<dt>transferencia<span class="classifier">bool, opcional</span></dt><dd><p>indica se o depósito é uma transferência (default é False)</p>
+</dd>
+</dl>
+</section>
+<section id="id44">
+<h3>Returns<a class="headerlink" href="#id44" title="Link permanente para este cabeçalho"></a></h3>
+<p>(bool, str): tupla com o status da operação e uma mensagem</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="account_obj.Conta.extrato">
+<span class="sig-name descname"><span class="pre">extrato</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.Conta.extrato" title="Link permanente para esta definição"></a></dt>
+<dd><p>Método que imprime o extrato da conta bancária.</p>
+<section id="id45">
+<h3>Parameters<a class="headerlink" href="#id45" title="Link permanente para este cabeçalho"></a></h3>
+<p>None: None</p>
+</section>
+<section id="id46">
+<h3>Returns<a class="headerlink" href="#id46" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="account_obj.Conta.saca">
+<span class="sig-name descname"><span class="pre">saca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">valor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transferencia</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.Conta.saca" title="Link permanente para esta definição"></a></dt>
+<dd><p>Método que realiza um saque na conta bancária.</p>
+<section id="id47">
+<h3>Parameters<a class="headerlink" href="#id47" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>valor<span class="classifier">float</span></dt><dd><p>valor a ser sacado na conta bancária</p>
+</dd>
+<dt>transferencia<span class="classifier">bool, opcional</span></dt><dd><p>indica se o saque é uma transferência (default é False)</p>
+</dd>
+</dl>
+</section>
+<section id="id48">
+<h3>Returns<a class="headerlink" href="#id48" title="Link permanente para este cabeçalho"></a></h3>
+<p>(bool, str): tupla com o status da operação e uma mensagem</p>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="account_obj.ContaCorrente">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">account_obj.</span></span><span class="sig-name descname"><span class="pre">ContaCorrente</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numero</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">senha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criacao</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saldo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">800</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.ContaCorrente" title="Link permanente para esta definição"></a></dt>
+<dd><p>Classe que representa uma conta corrente e herda da classe Conta.</p>
+<section id="id49">
+<h2>Attributes<a class="headerlink" href="#id49" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>id<span class="classifier">int</span></dt><dd><p>id da conta bancária</p>
+</dd>
+<dt>numero<span class="classifier">int</span></dt><dd><p>número da conta bancária</p>
+</dd>
+<dt>senha<span class="classifier">int</span></dt><dd><p>senha da conta bancária</p>
+</dd>
+<dt>criacao<span class="classifier">datetime</span></dt><dd><p>data de criação da conta bancária</p>
+</dd>
+<dt>saldo<span class="classifier">float</span></dt><dd><p>saldo da conta bancária</p>
+</dd>
+<dt>limite<span class="classifier">float</span></dt><dd><p>limite da conta bancária</p>
+</dd>
+<dt>historico<span class="classifier">Historico</span></dt><dd><p>histórico de transações da conta bancária</p>
+</dd>
+</dl>
+</section>
+<section id="id50">
+<h2>Methods<a class="headerlink" href="#id50" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>transfere(conta_destino, valor):</dt><dd><p>Realiza uma transferência entre contas.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="account_obj.ContaCorrente.transfere">
+<span class="sig-name descname"><span class="pre">transfere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conta_destino</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.ContaCorrente.transfere" title="Link permanente para esta definição"></a></dt>
+<dd><p>Método que realiza uma transferência entre contas.</p>
+<section id="id51">
+<h3>Parameters<a class="headerlink" href="#id51" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>conta_destino<span class="classifier">Conta</span></dt><dd><p>conta de destino da transferência</p>
+</dd>
+<dt>valor<span class="classifier">float</span></dt><dd><p>valor a ser transferido</p>
+</dd>
+</dl>
+</section>
+<section id="id52">
+<h3>Returns<a class="headerlink" href="#id52" title="Link permanente para este cabeçalho"></a></h3>
+<p>(bool, str): tupla com o status da operação e uma mensagem</p>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="account_obj.ContaPoupanca">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">account_obj.</span></span><span class="sig-name descname"><span class="pre">ContaPoupanca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numero</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">senha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criacao</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saldo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.ContaPoupanca" title="Link permanente para esta definição"></a></dt>
+<dd><p>Classe que representa uma conta poupança e herda da classe Conta.</p>
+<section id="id53">
+<h2>Attributes<a class="headerlink" href="#id53" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>id<span class="classifier">int</span></dt><dd><p>id da conta bancária</p>
+</dd>
+<dt>numero<span class="classifier">int</span></dt><dd><p>número da conta bancária</p>
+</dd>
+<dt>senha<span class="classifier">int</span></dt><dd><p>senha da conta bancária</p>
+</dd>
+<dt>criacao<span class="classifier">datetime</span></dt><dd><p>data de criação da conta bancária</p>
+</dd>
+<dt>saldo<span class="classifier">float</span></dt><dd><p>saldo da conta bancária</p>
+</dd>
+</dl>
+</section>
+<section id="id54">
+<h2>Methods<a class="headerlink" href="#id54" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>deposita(valor):</dt><dd><p>Realiza um depósito na conta bancária, chamando o método deposita da classe Conta.</p>
+</dd>
+<dt>saca(valor):</dt><dd><p>Realiza um saque na conta bancária, chamando o método saca da classe Conta.</p>
+</dd>
+<dt>transfere(conta_destino, valor):</dt><dd><p>Realiza uma transferência entre contas.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="account_obj.ContaPoupanca.deposita">
+<span class="sig-name descname"><span class="pre">deposita</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">valor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.ContaPoupanca.deposita" title="Link permanente para esta definição"></a></dt>
+<dd><p>Método que realiza um depósito na conta bancária, chamando o método deposita da classe Conta.</p>
+<section id="id55">
+<h3>Parameters<a class="headerlink" href="#id55" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>valor<span class="classifier">float</span></dt><dd><p>valor a ser depositado na conta bancária</p>
+</dd>
+</dl>
+</section>
+<section id="id56">
+<h3>Returns<a class="headerlink" href="#id56" title="Link permanente para este cabeçalho"></a></h3>
+<p>(bool, str): tupla com o status da operação e uma mensagem que é retornada pelo método deposita da classe Conta</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="account_obj.ContaPoupanca.saca">
+<span class="sig-name descname"><span class="pre">saca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">valor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.ContaPoupanca.saca" title="Link permanente para esta definição"></a></dt>
+<dd><p>Método que realiza um saque na conta bancária, chamando o método saca da classe Conta.</p>
+<section id="id57">
+<h3>Parameters<a class="headerlink" href="#id57" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>valor<span class="classifier">float</span></dt><dd><p>valor a ser sacado da conta bancária</p>
+</dd>
+</dl>
+</section>
+<section id="id58">
+<h3>Returns<a class="headerlink" href="#id58" title="Link permanente para este cabeçalho"></a></h3>
+<p>(bool, str): tupla com o status da operação e uma mensagem que é retornada pelo método saca da classe Conta</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="account_obj.ContaPoupanca.transfere">
+<span class="sig-name descname"><span class="pre">transfere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conta_destino</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.ContaPoupanca.transfere" title="Link permanente para esta definição"></a></dt>
+<dd><p>Método que realiza uma transferência entre contas.</p>
+<section id="id59">
+<h3>Parameters<a class="headerlink" href="#id59" title="Link permanente para este cabeçalho"></a></h3>
+<dl class="simple">
+<dt>conta_destino<span class="classifier">Conta</span></dt><dd><p>conta de destino da transferência</p>
+</dd>
+<dt>valor<span class="classifier">float</span></dt><dd><p>valor a ser transferido</p>
+</dd>
+</dl>
+</section>
+<section id="id60">
+<h3>Returns<a class="headerlink" href="#id60" title="Link permanente para este cabeçalho"></a></h3>
+<p>(bool, str): tupla com o status da operação e uma mensagem</p>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="account_obj.Historico">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">account_obj.</span></span><span class="sig-name descname"><span class="pre">Historico</span></span><a class="headerlink" href="#account_obj.Historico" title="Link permanente para esta definição"></a></dt>
+<dd><p>A classe representa o histórico de transações de uma conta.</p>
+<p>…</p>
+<section id="id61">
+<h2>Attributes<a class="headerlink" href="#id61" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>data_abertura<span class="classifier">datetime</span></dt><dd><p>data de abertura da conta</p>
+</dd>
+<dt>transacoes<span class="classifier">list</span></dt><dd><p>lista de transações</p>
+</dd>
+</dl>
+</section>
+<section id="id62">
+<h2>Methods<a class="headerlink" href="#id62" title="Link permanente para este cabeçalho"></a></h2>
+<dl class="simple">
+<dt>imprime():</dt><dd><p>Mostra o histórico de transações de uma conta.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="account_obj.Historico.imprime">
+<span class="sig-name descname"><span class="pre">imprime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#account_obj.Historico.imprime" title="Link permanente para esta definição"></a></dt>
+<dd><p>Mosta o histórico de transações de uma conta que estão armazenadas na lista de transações.</p>
+<section id="id63">
+<h3>Parameters<a class="headerlink" href="#id63" title="Link permanente para este cabeçalho"></a></h3>
+<p>None: None</p>
+</section>
+<section id="id64">
+<h3>Returns<a class="headerlink" href="#id64" title="Link permanente para este cabeçalho"></a></h3>
+<p>None</p>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link permanente para este cabeçalho"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Índice</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Índice do Módulo</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Página de Busca</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, João Vitor Moreira Passos, Dayan Ramos Gomes.</p>
+  </div>
+
+  Compilado com <a href="https://www.sphinx-doc.org/">Sphinx</a> usando um
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornecido por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

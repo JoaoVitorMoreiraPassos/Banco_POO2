@@ -1,6 +1,6 @@
 import socket
-from cllient_thread import ClientThread
-from sql_querys import (
+from client_thread import ClientThread
+from sql_queries import (
     login,
     add_cliente,
     get_transacoes,
@@ -141,7 +141,7 @@ def manager_operations(data, sinc):
             sinc.release()
             print("Um novo cliente foi cadastrado")
             return ("True".encode())
-        except Exception as E:
+        except Exception:
             return ("False".encode())
 
     elif operation == "03":
@@ -334,25 +334,39 @@ def manager_operations(data, sinc):
             return "False".encode()
 
 
-host = "0.0.0.0"
-port = 50002
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind((host, port))
-server.listen()
+def start():
+    """
+    Inicia e gerencia o servidor.
 
-while True:
-    # Faz o servidor aguardar por uma conexão
-    try:
+            Parameters:
+                    None
+            Returns:
+                    None
+    """
+    host = "0.0.0.0"
+    port = 50002
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind((host, port))
+    server.listen()
+
+    while True:
+        # Faz o servidor aguardar por uma conexão
         clientsock, clientAddress = server.accept()
-        newthread = ClientThread(clientAddress, clientsock, manager_operations)
-        newthread.start()
+        try:
+            newthread = ClientThread(
+                clientAddress, clientsock, manager_operations)
+            newthread.start()
 
-    except KeyboardInterrupt:
-        clientsock.close()
-        server.close()
-        quit()
-    except Exception as E:
-        print("erro de conexão: ", E)
-        clientsock.close()
-        server.close()
-        quit()
+        except KeyboardInterrupt:
+            clientsock.close()
+            server.close()
+            # quit()
+        except Exception as E:
+            print("erro de conexão: ", E)
+            clientsock.close()
+            server.close()
+        # quit()
+
+
+if __name__ == "__main__":
+    start()
